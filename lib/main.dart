@@ -11,7 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'components/commoncolor.dart';
 import 'package:ota_update/ota_update.dart';
 import 'screen/ADMIN_/adminController.dart';
-
+/////////////registration keyyyyyyyyyyyyyyyyy
+//ELZDKU6DAXVO
 void requestPermission() async {
   var status = await Permission.storage.status;
   // var statusbl= await Permission.bluetooth.status;
