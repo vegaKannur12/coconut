@@ -108,52 +108,52 @@ class _SalesItemState extends State<SalesItem> {
         elevation: 0,
         backgroundColor: P_Settings.salewaveColor,
         actions: <Widget>[
-          // Badge(
-          //   animationType: BadgeAnimationType.scale,
-          //   toAnimate: true,
-          //   badgeColor: Colors.white,
-          //   badgeContent: Consumer<Controller>(
-          //     builder: (context, value, child) {
-          //       if (value.count == null) {
-          //         return SpinKitChasingDots(
-          //             color: P_Settings.wavecolor, size: 9);
-          //       } else {
-          //         return Text(
-          //           "${value.count}",
-          //           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          //         );
-          //       }
-          //     },
-          //   ),
-          //   position: const BadgePosition(start: 33, bottom: 25),
-          //   child: IconButton(
-          //     onPressed: () async {
-          //       if (widget.customerId == null || widget.customerId.isEmpty) {
-          //       } else {
-          //         FocusManager.instance.primaryFocus?.unfocus();
-          //         Provider.of<Controller>(context, listen: false).selectSettings(
-          //             "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
+          Badge(
+            animationType: BadgeAnimationType.scale,
+            toAnimate: true,
+            badgeColor: Colors.white,
+            badgeContent: Consumer<Controller>(
+              builder: (context, value, child) {
+                if (value.count == null) {
+                  return SpinKitChasingDots(
+                      color: P_Settings.wavecolor, size: 9);
+                } else {
+                  return Text(
+                    "${value.count}",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  );
+                }
+              },
+            ),
+            position: const BadgePosition(start: 33, bottom: 25),
+            child: IconButton(
+              onPressed: () async {
+                if (widget.customerId == null || widget.customerId.isEmpty) {
+                } else {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  Provider.of<Controller>(context, listen: false).selectSettings(
+                      "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
 
-          //         Provider.of<Controller>(context, listen: false)
-          //             .getSaleBagDetails(widget.customerId, widget.os);
+                  Provider.of<Controller>(context, listen: false)
+                      .getSaleBagDetails(widget.customerId, widget.os);
 
-          //         Navigator.of(context).push(
-          //           PageRouteBuilder(
-          //             opaque: false, // set to false
-          //             pageBuilder: (_, __, ___) => SaleCart(
-          //               areaId: widget.areaId,
-          //               custmerId: widget.customerId,
-          //               os: widget.os,
-          //               areaname: widget.areaName,
-          //               type: widget.type,
-          //             ),
-          //           ),
-          //         );
-          //       }
-          //     },
-          //     icon: const Icon(Icons.shopping_cart),
-          //   ),
-          // ),
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      opaque: false, // set to false
+                      pageBuilder: (_, __, ___) => SaleCart(
+                        areaId: widget.areaId,
+                        custmerId: widget.customerId,
+                        os: widget.os,
+                        areaname: widget.areaName,
+                        type: widget.type,
+                      ),
+                    ),
+                  );
+                }
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
+          ),
           Consumer<Controller>(
             builder: (context, _value, child) {
               return PopupMenuButton<String>(
@@ -423,66 +423,66 @@ class _SalesItemState extends State<SalesItem> {
                                                             height:
                                                                 size.height *
                                                                     0.012),
-                                                        Row(
-                                                          children: [
-                                                            value.newList[index]
-                                                                        [
-                                                                        "prunit"] ==
-                                                                    null
-                                                                ? Container()
-                                                                : Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      // SizedBox(
-                                                                      //   width: size.width *
-                                                                      //       0.03,
-                                                                      // ),
-                                                                      Container(
-                                                                          child:
-                                                                              Text(
-                                                                        value.newList[index]["prunit"] ==
-                                                                                null
-                                                                            ? " "
-                                                                            : value.newList[index]["prunit"].toString(),
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                P_Settings.unitcolor,
-                                                                            fontWeight: FontWeight.bold,
-                                                                            fontSize: 15),
-                                                                      )),
-                                                                      SizedBox(
-                                                                        width: size.width *
-                                                                            0.02,
-                                                                      ),
-                                                                      Container(
-                                                                        child:
-                                                                            Text(
-                                                                          ' / ${value.newList[index]["pkg"]}',
-                                                                          style: TextStyle(
-                                                                              color: Colors.black,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
-                                                                      // value.qty[index].text == "0" ||
-                                                                      //         value.qty[index].text ==
-                                                                      //             null
-                                                                      //     ? Container()
-                                                                      //     : BlinkText(
-                                                                      //         '${value.qty[index].text}',
-                                                                      //         style: TextStyle(
-                                                                      //           fontWeight: FontWeight.bold,
-                                                                      //           color: Color.fromARGB(255, 25, 66, 26),
-                                                                      //           fontStyle: FontStyle.italic,
-                                                                      //         ),
-                                                                      //         endColor: Colors.white,
-                                                                      //         duration: Duration(milliseconds: 2000)),
-                                                                    ],
-                                                                  ),
-                                                          ],
-                                                        ),
+                                                        // Row(
+                                                        //   children: [
+                                                        //     value.newList[index]
+                                                        //                 [
+                                                        //                 "prunit"] ==
+                                                        //             null
+                                                        //         ? Container()
+                                                        //         : Row(
+                                                        //             mainAxisAlignment:
+                                                        //                 MainAxisAlignment
+                                                        //                     .start,
+                                                        //             children: [
+                                                        //               // SizedBox(
+                                                        //               //   width: size.width *
+                                                        //               //       0.03,
+                                                        //               // ),
+                                                        //               Container(
+                                                        //                   child:
+                                                        //                       Text(
+                                                        //                 value.newList[index]["prunit"] ==
+                                                        //                         null
+                                                        //                     ? " "
+                                                        //                     : value.newList[index]["prunit"].toString(),
+                                                        //                 style: TextStyle(
+                                                        //                     color:
+                                                        //                         P_Settings.unitcolor,
+                                                        //                     fontWeight: FontWeight.bold,
+                                                        //                     fontSize: 15),
+                                                        //               )),
+                                                        //               SizedBox(
+                                                        //                 width: size.width *
+                                                        //                     0.02,
+                                                        //               ),
+                                                        //               Container(
+                                                        //                 child:
+                                                        //                     Text(
+                                                        //                   ' / ${value.newList[index]["pkg"]}',
+                                                        //                   style: TextStyle(
+                                                        //                       color: Colors.black,
+                                                        //                       fontSize: 15,
+                                                        //                       fontWeight: FontWeight.bold),
+                                                        //                 ),
+                                                        //               ),
+                                                        //               // value.qty[index].text == "0" ||
+                                                        //               //         value.qty[index].text ==
+                                                        //               //             null
+                                                        //               //     ? Container()
+                                                        //               //     : BlinkText(
+                                                        //               //         '${value.qty[index].text}',
+                                                        //               //         style: TextStyle(
+                                                        //               //           fontWeight: FontWeight.bold,
+                                                        //               //           color: Color.fromARGB(255, 25, 66, 26),
+                                                        //               //           fontStyle: FontStyle.italic,
+                                                        //               //         ),
+                                                        //               //         endColor: Colors.white,
+                                                        //               //         duration: Duration(milliseconds: 2000)),
+                                                        //             ],
+                                                        //           ),
+                                                        //   ],
+                                                        // ),
                                                       ],
                                                     ),
                                                     trailing: Text(
@@ -836,9 +836,8 @@ class _SalesItemState extends State<SalesItem> {
                                                           255, 226, 225, 225),
                                                   child: ListTile(
                                                     onTap: () {
-                                                      cocosheet
-                                                          .showMoadlBottomsheet(
-                                                              size, context);
+                                                      // cocosheet.showsalesMoadlBottomsheet(value.productName[index]["pritem"], value.productName[index]["prcode"], "", 1,value.productName[index]["prrate1"], dis_per, dis_amt, tax_per, tax_amt, cess_per, cess_amt, net_amt, gross, context, size, index, customerId, os, pkg, unit_name)
+                                                         
                                                     },
                                                     dense: true,
                                                     title: Column(
@@ -881,89 +880,82 @@ class _SalesItemState extends State<SalesItem> {
                                                             height:
                                                                 size.height *
                                                                     0.012),
-                                                        Row(
-                                                          children: [
-                                                            value.productName[
-                                                                            index]
-                                                                        [
-                                                                        "prunit"] ==
-                                                                    null
-                                                                ? Container()
-                                                                : Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      // value.qty[index].text == "0" ||
-                                                                      //         value.qty[index].text ==
-                                                                      //             null
-                                                                      //     ? Container()
-                                                                      //     : BlinkText(
-                                                                      //         '${value.qty[index].text}',
-                                                                      //         style: TextStyle(
-                                                                      //           fontWeight: FontWeight.bold,
-                                                                      //           color: Color.fromARGB(255, 25, 66, 26),
-                                                                      //           fontStyle: FontStyle.italic,
-                                                                      //         ),
-                                                                      //         endColor: Colors.white,
-                                                                      //         duration: Duration(milliseconds: 2000)),
-                                                                      // SizedBox(
-                                                                      //   width: size.width *
-                                                                      //       0.03,
-                                                                      // ),
-                                                                      Container(
-                                                                          child:
-                                                                              Text(
-                                                                        value.productName[index]["prunit"] ==
-                                                                                null
-                                                                            ? " "
-                                                                            : value.productName[index]["prunit"].toString(),
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                P_Settings.unitcolor,
-                                                                            fontWeight: FontWeight.bold,
-                                                                            fontSize: 15),
-                                                                      )),
-                                                                      SizedBox(
-                                                                        width: size.width *
-                                                                            0.02,
-                                                                      ),
-                                                                      Container(
-                                                                        child:
-                                                                            Text(
-                                                                          ' / ${value.productName[index]["pkg"]}',
-                                                                          style: TextStyle(
-                                                                              color: Colors.black,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                          ],
-                                                        ),
+                                                        // Row(
+                                                        //   children: [
+                                                        //     value.productName[
+                                                        //                     index]
+                                                        //                 [
+                                                        //                 "prunit"] ==
+                                                        //             null
+                                                        //         ? Container()
+                                                        //         : Row(
+                                                        //             mainAxisAlignment:
+                                                        //                 MainAxisAlignment
+                                                        //                     .start,
+                                                        //             children: [
+                                                        //               // value.qty[index].text == "0" ||
+                                                        //               //         value.qty[index].text ==
+                                                        //               //             null
+                                                        //               //     ? Container()
+                                                        //               //     : BlinkText(
+                                                        //               //         '${value.qty[index].text}',
+                                                        //               //         style: TextStyle(
+                                                        //               //           fontWeight: FontWeight.bold,
+                                                        //               //           color: Color.fromARGB(255, 25, 66, 26),
+                                                        //               //           fontStyle: FontStyle.italic,
+                                                        //               //         ),
+                                                        //               //         endColor: Colors.white,
+                                                        //               //         duration: Duration(milliseconds: 2000)),
+                                                        //               // SizedBox(
+                                                        //               //   width: size.width *
+                                                        //               //       0.03,
+                                                        //               // ),
+                                                        //               Container(
+                                                        //                   child:
+                                                        //                       Text(
+                                                        //                 value.productName[index]["prunit"] ==
+                                                        //                         null
+                                                        //                     ? " "
+                                                        //                     : value.productName[index]["prunit"].toString(),
+                                                        //                 style: TextStyle(
+                                                        //                     color:
+                                                        //                         P_Settings.unitcolor,
+                                                        //                     fontWeight: FontWeight.bold,
+                                                        //                     fontSize: 15),
+                                                        //               )),
+                                                        //               SizedBox(
+                                                        //                 width: size.width *
+                                                        //                     0.02,
+                                                        //               ),
+                                                        //               Container(
+                                                        //                 child:
+                                                        //                     Text(
+                                                        //                   ' / ${value.productName[index]["pkg"]}',
+                                                        //                   style: TextStyle(
+                                                        //                       color: Colors.black,
+                                                        //                       fontSize: 15,
+                                                        //                       fontWeight: FontWeight.bold),
+                                                        //                 ),
+                                                        //               ),
+                                                        //             ],
+                                                        //           ),
+                                                        //   ],
+                                                        // ),
                                                       ],
                                                     ),
-                                                    subtitle: Column(
-                                                      children: [
-                                                        SizedBox(
-                                                          height: size.height *
-                                                              0.01,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    trailing: Text(
-                                                      '  \u{20B9}${value.productName[index]["prrate1"]}',
-                                                      style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 25, 55, 185),
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
-                                                    ),
+                                                    
+                                                    // trailing: Text(
+                                                    //   '  \u{20B9}${value.productName[index]["prrate1"]}',
+                                                    //   style: const TextStyle(
+                                                    //     fontSize: 16,
+                                                    //     fontWeight:
+                                                    //         FontWeight.bold,
+                                                    //     color: Color.fromARGB(
+                                                    //         255, 25, 55, 185),
+                                                    //     fontStyle:
+                                                    //         FontStyle.italic,
+                                                    //   ),
+                                                    // ),
                                                     // trailing: Wrap(
                                                     //   spacing: 0,
                                                     //   children: [
