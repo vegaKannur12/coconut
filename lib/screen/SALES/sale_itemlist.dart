@@ -432,7 +432,6 @@ class _SalesItemState extends State<SalesItem> {
                                                                         MainAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                    
                                                                       SizedBox(
                                                                         width: size.width *
                                                                             0.03,
@@ -464,7 +463,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                               fontWeight: FontWeight.bold),
                                                                         ),
                                                                       ),
-                                                                        value.qty[index].text == "0" ||
+                                                                      value.qty[index].text == "0" ||
                                                                               value.qty[index].text ==
                                                                                   null
                                                                           ? Container()
@@ -483,12 +482,10 @@ class _SalesItemState extends State<SalesItem> {
                                                         ),
                                                       ],
                                                     ),
-                                                
                                                     trailing: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
                                                       children: [
-                                                     
                                                         SizedBox(
                                                           width: 10,
                                                         ),
