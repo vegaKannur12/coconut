@@ -122,6 +122,7 @@ class Controller extends ChangeNotifier {
   List<Map<String, dynamic>> filteredProductList = [];
   List<Map<String, dynamic>> salefilteredProductList = [];
   List<Map<String, dynamic>> returnfilteredProductList = [];
+  List<Map<String, dynamic>> cocunutSalesBag = [];
 
   // List<Map<String, dynamic>> returnList = [];
   bool filter = false;
@@ -3748,6 +3749,17 @@ class Controller extends ChangeNotifier {
     //   item["od"] = resultQuery;
     //   om.add(item);
     // }
+    notifyListeners();
+  }
+
+  ////////////////////////////////////////////////////////////
+  coconutFromSalesbagTable(String custmerId, String prod_code) async {
+    var res =
+        await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prod_code);
+    cocunutSalesBag.clear();
+    for (var item in res) {
+      cocunutSalesBag.add(item);
+    }
     notifyListeners();
   }
 }
