@@ -836,8 +836,39 @@ class _SalesItemState extends State<SalesItem> {
                                                           255, 226, 225, 225),
                                                   child: ListTile(
                                                     onTap: () {
-                                                      // cocosheet.showsalesMoadlBottomsheet(value.productName[index]["pritem"], value.productName[index]["prcode"], "", 1,value.productName[index]["prrate1"], dis_per, dis_amt, tax_per, tax_amt, cess_per, cess_amt, net_amt, gross, context, size, index, customerId, os, pkg, unit_name)
-                                                         
+                                                      cocosheet.showsalesMoadlBottomsheet(
+                                                          value.productName[index]
+                                                              ["pritem"].toString(),
+                                                          value.productName[index]
+                                                              ["prcode"].toString(),
+                                                          "",
+                                                          1,
+                                                          value.productName[index]
+                                                              ["prrate1"],
+                                                          0.0,
+                                                          0.0,
+                                                          value.productName[index]
+                                                              ["tax_per"],
+                                                          value.productName[index]
+                                                              ["tax_amt"],
+                                                          value.productName[index]
+                                                              ["cess_per"],
+                                                          value.productName[index]
+                                                              ["cess_amt"],
+                                                          value.productName[
+                                                              index]["net_amt"],
+                                                          0.0,
+                                                          context,
+                                                          size,
+                                                          index,
+                                                          value.productName[index]
+                                                              ["customerid"],
+                                                          value.productName[
+                                                              index]["os"],
+                                                          value.productName[
+                                                              index]["pkg"],
+                                                          value.productName[index]
+                                                              ["unit_name"]);
                                                     },
                                                     dense: true,
                                                     title: Column(
@@ -943,7 +974,7 @@ class _SalesItemState extends State<SalesItem> {
                                                         // ),
                                                       ],
                                                     ),
-                                                    
+
                                                     // trailing: Text(
                                                     //   '  \u{20B9}${value.productName[index]["prrate1"]}',
                                                     //   style: const TextStyle(
