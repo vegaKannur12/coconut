@@ -836,8 +836,12 @@ class _SalesItemState extends State<SalesItem> {
                                                           255, 226, 225, 225),
                                                   child: ListTile(
                                                     onTap: () {
+                                                      Provider.of<Controller>(
+                                                                        context,
+                                                                        listen:
+                                                                            false).coconutFromSalesbagTable(widget.customerId, value.productName[index]["prcode"].toString());
                                                       // cocosheet.showsalesMoadlBottomsheet(value.productName[index]["pritem"], value.productName[index]["prcode"], "", 1,value.productName[index]["prrate1"], dis_per, dis_amt, tax_per, tax_amt, cess_per, cess_amt, net_amt, gross, context, size, index, customerId, os, pkg, unit_name)
-                                                         
+                                                      
                                                     },
                                                     dense: true,
                                                     title: Column(
