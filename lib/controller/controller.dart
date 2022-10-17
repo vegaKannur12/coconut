@@ -197,6 +197,7 @@ class Controller extends ChangeNotifier {
   List<TextEditingController> salesrate = [];
   List<TextEditingController> discount_prercent = [];
   List<TextEditingController> discount_amount = [];
+  List<TextEditingController> coconutRate = [];
 
   List<bool> rateEdit = [];
   String? count;
@@ -1863,6 +1864,7 @@ class Controller extends ChangeNotifier {
 
       print("text length-------$length");
       qty = List.generate(length, (index) => TextEditingController());
+      coconutRate = List.generate(length, (index) => TextEditingController());
       // listDropdown=List.generate(length, (index) => DropdownButton())
       selected = List.generate(length, (index) => false);
       // returnselected = List.generate(length, (index) => false);
@@ -1875,7 +1877,9 @@ class Controller extends ChangeNotifier {
         }
         print("new quantity-------${qty[i].text}");
       }
-
+      for (int i = 0; i < productName.length; i++) {
+        coconutRate[i].text = productName[i]['prrate1'].toString();
+      }
       isLoading = false;
       notifyListeners();
       print("product name----${productName}");
