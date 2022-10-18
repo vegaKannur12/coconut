@@ -13,7 +13,6 @@ class P_Settings {
   /// [title] Project Title
   // static String get title => 'Order App';
   static Color get appbarColor => Color.fromARGB(255, 221, 202, 219);
-  static Color get homeappbarColor => Colors.purple;
 
   static Color get headingColor => Color.fromARGB(255, 4, 11, 73);
   // font color

@@ -122,7 +122,7 @@ class Controller extends ChangeNotifier {
   List<Map<String, dynamic>> filteredProductList = [];
   List<Map<String, dynamic>> salefilteredProductList = [];
   List<Map<String, dynamic>> returnfilteredProductList = [];
-  List<Map<String, dynamic>> cocunutSalesBag = [];
+  List<Map<String, dynamic>> salesitemList2 = [];
 
   // List<Map<String, dynamic>> returnList = [];
   bool filter = false;
@@ -198,7 +198,7 @@ class Controller extends ChangeNotifier {
   List<TextEditingController> salesrate = [];
   List<TextEditingController> discount_prercent = [];
   List<TextEditingController> discount_amount = [];
-  List<TextEditingController> coconutRate = [];
+  // List<TextEditingController> coconutRate = [];
 
   List<bool> rateEdit = [];
   String? count;
@@ -1865,7 +1865,7 @@ class Controller extends ChangeNotifier {
 
       print("text length-------$length");
       qty = List.generate(length, (index) => TextEditingController());
-      coconutRate = List.generate(length, (index) => TextEditingController());
+      // coconutRate = List.generate(length, (index) => TextEditingController());
       // listDropdown=List.generate(length, (index) => DropdownButton())
       selected = List.generate(length, (index) => false);
       // returnselected = List.generate(length, (index) => false);
@@ -1878,9 +1878,9 @@ class Controller extends ChangeNotifier {
         }
         print("new quantity-------${qty[i].text}");
       }
-      for (int i = 0; i < productName.length; i++) {
-        coconutRate[i].text = productName[i]['prrate1'].toString();
-      }
+      // for (int i = 0; i < productName.length; i++) {
+      //   coconutRate[i].text = productName[i]['prrate1'].toString();
+      // }
       isLoading = false;
       notifyListeners();
       print("product name----${productName}");
@@ -3753,13 +3753,18 @@ class Controller extends ChangeNotifier {
   }
 
   ////////////////////////////////////////////////////////////
-  coconutFromSalesbagTable(String custmerId, String prod_code) async {
-    var res =
-        await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prod_code);
-    cocunutSalesBag.clear();
+  FromSalesbagTable_X001(
+    String custmerId,
+  ) async {
+    salesitemList2.clear();
+    var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
+      custmerId,
+    );
+    salesitemList2.clear();
     for (var item in res) {
-      cocunutSalesBag.add(item);
+      salesitemList2.add(item);
     }
+    print("coconut form salesbag.${salesitemList2}");
     notifyListeners();
   }
 }

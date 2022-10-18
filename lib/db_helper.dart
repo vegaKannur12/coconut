@@ -1988,18 +1988,55 @@ class OrderAppDB {
         "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
         "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
         "inner join 'productUnits' u  ON u.pid = pd.pid where pd.code = ${prod_code}";
-
-    unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
+    var itemselectionquery = "SELECT pid,prcode,pritem FROM ( " +
         unitquery +
-        " ) k " +
-        "left join 'salesBagTable' b on k.prcode = b.code " +
-        "AND b.customerid='$customerId' and " +
-        "b.unit_name = k.prunit " +
-        " order by b.cartrowno  DESC,k.pritem,k.prcode;";
+        " ) k group by pid,prcode,pritem order by pritem";
+    // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
+    //     unitquery +
+    //     " ) k " +
+    //     "left join 'salesBagTable' b on k.prcode = b.code " +
+    //     "AND b.customerid='$customerId' and " +
+    //     "b.unit_name = k.prunit " +
+    //     " order by b.cartrowno  DESC,k.pritem,k.prcode;";
 //  b.cartrowno DESC
+    print("unit queryyyy..$unitquery");
     result = await db.rawQuery(unitquery);
 
     print("selectfromsalebagTable result----$result");
+    print("length sales unitsss---${result.length}");
+    return result;
+  }
+
+//////////////////////////////////////////////////
+  selectfromsalebagTable_X001(
+    String customerId,
+  ) async {
+    List<Map<String, dynamic>> result;
+    List<Map<String, dynamic>> result1;
+    Database db = await instance.database;
+    var unitquery = "";
+
+    // unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
+    //     "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p union all " +
+    //     "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
+    //     "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
+    //     "inner join 'productUnits' u  ON u.pid = pd.pid ";
+
+    var itemselectionquery = "SELECT p.pid prid,p.code prcode,p.item pritem " +
+        " from 'productDetailsTable' p group by p.pid,p.code,p.item order by p.item";
+
+    // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
+    //     unitquery +
+    //     " ) k " +
+    //     "left join 'salesBagTable' b on k.prcode = b.code " +
+    //     "AND b.customerid='$customerId' and " +
+    //     "b.unit_name = k.prunit " +
+    //     " order by b.cartrowno  DESC,k.pritem,k.prcode;";
+//  b.cartrowno DESC
+
+    print("unit queryyyy..$itemselectionquery");
+    result = await db.rawQuery(itemselectionquery);
+
     print("length sales unitsss---${result.length}");
     return result;
   }

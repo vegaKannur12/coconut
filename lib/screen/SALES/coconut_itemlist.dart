@@ -814,7 +814,7 @@ class _SalesItemState extends State<SalesItem> {
                                       : ListView.builder(
                                           itemExtent: 60,
                                           shrinkWrap: true,
-                                          itemCount: value.productName.length,
+                                          itemCount: value.salesitemList2.length,
                                           itemBuilder:
                                               (BuildContext context, index) {
                                             return Padding(
@@ -824,51 +824,57 @@ class _SalesItemState extends State<SalesItem> {
                                                   bottom: 0.2),
                                               child: Card(
                                                 child: Ink(
-                                                  color: value.productName[
-                                                                  index]
-                                                              ["cartrowno"] ==
-                                                          null
-                                                      ? value.selected[index]
-                                                          ? Color.fromARGB(255,
-                                                              226, 225, 225)
-                                                          : Colors.white
-                                                      : Color.fromARGB(
-                                                          255, 226, 225, 225),
+                                                  // color: value.salesitemList2[
+                                                  //                 index]
+                                                  //             ["cartrowno"] ==
+                                                  //         null
+                                                  //     ? value.selected[index]
+                                                  //         ? Color.fromARGB(255,
+                                                  //             226, 225, 225)
+                                                  //         : Colors.white
+                                                  //     : Color.fromARGB(
+                                                  //         255, 226, 225, 225),
                                                   child: ListTile(
                                                     onTap: () {
-                                                      cocosheet.showsalesMoadlBottomsheet(
-                                                          value.productName[index]
-                                                              ["pritem"].toString(),
-                                                          value.productName[index]
-                                                              ["prcode"].toString(),
-                                                          "",
-                                                          1,
-                                                          value.productName[index]
-                                                              ["prrate1"],
-                                                          0.0,
-                                                          0.0,
-                                                          value.productName[index]
-                                                              ["tax_per"],
-                                                          value.productName[index]
-                                                              ["tax_amt"],
-                                                          value.productName[index]
-                                                              ["cess_per"],
-                                                          value.productName[index]
-                                                              ["cess_amt"],
-                                                          value.productName[
-                                                              index]["net_amt"],
-                                                          0.0,
-                                                          context,
-                                                          size,
-                                                          index,
-                                                          value.productName[index]
-                                                              ["customerid"],
-                                                          value.productName[
-                                                              index]["os"],
-                                                          value.productName[
-                                                              index]["pkg"],
-                                                          value.productName[index]
-                                                              ["unit_name"]);
+                                                      // Provider.of<Controller>(
+                                                      //         context,
+                                                      //         listen: false)
+                                                      //     .coconutFromSalesbagTable(
+                                                      //         widget.customerId,
+                                                      //         value.productName[
+                                                      //                 index]
+                                                      //                 ["prcode"]
+                                                      //             .toString());
+                                                      // cocosheet.showsalesMoadlBottomsheet(
+                                                      //     value.productName[index]["pritem"]
+                                                      //         .toString(),
+                                                      //     value.productName[index]
+                                                      //             ["prcode"]
+                                                      //         .toString(),
+                                                      //     "",
+                                                      //     1,
+                                                      //     0.0,
+                                                      //     0.0,
+                                                      //     0.0,
+                                                      //     double.parse(value
+                                                      //         .productName[index]
+                                                      //             ["tax_per"]
+                                                      //         .toString()),
+                                                      //     double.parse(value
+                                                      //         .productName[index]
+                                                      //             ["tax_amt"]
+                                                      //         .toString()),
+                                                      //     0.0,
+                                                      //    0.0,
+                                                      //     double.parse(value.productName[index]["net_amt"].toString()),
+                                                      //     0.0,
+                                                      //     context,
+                                                      //     size,
+                                                      //     index,
+                                                      //     value.productName[index]["customerid"],
+                                                      //     value.productName[index]["os"],
+                                                      //     value.productName[index]["pkg"],
+                                                      //     value.productName[index]["unit_name"]);
                                                     },
                                                     dense: true,
                                                     title: Column(
@@ -882,9 +888,9 @@ class _SalesItemState extends State<SalesItem> {
                                                         Flexible(
                                                           flex: 5,
                                                           child: Text(
-                                                            '${value.productName[index]["prcode"]}' +
-                                                                '-' +
-                                                                '${value.productName[index]["pritem"]}',
+                                                            '${value.salesitemList2[index]["pritem"]}' +
+                                                                '- ' +
+                                                                '${value.salesitemList2[index]["prcode"]}',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,

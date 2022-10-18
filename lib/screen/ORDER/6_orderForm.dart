@@ -1042,7 +1042,13 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                     custmerId
                                                                         .toString(),
                                                                   );
-
+                                                                  Provider.of<Controller>(
+                                                                          context,
+                                                                          listen:
+                                                                              false)
+                                                                      .FromSalesbagTable_X001(
+                                                                          custmerId
+                                                                              .toString());
                                                                   Provider.of<Controller>(
                                                                           context,
                                                                           listen:
