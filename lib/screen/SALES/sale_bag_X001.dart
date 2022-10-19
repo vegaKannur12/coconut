@@ -6,7 +6,7 @@ import 'package:orderapp/components/commoncolor.dart';
 import 'package:orderapp/components/popupPayment.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/db_helper.dart';
-import 'package:orderapp/screen/SALES/X001_bottomsheet.dart';
+import 'package:orderapp/screen/SALES/salesBottomsheet.dart';
 import 'package:orderapp/screen/SALES/saleItemDetails.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class _SaleCartX001State extends State<SaleCartX001> {
   String? selected;
   PaymentSelect paysheet = PaymentSelect();
   SaleItemDetails saleDetails = SaleItemDetails();
-  SalesBottomSheet sheet = SalesBottomSheet();
+
   List<String> s = [];
   List rawCalcResult = [];
   String? gen_condition;
