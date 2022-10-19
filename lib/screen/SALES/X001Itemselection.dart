@@ -19,7 +19,7 @@ import 'package:orderapp/screen/SALES/sale_cart.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../components/coconut_bottomsheet.dart';
+import '../../components/X001_bottomsheet.dart';
 
 class SalesItem extends StatefulWidget {
   // List<Map<String,dynamic>>  products;
@@ -98,26 +98,27 @@ class _SalesItemState extends State<SalesItem> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: Consumer<Controller>(
-        builder: (context, value, child) {
-          return BottomAppBar(
-            // shape: shape,
-            color: P_Settings.ratecolor,
-            child: ElevatedButton(
+      bottomNavigationBar: BottomAppBar(
+        // shape: shape,
+        color: P_Settings.ratecolor,
+        child: Consumer<Controller>(
+          builder: (context, value, child) {
+            return ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: P_Settings.ratecolor, // background
               ),
               onPressed: () {
-                paysheet.showpaymentSheet(
-                    context,
-                    widget.areaId,
-                    widget.areaName,
-                    widget.customerId,
-                    s[0],
-                    s[1],
-                    " ",
-                    " ",
-                    value.orderTotal2[11]);
+                print("hai");
+                // paysheet.showpaymentSheet(
+                //     context,
+                //     widget.areaId,
+                //     widget.areaName,
+                //     widget.customerId,
+                //     s[0],
+                //     s[1],
+                //     " ",
+                //     " ",
+                //     value.orderTotal2[11]);
               },
               child: Text(
                 'Save',
@@ -128,9 +129,9 @@ class _SalesItemState extends State<SalesItem> {
                   color: P_Settings.tableheadingColor,
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       appBar: AppBar(
         leading: IconButton(
@@ -955,37 +956,42 @@ class _SalesItemState extends State<SalesItem> {
                                                                   ["prid"]);
                                                       cocosheet
                                                           .showsalesMoadlBottomsheet(
-                                                        // value.salesitemList2[index]
-                                                        //     ['pritem'],
-                                                        // value.salesitemList2[index]
-                                                        //     ['prcode'],
-                                                        // "",
-                                                        // 1,
-                                                        // value.salesitemList2[index]
-                                                        //     ['prrate'],
-                                                        // value.salesitemList2[index]
-                                                        //     ['disc_per'],
-                                                        // value.salesitemList2[index]
-                                                        //     ['disc_amt'],
-                                                        // value.salesitemList2[index]
-                                                        //     ['prtax'],
-                                                        // value.salesitemList2[
-                                                        //     index]['tax_per'],
-                                                        // value.salesitemList2[
-                                                        //     index]['ces_per'],
-                                                        // value.salesitemList2[
-                                                        //     index]['ces_amt'],
-                                                        // value.salesitemList2[
-                                                        //     index]['net_amt'],
-                                                        // 0.0,
-                                                        context,
-                                                        size,
-                                                        // index,
-                                                        // widget.customerId,
-                                                        // widget.os,
-                                                        // 0.0,
-                                                        // ""
-                                                      );
+                                                              value.salesitemList2[index]
+                                                                  ['pritem'],
+                                                              value.salesitemList2[index]
+                                                                  ['prcode'],
+                                                              // "",
+                                                              1,
+                                                              value.salesitemList2[index]
+                                                                  ['prrate'],
+                                                              value.salesitemList2[index]
+                                                                  ['disc_per'],
+                                                              value.salesitemList2[index]
+                                                                  ['disc_amt'],
+                                                              value.salesitemList2[index]
+                                                                  ['prtax'],
+                                                              value.salesitemList2[index]
+                                                                  ['tax_per'],
+                                                              value.salesitemList2[index]
+                                                                  ['ces_per'],
+                                                              value.salesitemList2[
+                                                                      index]
+                                                                  ['ces_amt'],
+                                                              value.salesitemList2[
+                                                                      index]
+                                                                  ['net_amt'],
+                                                              // 0.0,
+                                                              context,
+                                                              size,
+                                                              // index,
+                                                              // widget.customerId,
+                                                              // widget.os,
+                                                              0.0,
+                                                              value
+                                                                  .salesitemList2[
+                                                                      index]
+                                                                      ['prunit']
+                                                                  .toString());
                                                     },
                                                     dense: true,
                                                     title: Column(

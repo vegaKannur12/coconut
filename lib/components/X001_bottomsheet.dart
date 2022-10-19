@@ -10,32 +10,33 @@ class CoconutSheet {
   String? selected;
   ValueNotifier<bool> visible = ValueNotifier(false);
   showsalesMoadlBottomsheet(
-    // String item,
-    // String code,
+    String item,
+    String code,
     // String hsn,
-    // double? qty,
-    // double? rate,
-    // double? dis_per,
-    // double? dis_amt,
-    // double? tax_per,
-    // double? tax_amt,
-    // double? cess_per,
-    // double? cess_amt,
-    // double? net_amt,
+    double? qty,
+    double? rate,
+    double? dis_per,
+    double? dis_amt,
+    double? tax_per,
+    double? tax_amt,
+    double? cess_per,
+    double? cess_amt,
+    double? net_amt,
     // double gross,
     BuildContext context,
     Size size,
     // int index,
     // String customerId,
     // String os,
-    // double pkg,
-    // String unit_name
+    double pkg,
+    String unit_name
   ) {
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          // print("param---$qty----$dis_per--$dis_amt--$net_amt--$tax_amt");
+          print(
+              "param---$item....$code....$qty--$rate--$dis_per--$dis_amt--$net_amt--$tax_amt");
           // rawCalcResult = Provider.of<Controller>(context,listen: false).rawCalculation(rate,qty.toDouble(), 0.0, 100,tax_per, 0.0, "0", 0);
 
           // value.discount_prercent[index].text = dis_per.toString();
@@ -74,8 +75,7 @@ class CoconutSheet {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "itemmm",
-                                  // item,
+                                  item,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class CoconutSheet {
                                 ),
                                 Text("-"),
                                 Text(
-                                  "( code)",
+                                  code,
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold,
@@ -272,7 +272,7 @@ class CoconutSheet {
                         //               style: TextStyle(fontSize: 15),
                         //             ),
                         //             Spacer(),
-                        //             Text("\u{20B9}rate!.toStringAsFixed(2)")
+                        //             Text("\u{20B9}${rate!.toStringAsFixed(2)}")
                         //           ],
                         //         ),
                         //       ),
@@ -302,7 +302,7 @@ class CoconutSheet {
                               ),
                               Spacer(),
                               Text(
-                                "unit_name",
+                                unit_name,
                                 style: TextStyle(fontSize: 15),
                               ),
                             ],
