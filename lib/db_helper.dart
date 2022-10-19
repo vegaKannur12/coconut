@@ -1985,10 +1985,11 @@ class OrderAppDB {
     var unitquery = "";
 
     unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
-        "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p union all " +
-        "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
-        "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
-        "inner join 'productUnits' u  ON u.pid = pd.pid and pd.code = $prod_code";
+        "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p " +
+        "left join 'productUnits' u on u.pid = p.pid where p.code= '$prod_code'";
+        // "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
+        // "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
+        // "inner join 'productUnits' u  ON u.pid = p.pid ";
     // and pd.code = ${prod_code}
 
     // var itemselectionquery = "SELECT pid,prcode,pritem FROM ( " +
