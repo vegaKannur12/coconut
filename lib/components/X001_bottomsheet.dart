@@ -29,12 +29,13 @@ class CoconutSheet {
       // String customerId,
       // String os,
       double pkg,
-      String unit_name) {
+      List unitList
+      ) {
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          print("param---$pkg---$unit_name---$rate--$item....$code....$qty--$rate--");
+          print("param---$pkg-----$rate--$item....$code....$qty--$unitList--");
           // rawCalcResult = Provider.of<Controller>(context,listen: false).rawCalculation(rate,qty.toDouble(), 0.0, 100,tax_per, 0.0, "0", 0);
 
           // value.discount_prercent[index].text = dis_per.toString();
@@ -332,7 +333,7 @@ class CoconutSheet {
                               ),
                               Spacer(),
                               Text(
-                                unit_name,
+                               " unit_name",
                                 style: TextStyle(fontSize: 15),
                               ),
                             ],

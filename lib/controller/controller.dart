@@ -34,7 +34,7 @@ class Controller extends ChangeNotifier {
   double tax_tot = 0.0;
   String? selectunit;
   Map<String, dynamic> printSalesData = {};
-
+  List prUnitSaleListData2=[];
   double disc_amt = 0.0;
   double net_amt = 0.0;
   double taxable_rate = 0.0;
@@ -245,6 +245,7 @@ class Controller extends ChangeNotifier {
   String? path;
   String? textFile;
   bool? customer_visibility = false;
+  String? product_code;
 
 //////////////////////////////REGISTRATION ///////////////////////////
   Future<RegistrationData?> postRegistration(
@@ -3927,11 +3928,12 @@ class Controller extends ChangeNotifier {
     salesitemListdata2.clear();
     var res =
         await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prcode);
-    salesitemList2.clear();
+    salesitemListdata2.clear();
     for (var item in res) {
-      salesitemList2.add(item);
+      salesitemListdata2.add(item);
+      prUnitSaleListData2.add(item["prunit"]);
     }
-    print("full data ......${salesitemList2}");
+    print("full data ......${salesitemListdata2}");
     notifyListeners();
   }
 }
