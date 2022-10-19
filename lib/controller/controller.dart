@@ -123,6 +123,7 @@ class Controller extends ChangeNotifier {
   List<Map<String, dynamic>> salefilteredProductList = [];
   List<Map<String, dynamic>> returnfilteredProductList = [];
   List<Map<String, dynamic>> salesitemList2 = [];
+  List<Map<String, dynamic>> salesitemListdata2 = [];
 
   // List<Map<String, dynamic>> returnList = [];
   bool filter = false;
@@ -159,6 +160,7 @@ class Controller extends ChangeNotifier {
 
   List<Map<String, dynamic>> walletList = [];
   List<Map<String, dynamic>> productUnitList = [];
+  List productUnit_X001 = [];
 
   List<Map<String, dynamic>> historydataList = [];
   List<Map<String, dynamic>> staffOrderTotal = [];
@@ -1142,15 +1144,17 @@ class Controller extends ChangeNotifier {
   fetchProductUnits(int code) async {
     try {
       productUnitList.clear();
+      print("codeeeeeeee   $code");
       var res = await OrderAppDB.instance
           .selectAllcommon('productUnits', "pid='$code'");
       print("unit result..........$res");
       productUnitList.clear();
       for (var item in res) {
         productUnitList.add(item);
+        productUnit_X001.add(item);
       }
       print("product length...........${productUnitList.length}");
-      print("ProductUnits  ----$productUnitList");
+      print("ProductUnits  ----$productUnit_X001");
       notifyListeners();
     } catch (e) {
       print("error...$e");
@@ -3417,6 +3421,155 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
+//////////////////////////////////////////////////////////////////
+  searchProcess_X001(String customerId, String os, String comid, String type,
+      List<Map<String, dynamic>> list) async {
+    print("searchkey--comid-$type-$searchkey---$comid----$os");
+    List<Map<String, dynamic>> result = [];
+    List<Map<String, dynamic>> list = type == 'sales'
+        ? await OrderAppDB.instance.selectfromsalebagTable_X001(customerId)
+        : type == 'sale order'
+            ? await OrderAppDB.instance.selectfromOrderbagTable(customerId)
+            : await OrderAppDB.instance.selectfromreturnbagTable(customerId);
+    // List<Map<String, dynamic>> orderlist =
+    //     await OrderAppDB.instance.selectfromOrderbagTable(customerId);
+    newList.clear();
+    print("jhkzsfz----$list");
+    if (searchkey!.isEmpty) {
+      newList = list;
+      var length = newList.length;
+      print("text length----$length");
+      qty = List.generate(length, (index) => TextEditingController());
+      selected = List.generate(length, (index) => false);
+    } else {
+      isListLoading = true;
+      notifyListeners();
+      print("else is search");
+      isSearch = true;
+
+      // List<Map<String, dynamic>> res =
+      //     await OrderAppDB.instance.getOrderBagTable(customerId, os);
+      // for (var item in res) {
+      //   bagList.add(item);
+      // }
+// print("jhfdjkhfjd----$bagList");
+
+      print(" nw list---$salesitemList2");
+      newList = list
+          .where((product) =>
+                  product["pritem"]
+                      .toLowerCase()
+                      .contains(searchkey!.toLowerCase()) ||
+                  product["prcode"]
+                      .toLowerCase()
+                      .contains(searchkey!.toLowerCase())
+              //      ||
+              // product["prcategoryId"]
+              //     .toLowerCase()
+              //     .contains(searchkey!.toLowerCase())
+              )
+          .toList();
+
+      // result = await OrderAppDB.instance.searchItem(
+      //     'productDetailsTable',
+      //     searchkey!,
+      //     'item',
+      //     'code',
+      //     'categoryId',
+      //     " and companyId='${comid}'");
+
+      for (var item in result) {
+        newList.add(item);
+      }
+
+      print("newlist-----------$newList");
+      isListLoading = false;
+      notifyListeners();
+      var length = newList.length;
+      selected = List.generate(length, (index) => false);
+      qty = List.generate(length, (index) => TextEditingController());
+      for (int i = 0; i < newList.length; i++) {
+        if (newList[i]["qty"] != null) {
+          qty[i].text = newList[i]["qty"].toString();
+        } else {
+          qty[i].text = "0";
+        }
+      }
+
+      print("baglis length----${bagList}");
+      if (newList.length > 0) {
+        print("enterde");
+        if (type == "sale order") {
+          List lis = await getBagDetails(customerId, os);
+          for (var item = 0; item < newList.length; item++) {
+            print("newList[item]----${newList[item]}");
+
+            for (var i = 0; i < bagList.length; i++) {
+              print("bagList[item]----${bagList[i]}");
+
+              if (bagList[i]["code"] == newList[item]["code"]) {
+                print("ifff");
+                selected[item] = true;
+                break;
+              } else {
+                print("else----");
+                selected[item] = false;
+              }
+            }
+          }
+        }
+        if (type == "return") {
+          List lis = await getreturnBagDetails(customerId, os);
+
+          for (var item = 0; item < newList.length; item++) {
+            print("newList[item]-return---${newList[item]}");
+
+            for (var i = 0; i < returnbagList.length; i++) {
+              print("bagList[item]----${returnbagList[i]}");
+
+              if (returnbagList[i]["code"] == newList[item]["code"]) {
+                print("codes are equal......");
+                selected[item] = true;
+                break;
+              } else {
+                print("else----");
+                selected[item] = false;
+              }
+            }
+          }
+        }
+        if (type == "sales") {
+          List lis = await getSaleBagDetails(customerId, os);
+
+          for (var item = 0; item < newList.length; item++) {
+            print("newList[item]----${newList[item]}");
+
+            for (var i = 0; i < salebagList.length; i++) {
+              print("bagList[item]----${salebagList[i]}");
+
+              if (salebagList[i]["code"] == newList[item]["code"]) {
+                print("ifff");
+                selected[item] = true;
+                break;
+              } else {
+                print("else----");
+                selected[item] = false;
+              }
+            }
+          }
+        }
+      }
+
+      print("text length----$length");
+
+      print("selected[item]-----${selected}");
+
+      // notifyListeners();
+    }
+
+    print("nw list---$newList");
+    notifyListeners();
+  }
 ////////////////////////////////////////////////////////////////
   // searchProcess1(String customerId, String os, String comid, String type,
   //     List<Map<String, dynamic>> list) async {
@@ -3765,6 +3918,20 @@ class Controller extends ChangeNotifier {
       salesitemList2.add(item);
     }
     print("coconut form salesbag.${salesitemList2}");
+    notifyListeners();
+  }
+
+  ///////////////////////////////////////////////
+  FromSalesListData_X001(String custmerId, String prcode) async {
+    print("inside sales bottomsheet........$custmerId........$prcode");
+    // salesitemListdata2.clear();
+    var res =
+        await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prcode);
+    salesitemListdata2.clear();
+    for (var item in res) {
+      salesitemListdata2.add(item);
+    }
+    print("full data ......${salesitemListdata2}");
     notifyListeners();
   }
 }

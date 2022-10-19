@@ -1,16 +1,20 @@
 import 'package:badges/badges.dart';
 import 'package:blinking_text/blinking_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:orderapp/components/commoncolor.dart';
 
 import 'package:orderapp/components/customSearchTile.dart';
 import 'package:orderapp/components/customSnackbar.dart';
+import 'package:orderapp/components/popupPayment.dart';
 import 'package:orderapp/components/showMoadal.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/db_helper.dart';
 import 'package:orderapp/screen/SALES/saleFilteredProductList.dart';
+import 'package:orderapp/screen/SALES/saleItemDetails.dart';
+import 'package:orderapp/screen/SALES/sale_bag_X001.dart';
 import 'package:orderapp/screen/SALES/sale_cart.dart';
 
 import 'package:provider/provider.dart';
@@ -40,6 +44,7 @@ class SalesItem extends StatefulWidget {
 }
 
 class _SalesItemState extends State<SalesItem> {
+  PaymentSelect paysheet = PaymentSelect();
   CoconutSheet cocosheet = CoconutSheet();
   double baseRate = 1.0;
   String rate1 = "1";
@@ -49,6 +54,7 @@ class _SalesItemState extends State<SalesItem> {
   double? newqty = 0.0;
   TextEditingController searchcontroll = TextEditingController();
   ShowModal showModal = ShowModal();
+  SaleItemDetails saleDetails = SaleItemDetails();
   List<Map<String, dynamic>> products = [];
   SearchTile search = SearchTile();
   DateTime now = DateTime.now();
@@ -78,6 +84,8 @@ class _SalesItemState extends State<SalesItem> {
     date = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     s = date!.split(" ");
     Provider.of<Controller>(context, listen: false)
+        .calculatesalesTotal(widget.os, widget.customerId);
+    Provider.of<Controller>(context, listen: false)
         .getSaleProductList(widget.customerId);
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -90,6 +98,40 @@ class _SalesItemState extends State<SalesItem> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: Consumer<Controller>(
+        builder: (context, value, child) {
+          return BottomAppBar(
+            // shape: shape,
+            color: P_Settings.ratecolor,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: P_Settings.ratecolor, // background
+              ),
+              onPressed: () {
+                paysheet.showpaymentSheet(
+                    context,
+                    widget.areaId,
+                    widget.areaName,
+                    widget.customerId,
+                    s[0],
+                    s[1],
+                    " ",
+                    " ",
+                    value.orderTotal2[11]);
+              },
+              child: Text(
+                'Save',
+                style: GoogleFonts.aBeeZee(
+                  textStyle: Theme.of(context).textTheme.bodyText2,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: P_Settings.tableheadingColor,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -108,26 +150,10 @@ class _SalesItemState extends State<SalesItem> {
         elevation: 0,
         backgroundColor: P_Settings.salewaveColor,
         actions: <Widget>[
-          Badge(
-            animationType: BadgeAnimationType.scale,
-            toAnimate: true,
-            badgeColor: Colors.white,
-            badgeContent: Consumer<Controller>(
-              builder: (context, value, child) {
-                if (value.count == null) {
-                  return SpinKitChasingDots(
-                      color: P_Settings.wavecolor, size: 9);
-                } else {
-                  return Text(
-                    "${value.count}",
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  );
-                }
-              },
-            ),
-            position: const BadgePosition(start: 33, bottom: 25),
-            child: IconButton(
-              onPressed: () async {
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: OutlinedButton(
+              onPressed: () {
                 if (widget.customerId == null || widget.customerId.isEmpty) {
                 } else {
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -140,7 +166,7 @@ class _SalesItemState extends State<SalesItem> {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       opaque: false, // set to false
-                      pageBuilder: (_, __, ___) => SaleCart(
+                      pageBuilder: (_, __, ___) => SaleCartX001(
                         areaId: widget.areaId,
                         custmerId: widget.customerId,
                         os: widget.os,
@@ -151,9 +177,62 @@ class _SalesItemState extends State<SalesItem> {
                   );
                 }
               },
-              icon: const Icon(Icons.shopping_cart),
+              child: Text(
+                "View Data",
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
+          // Badge(
+          //   animationType: BadgeAnimationType.scale,
+          //   toAnimate: true,
+          //   badgeColor: Colors.white,
+          //   badgeContent: Consumer<Controller>(
+          //     builder: (context, value, child) {
+          //       if (value.count == null) {
+          //         return SpinKitChasingDots(
+          //             color: P_Settings.wavecolor, size: 9);
+          //       } else {
+          //         return Text(
+          //           "${value.count}",
+          //           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          //         );
+          //       }
+          //     },
+          //   ),
+          //   position: const BadgePosition(start: 33, bottom: 25),
+          //   child: IconButton(
+          //     onPressed: () async {
+          //       if (widget.customerId == null || widget.customerId.isEmpty) {
+          //       } else {
+          //         FocusManager.instance.primaryFocus?.unfocus();
+          //         Provider.of<Controller>(context, listen: false).selectSettings(
+          //             "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
+
+          //         Provider.of<Controller>(context, listen: false)
+          //             .getSaleBagDetails(widget.customerId, widget.os);
+
+          //         Navigator.of(context).push(
+          //           PageRouteBuilder(
+          //             opaque: false, // set to false
+          //             pageBuilder: (_, __, ___) => SaleCartX001(
+          //               areaId: widget.areaId,
+          //               custmerId: widget.customerId,
+          //               os: widget.os,
+          //               areaname: widget.areaName,
+          //               type: widget.type,
+          //             ),
+          //           ),
+          //         );
+          //       }
+          //     },
+          //     icon: const Icon(Icons.shopping_cart),
+          //   ),
+          // ),
           Consumer<Controller>(
             builder: (context, _value, child) {
               return PopupMenuButton<String>(
@@ -276,7 +355,7 @@ class _SalesItemState extends State<SalesItem> {
                                               .salefilterCompany
                                           ? Provider.of<Controller>(context,
                                                   listen: false)
-                                              .searchProcess(
+                                              .searchProcess_X001(
                                                   widget.customerId,
                                                   widget.os,
                                                   Provider.of<Controller>(
@@ -287,7 +366,7 @@ class _SalesItemState extends State<SalesItem> {
                                                   value.productName)
                                           : Provider.of<Controller>(context,
                                                   listen: false)
-                                              .searchProcess(
+                                              .searchProcess_X001(
                                                   widget.customerId,
                                                   widget.os,
                                                   "",
@@ -300,13 +379,13 @@ class _SalesItemState extends State<SalesItem> {
                                       size: 20,
                                     ),
                                     onPressed: () {
-                                      Provider.of<Controller>(context,
-                                              listen: false)
-                                          .getSaleProductList(
-                                              widget.customerId);
-                                      Provider.of<Controller>(context,
-                                              listen: false)
-                                          .setIssearch(false);
+                                      // Provider.of<Controller>(context,
+                                      //         listen: false)
+                                      //     .getSaleProductList(
+                                      //         widget.customerId);
+                                      // Provider.of<Controller>(context,
+                                      //         listen: false)
+                                      //     .setIssearch(false);
 
                                       value.setisVisible(false);
                                       Provider.of<Controller>(context,
@@ -394,9 +473,9 @@ class _SalesItemState extends State<SalesItem> {
                                                         Flexible(
                                                           flex: 5,
                                                           child: Text(
-                                                            '${value.newList[index]["prcode"]}' +
-                                                                '-' +
-                                                                '${value.newList[index]["pritem"]}',
+                                                            '${value.newList[index]["pritem"]}' +
+                                                                '- ' +
+                                                                '${value.newList[index]["prcode"]}',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -413,7 +492,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                             .black
                                                                     : Colors
                                                                         .black,
-                                                                fontSize: 12,
+                                                                fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -485,18 +564,18 @@ class _SalesItemState extends State<SalesItem> {
                                                         // ),
                                                       ],
                                                     ),
-                                                    trailing: Text(
-                                                      '  \u{20B9}${value.newList[index]["prrate1"]}',
-                                                      style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 25, 55, 185),
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
-                                                    ),
+                                                    // trailing: Text(
+                                                    //   '  \u{20B9}${value.newList[index]["prrate1"]}',
+                                                    //   style: const TextStyle(
+                                                    //     fontSize: 16,
+                                                    //     fontWeight:
+                                                    //         FontWeight.bold,
+                                                    //     color: Color.fromARGB(
+                                                    //         255, 25, 55, 185),
+                                                    //     fontStyle:
+                                                    //         FontStyle.italic,
+                                                    //   ),
+                                                    // ),
                                                     // trailing: Row(
                                                     //   mainAxisSize:
                                                     //       MainAxisSize.min,
@@ -814,7 +893,8 @@ class _SalesItemState extends State<SalesItem> {
                                       : ListView.builder(
                                           itemExtent: 60,
                                           shrinkWrap: true,
-                                          itemCount: value.salesitemList2.length,
+                                          itemCount:
+                                              value.salesitemList2.length,
                                           itemBuilder:
                                               (BuildContext context, index) {
                                             return Padding(
@@ -835,46 +915,77 @@ class _SalesItemState extends State<SalesItem> {
                                                   //     : Color.fromARGB(
                                                   //         255, 226, 225, 225),
                                                   child: ListTile(
-                                                    onTap: () {
-                                                      // Provider.of<Controller>(
+                                                    onTap: () async {
+                                                      Provider.of<Controller>(
+                                                              context,
+                                                              listen: false)
+                                                          .FromSalesListData_X001(
+                                                              widget.customerId,
+                                                              "");
+                                                      // cocosheet
+                                                      //     .showsalesMoadlBottomsheet(
+                                                      //   context,
+                                                      //   size,
+                                                      //   // index,
+                                                      // );
+                                                      Provider.of<Controller>(
+                                                              context,
+                                                              listen: false)
+                                                          .getProductList(
+                                                        widget.customerId,
+                                                      );
+                                                      // await Provider.of<
+                                                      //             Controller>(
                                                       //         context,
                                                       //         listen: false)
-                                                      //     .coconutFromSalesbagTable(
+                                                      //     .FromSalesListData_X001(
                                                       //         widget.customerId,
-                                                      //         value.productName[
+                                                      //         value
+                                                      //             .salesitemList2[
                                                       //                 index]
                                                       //                 ["prcode"]
-                                                      //             .toString());
-                                                      // cocosheet.showsalesMoadlBottomsheet(
-                                                      //     value.productName[index]["pritem"]
-                                                      //         .toString(),
-                                                      //     value.productName[index]
-                                                      //             ["prcode"]
-                                                      //         .toString(),
-                                                      //     "",
-                                                      //     1,
-                                                      //     0.0,
-                                                      //     0.0,
-                                                      //     0.0,
-                                                      //     double.parse(value
-                                                      //         .productName[index]
-                                                      //             ["tax_per"]
-                                                      //         .toString()),
-                                                      //     double.parse(value
-                                                      //         .productName[index]
-                                                      //             ["tax_amt"]
-                                                      //         .toString()),
-                                                      //     0.0,
-                                                      //    0.0,
-                                                      //     double.parse(value.productName[index]["net_amt"].toString()),
-                                                      //     0.0,
-                                                      //     context,
-                                                      //     size,
-                                                      //     index,
-                                                      //     value.productName[index]["customerid"],
-                                                      //     value.productName[index]["os"],
-                                                      //     value.productName[index]["pkg"],
-                                                      //     value.productName[index]["unit_name"]);
+                                                      //
+                                                      // .toString());
+                                                      Provider.of<Controller>(
+                                                              context,
+                                                              listen: false)
+                                                          .fetchProductUnits(
+                                                              value.salesitemList2[
+                                                                      index]
+                                                                  ["prid"]);
+                                                      cocosheet
+                                                          .showsalesMoadlBottomsheet(
+                                                        // value.salesitemList2[index]
+                                                        //     ['pritem'],
+                                                        // value.salesitemList2[index]
+                                                        //     ['prcode'],
+                                                        // "",
+                                                        // 1,
+                                                        // value.salesitemList2[index]
+                                                        //     ['prrate'],
+                                                        // value.salesitemList2[index]
+                                                        //     ['disc_per'],
+                                                        // value.salesitemList2[index]
+                                                        //     ['disc_amt'],
+                                                        // value.salesitemList2[index]
+                                                        //     ['prtax'],
+                                                        // value.salesitemList2[
+                                                        //     index]['tax_per'],
+                                                        // value.salesitemList2[
+                                                        //     index]['ces_per'],
+                                                        // value.salesitemList2[
+                                                        //     index]['ces_amt'],
+                                                        // value.salesitemList2[
+                                                        //     index]['net_amt'],
+                                                        // 0.0,
+                                                        context,
+                                                        size,
+                                                        // index,
+                                                        // widget.customerId,
+                                                        // widget.os,
+                                                        // 0.0,
+                                                        // ""
+                                                      );
                                                     },
                                                     dense: true,
                                                     title: Column(
@@ -907,7 +1018,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                             .black
                                                                     : Colors
                                                                         .black,
-                                                                fontSize: 12,
+                                                                fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1583,4 +1694,5 @@ class _SalesItemState extends State<SalesItem> {
   // }
 
   //////////////////////////////////////////////////////////////////////////////////
+
 }
