@@ -917,12 +917,6 @@ class _SalesItemState extends State<SalesItem> {
                                                   //         255, 226, 225, 225),
                                                   child: ListTile(
                                                     onTap: () async {
-                                                      Provider.of<Controller>(
-                                                              context,
-                                                              listen: false)
-                                                          .FromSalesListData_X001(
-                                                              widget.customerId,
-                                                              "");
                                                       // cocosheet
                                                       //     .showsalesMoadlBottomsheet(
                                                       //   context,
@@ -935,6 +929,7 @@ class _SalesItemState extends State<SalesItem> {
                                                           .getProductList(
                                                         widget.customerId,
                                                       );
+
                                                       // await Provider.of<
                                                       //             Controller>(
                                                       //         context,
@@ -954,44 +949,56 @@ class _SalesItemState extends State<SalesItem> {
                                                               value.salesitemList2[
                                                                       index]
                                                                   ["prid"]);
-                                                      cocosheet
-                                                          .showsalesMoadlBottomsheet(
-                                                              value.salesitemList2[index]
-                                                                  ['pritem'],
-                                                              value.salesitemList2[index]
-                                                                  ['prcode'],
-                                                              // "",
-                                                              1,
-                                                              value.salesitemList2[index]
-                                                                  ['prrate'],
-                                                              value.salesitemList2[index]
-                                                                  ['disc_per'],
-                                                              value.salesitemList2[index]
-                                                                  ['disc_amt'],
-                                                              value.salesitemList2[index]
-                                                                  ['prtax'],
-                                                              value.salesitemList2[index]
-                                                                  ['tax_per'],
-                                                              value.salesitemList2[index]
-                                                                  ['ces_per'],
-                                                              value.salesitemList2[
-                                                                      index]
-                                                                  ['ces_amt'],
-                                                              value.salesitemList2[
-                                                                      index]
-                                                                  ['net_amt'],
-                                                              // 0.0,
+                                                      Provider.of<Controller>(
                                                               context,
-                                                              size,
-                                                              // index,
-                                                              // widget.customerId,
-                                                              // widget.os,
-                                                              0.0,
-                                                              value
-                                                                  .salesitemList2[
+                                                              listen: false)
+                                                          .FromSalesListData_X001(
+                                                              widget.customerId,
+                                                              value.salesitemList2[
                                                                       index]
-                                                                      ['prunit']
-                                                                  .toString());
+                                                                  ['prcode'],
+                                                              index);
+                                                      // cocosheet
+                                                      //     .showsalesMoadlBottomsheet(
+                                                      //         value.salesitemList2[index]
+                                                      //             ['pritem'],
+                                                      //         value.salesitemList2[index]
+                                                      //             ['prcode'],
+                                                      //         // "",
+                                                      //         1,
+                                                      //         double.parse(value
+                                                      //                 .salesitemList2[index]
+                                                      //             ['prrate']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['disc_per']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['disc_amt']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['prtax']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['tax_per']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['ces_per']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['ces_amt']),
+                                                      //         // double.parse(value.salesitemList2[index]
+                                                      //         //     ['net_amt']),
+                                                      //         // 0.0,
+                                                      //         context,
+                                                      //         size,
+                                                      //         // index,
+                                                      //         // widget.customerId,
+                                                      //         // widget.os,
+                                                      //         double.parse(value
+                                                      //             .salesitemList2[
+                                                      //                 index]
+                                                      //                 ['pkg']
+                                                      //             .toString()),
+                                                      //         value
+                                                      //             .salesitemList2[
+                                                      //                 index]
+                                                      //                 ['prunit']
+                                                      //             .toString());
                                                     },
                                                     dense: true,
                                                     title: Column(

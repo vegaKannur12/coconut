@@ -10,33 +10,31 @@ class CoconutSheet {
   String? selected;
   ValueNotifier<bool> visible = ValueNotifier(false);
   showsalesMoadlBottomsheet(
-    String item,
-    String code,
-    // String hsn,
-    double? qty,
-    double? rate,
-    double? dis_per,
-    double? dis_amt,
-    double? tax_per,
-    double? tax_amt,
-    double? cess_per,
-    double? cess_amt,
-    double? net_amt,
-    // double gross,
-    BuildContext context,
-    Size size,
-    // int index,
-    // String customerId,
-    // String os,
-    double pkg,
-    String unit_name
-  ) {
+      String item,
+      String code,
+      // String hsn,
+      double? qty,
+      double? rate,
+      // double? dis_per,
+      // double? dis_amt,
+      // double? tax_per,
+      // double? tax_amt,
+      // double? cess_per,
+      // double? cess_amt,
+      // double? net_amt,
+      // double gross,
+      BuildContext context,
+      Size size,
+      // int index,
+      // String customerId,
+      // String os,
+      double pkg,
+      String unit_name) {
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          print(
-              "param---$item....$code....$qty--$rate--$dis_per--$dis_amt--$net_amt--$tax_amt");
+          print("param---$pkg---$unit_name---$rate--$item....$code....$qty--$rate--");
           // rawCalcResult = Provider.of<Controller>(context,listen: false).rawCalculation(rate,qty.toDouble(), 0.0, 100,tax_per, 0.0, "0", 0);
 
           // value.discount_prercent[index].text = dis_per.toString();
@@ -112,6 +110,38 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.only(right: 30),
                                 child: dropDownRoute(size),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Qty",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Spacer(),
+                              Text(
+                                "qty",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Rate",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Spacer(),
+                              Text(
+                                "rate",
+                                style: TextStyle(fontSize: 15),
                               ),
                             ],
                           ),

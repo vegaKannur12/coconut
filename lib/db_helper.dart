@@ -1979,6 +1979,7 @@ class OrderAppDB {
 
 /////////////////////////////////////////////////////////////////////
   coconutfromsalebagTable(String customerId, String prod_code) async {
+    // print("product code..$proc_code");
     List<Map<String, dynamic>> result;
     Database db = await instance.database;
     var unitquery = "";
@@ -1987,23 +1988,25 @@ class OrderAppDB {
         "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p union all " +
         "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
         "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
-        "inner join 'productUnits' u  ON u.pid = pd.pid ";
+        "inner join 'productUnits' u  ON u.pid = pd.pid and pd.code = $prod_code";
+    // and pd.code = ${prod_code}
+
     // var itemselectionquery = "SELECT pid,prcode,pritem FROM ( " +
     //     unitquery +
-    //     " ) k group by pid,prcode,pritem order by pritem";
-    unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
-        unitquery +
-        " ) k " +
-        "left join 'salesBagTable' b on k.prcode = b.code " +
-        "AND b.customerid='$customerId' and " +
-        "b.unit_name = k.prunit " +
-        " order by b.cartrowno  DESC,k.pritem,k.prcode;";
+    //     " ) where pd.prcode = ${prod_code} k group by pid,prcode,pritem order by pritem";
+    // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
+    //     unitquery +
+    //     " ) k " +
+    //     "left join 'salesBagTable' b on k.prcode = b.code " +
+    //     "AND b.customerid='$customerId' and " +
+    //     "b.unit_name = k.prunit " +
+    //     " order by b.cartrowno  DESC,k.pritem,k.prcode;";
 //  b.cartrowno DESC
     print("unit queryyyy..$unitquery");
     result = await db.rawQuery(unitquery);
 
     print("selectfromsalebagTable result----$result");
-    print("length sales unitsss---${result.length}");
+    print("length sales unitsss---${result}");
     return result;
   }
 

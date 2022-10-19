@@ -3922,16 +3922,16 @@ class Controller extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////////
-  FromSalesListData_X001(String custmerId, String prcode) async {
-    print("inside sales bottomsheet........$custmerId........$prcode");
-    // salesitemListdata2.clear();
+  FromSalesListData_X001(String custmerId, String prcode,int index) async {
+    print("inside sales bottomsheet........$custmerId........$prcode.....$index");
+    salesitemListdata2.clear();
     var res =
         await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prcode);
-    salesitemListdata2.clear();
+    salesitemList2.clear();
     for (var item in res) {
-      salesitemListdata2.add(item);
+      salesitemList2.add(item);
     }
-    print("full data ......${salesitemListdata2}");
+    print("full data ......${salesitemList2}");
     notifyListeners();
   }
 }
