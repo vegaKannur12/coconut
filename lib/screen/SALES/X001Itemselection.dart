@@ -1001,7 +1001,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                     .customerId,
                                                                 widget.os,
                                                                 0.0,
-                                                                value.prUnitSaleListData2);
+                                                               );
                                                       }
                                                     },
                                                     dense: true,
