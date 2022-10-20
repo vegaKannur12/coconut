@@ -1983,10 +1983,17 @@ class OrderAppDB {
     List<Map<String, dynamic>> result;
     Database db = await instance.database;
     var unitquery = "";
+    unitquery = "SELECT p.pid,p.code,p.item, p.unit , 1 pkg ,p.companyId ,p.hsn , " +
+        "p.tax ,p.prate ,p.mrp ,p.cost ,p.rate1 , " +
+        "p.categoryId  from 'productDetailsTable' p where p.code= '$prod_code' union all " +
+        "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
+        "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
+        "inner  join 'productUnits' u  ON u.pid = pd.pid where pd.code= '$prod_code' order by pkg";
 
-    unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
-        "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId,u.unit_name pr_unitName from 'productDetailsTable' p " +
-        "left join 'productUnits' u on u.pid = p.pid where p.code= '$prod_code'";
+    // unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
+    //     "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, "+
+    //     " p.categoryId  prcategoryId,u.unit_name pr_unitName from 'productDetailsTable' p " +
+    //     "left join 'productUnits' u on u.pid = p.pid where p.code= '$prod_code'";
 
     // "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
     // "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
