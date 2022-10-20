@@ -958,48 +958,54 @@ class _SalesItemState extends State<SalesItem> {
                                                       Provider.of<Controller>(
                                                               context,
                                                               listen: false)
-                                                          .FromSalesListData_X001(
+                                                          .fromSalesListData_X001(
                                                               widget.customerId,
                                                               value
                                                                   .product_code!,
                                                               index);
-                                                      cocosheet
-                                                          .showsalesMoadlBottomsheet(
-                                                              value.salesitemListdata2[
-                                                                  0]['pritem'],
-                                                              value.salesitemListdata2[
-                                                                  0]['prcode'],
-                                                              // "",
-                                                              1,
-                                                              double.parse(value
-                                                                      .salesitemListdata2[
-                                                                  0]['prrate']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['disc_per']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['disc_amt']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['prtax']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['tax_per']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['ces_per']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['ces_amt']),
-                                                              // double.parse(value.salesitemList2[index]
-                                                              //     ['net_amt']),
-                                                              // 0.0,
-                                                              context,
-                                                              size,
-                                                              // index,
-                                                              // widget.customerId,
-                                                              // widget.os,
-                                                              double.parse(value
-                                                                  .salesitemListdata2[
-                                                                      0]['pkg']
-                                                                  .toString()),
-                                                              value
-                                                                  .prUnitSaleListData2);
+                                                      if (value.isLoading) {
+                                                      CircularProgressIndicator();
+                                                      } else {
+                                                        cocosheet
+                                                            .showsalesMoadlBottomsheet(
+                                                                value.salesitemListdata2[0]
+                                                                    ['pritem'],
+                                                                value.salesitemListdata2[0]
+                                                                    ['prcode'],
+                                                                // "",
+                                                                1,
+                                                                double.parse(value
+                                                                        .salesitemListdata2[0]
+                                                                    ['prrate']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['disc_per']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['disc_amt']),
+                                                                double.parse(value
+                                                                            .salesitemList2[
+                                                                        index]
+                                                                    ['prtax']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['tax_per']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['ces_per']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['ces_amt']),
+                                                                // double.parse(value.salesitemList2[index]
+                                                                //     ['net_amt']),
+                                                                // 0.0,
+                                                                context,
+                                                                size,
+                                                                // index,
+                                                                // widget.customerId,
+                                                                // widget.os,
+                                                                double.parse(value
+                                                                    .salesitemListdata2[
+                                                                        0]
+                                                                        ['pkg']
+                                                                    .toString()),
+                                                                value.prUnitSaleListData2);
+                                                      }
                                                     },
                                                     dense: true,
                                                     title: Column(
