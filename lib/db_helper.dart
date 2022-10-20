@@ -1985,7 +1985,7 @@ class OrderAppDB {
     var unitquery = "";
 
     unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
-        "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p " +
+        "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId,u.unit_name pr_unitName from 'productDetailsTable' p " +
         "left join 'productUnits' u on u.pid = p.pid where p.code= '$prod_code'";
 
     // "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +

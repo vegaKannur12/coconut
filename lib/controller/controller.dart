@@ -3923,19 +3923,26 @@ class Controller extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////////
-  fromSalesListData_X001(String custmerId, String prcode, int index) async {
+  Future fromSalesListData_X001(String custmerId, String prcode, int index) async {
     print(
         "inside sales bottomsheet........$custmerId........$prcode.....$index");
     salesitemListdata2.clear();
+    prUnitSaleListData2.clear();
+    isLoading = true;
     var res =
         await OrderAppDB.instance.fromsalebagTable_X001(custmerId, prcode);
     salesitemListdata2.clear();
     for (var item in res) {
       salesitemListdata2.add(item);
-      prUnitSaleListData2.add(item["prunit"]);
+
+      prUnitSaleListData2.add(item["pr_unitName"]);
     }
+    isLoading = false;
+    notifyListeners();
+
     print("full data ......${salesitemListdata2}");
-    // print("units ......${prUnitSaleListData2}");
+    print("prUnitSaleListData2.....${prUnitSaleListData2}");
+
     notifyListeners();
   }
 }
