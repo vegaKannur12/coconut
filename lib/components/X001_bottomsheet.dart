@@ -114,7 +114,8 @@ class CoconutSheet {
                                     // Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 30),
-                                      child: dropDownUnit(size),
+                                      child:
+                                      value.prNullvalue?Container(): dropDownUnit(size),
                                     ),
                                   ],
                                 ),

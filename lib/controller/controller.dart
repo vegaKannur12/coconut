@@ -33,6 +33,7 @@ class Controller extends ChangeNotifier {
   double cess_tot = 0.0;
   double tax_tot = 0.0;
   String? selectunit;
+  bool prNullvalue=false;
   Map<String, dynamic> printSalesData = {};
   List prUnitSaleListData2 = [];
   double disc_amt = 0.0;
@@ -3940,13 +3941,13 @@ class Controller extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
-    prUnitSaleListData2.where(
-      (element) {
-        if (element == null) {
-          return 
-        }
-      },
-    ).toList();
+   if( prUnitSaleListData2[0]==null){
+    prNullvalue=true;
+    notifyListeners();
+   }else{
+    prNullvalue=false;
+    notifyListeners();
+   }
     print("full data ......${salesitemListdata2}");
     print("prUnitSaleListData2.....${prUnitSaleListData2}");
 
