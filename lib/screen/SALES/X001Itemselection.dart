@@ -1003,8 +1003,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                   .salesitemListdata2[
                                                                       0]['pkg']
                                                                   .toString()),
-                                                              value
-                                                                  .prUnitSaleListData2);
+                                                           );
                                                       }
                                                     },
                                                     dense: true,

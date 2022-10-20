@@ -11,31 +11,31 @@ class CoconutSheet {
   String? selected;
   ValueNotifier<bool> visible = ValueNotifier(false);
   showsalesMoadlBottomsheet(
-      String item,
-      String code,
-      // String hsn,
-      double? qty,
-      double? rate,
-      // double? dis_per,
-      // double? dis_amt,
-      // double? tax_per,
-      double? tax_amt,
-      // double? cess_per,
-      // double? cess_amt,
-      // double? net_amt,
-      // double gross,
-      BuildContext context,
-      Size size,
-      // int index,
-      // String customerId,
-      // String os,
-      double pkg,
-      List? unitList) {
+    String item,
+    String code,
+    // String hsn,
+    double? qty,
+    double? rate,
+    // double? dis_per,
+    // double? dis_amt,
+    // double? tax_per,
+    double? tax_amt,
+    // double? cess_per,
+    // double? cess_amt,
+    // double? net_amt,
+    // double gross,
+    BuildContext context,
+    Size size,
+    // int index,
+    // String customerId,
+    // String os,
+    double pkg,
+  ) {
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          print("param---$pkg-----$rate--$item....$code....$qty--$unitList--");
+          print("param---$pkg-----$rate--$item....$code....$qty----");
           // rawCalcResult = Provider.of<Controller>(context,listen: false).rawCalculation(rate,qty.toDouble(), 0.0, 100,tax_per, 0.0, "0", 0);
 
           // value.discount_prercent[index].text = dis_per.toString();
@@ -114,7 +114,7 @@ class CoconutSheet {
                                     // Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 30),
-                                      child: dropDownRoute(size),
+                                      child: dropDownUnit(size),
                                     ),
                                   ],
                                 ),
@@ -665,7 +665,7 @@ class CoconutSheet {
   }
 
   //////////////////
-  Widget dropDownRoute(Size size) {
+  Widget dropDownUnit(Size size) {
     return Consumer<Controller>(
       builder: (context, value, child) {
         return Padding(
@@ -685,22 +685,22 @@ class CoconutSheet {
               // isDense: true,
               hint: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text("Select Route"),
+                child: Text("Select Unit"),
               ),
               autofocus: true,
               underline: SizedBox(),
               elevation: 0,
 
-              items: value.productUnit_X001
+              items: value.prUnitSaleListData2
                   .map((item) => DropdownMenuItem<String>(
-                      value: "${item.pid},${item.unit_name}",
+                      value: item.toString(),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              item.unit_name,
+                              item.toString(),
                               style: TextStyle(fontSize: 14),
                             ),
                           ),

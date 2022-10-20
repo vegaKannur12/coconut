@@ -3923,7 +3923,8 @@ class Controller extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////////
-  Future fromSalesListData_X001(String custmerId, String prcode, int index) async {
+  Future fromSalesListData_X001(
+      String custmerId, String prcode, int index) async {
     print(
         "inside sales bottomsheet........$custmerId........$prcode.....$index");
     salesitemListdata2.clear();
@@ -3939,7 +3940,13 @@ class Controller extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
-
+    prUnitSaleListData2.where(
+      (element) {
+        if (element == null) {
+          return 
+        }
+      },
+    ).toList();
     print("full data ......${salesitemListdata2}");
     print("prUnitSaleListData2.....${prUnitSaleListData2}");
 
