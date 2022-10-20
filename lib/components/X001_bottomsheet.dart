@@ -18,7 +18,7 @@ class CoconutSheet {
       // double? dis_per,
       // double? dis_amt,
       // double? tax_per,
-      // double? tax_amt,
+      double? tax_amt,
       // double? cess_per,
       // double? cess_amt,
       // double? net_amt,

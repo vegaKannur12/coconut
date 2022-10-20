@@ -1978,7 +1978,7 @@ class OrderAppDB {
   }
 
 /////////////////////////////////////////////////////////////////////
-  coconutfromsalebagTable(String customerId, String prod_code) async {
+  fromsalebagTable_X001(String customerId, String prod_code) async {
     // print("product code..$proc_code");
     List<Map<String, dynamic>> result;
     Database db = await instance.database;

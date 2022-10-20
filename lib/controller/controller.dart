@@ -34,7 +34,7 @@ class Controller extends ChangeNotifier {
   double tax_tot = 0.0;
   String? selectunit;
   Map<String, dynamic> printSalesData = {};
-  List prUnitSaleListData2=[];
+  List prUnitSaleListData2 = [];
   double disc_amt = 0.0;
   double net_amt = 0.0;
   double taxable_rate = 0.0;
@@ -3923,11 +3923,12 @@ class Controller extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////////
-  FromSalesListData_X001(String custmerId, String prcode,int index) async {
-    print("inside sales bottomsheet........$custmerId........$prcode.....$index");
+  FromSalesListData_X001(String custmerId, String prcode, int index) async {
+    print(
+        "inside sales bottomsheet........$custmerId........$prcode.....$index");
     salesitemListdata2.clear();
     var res =
-        await OrderAppDB.instance.coconutfromsalebagTable(custmerId, prcode);
+        await OrderAppDB.instance.fromsalebagTable_X001(custmerId, prcode);
     salesitemListdata2.clear();
     for (var item in res) {
       salesitemListdata2.add(item);
