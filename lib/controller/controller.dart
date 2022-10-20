@@ -3923,7 +3923,7 @@ class Controller extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////////
-  FromSalesListData_X001(String custmerId, String prcode, int index) async {
+  fromSalesListData_X001(String custmerId, String prcode, int index) async {
     print(
         "inside sales bottomsheet........$custmerId........$prcode.....$index");
     salesitemListdata2.clear();
@@ -3935,6 +3935,7 @@ class Controller extends ChangeNotifier {
       prUnitSaleListData2.add(item["prunit"]);
     }
     print("full data ......${salesitemListdata2}");
+    // print("units ......${prUnitSaleListData2}");
     notifyListeners();
   }
 }
