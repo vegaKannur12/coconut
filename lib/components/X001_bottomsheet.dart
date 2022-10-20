@@ -16,19 +16,19 @@ class CoconutSheet {
       // String hsn,
       double? qty,
       double? rate,
-      // double? dis_per,
-      // double? dis_amt,
-      // double? tax_per,
+      double? dis_per,
+      double? dis_amt,
+      double? tax_per,
       double? tax_amt,
-      // double? cess_per,
-      // double? cess_amt,
-      // double? net_amt,
-      // double gross,
+      double? cess_per,
+      double? cess_amt,
+      double? net_amt,
+      double gross,
       BuildContext context,
       Size size,
-      // int index,
-      // String customerId,
-      // String os,
+      int index,
+      String customerId,
+      String os,
       double pkg,
       List? unitList) {
     return showModalBottomSheet(
@@ -128,9 +128,69 @@ class CoconutSheet {
                                       style: TextStyle(fontSize: 15),
                                     ),
                                     Spacer(),
-                                    Text(
-                                      "qty",
-                                      style: TextStyle(fontSize: 15),
+                                    // Text(
+                                    //   qty.toString(),
+                                    //   style: TextStyle(fontSize: 15),
+                                    // ),
+                                    Container(
+                                      width: size.width * 0.2,
+                                      child: TextField(
+                                        onTap: () {
+                                          value.salesqty[index].selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: value
+                                                      .salesqty[index]
+                                                      .value
+                                                      .text
+                                                      .length);
+                                        },
+                                        // autofocus: true,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(0),
+                                          //border: InputBorder.none
+                                        ),
+
+                                        // maxLines: 1,
+                                        // minLines: 1,
+                                        keyboardType: TextInputType.number,
+                                        onSubmitted: (values) {
+                                          print("values----$values");
+                                          double valueqty = 0.0;
+                                          // value.discount_amount[index].text=;
+                                          if (values.isNotEmpty) {
+                                            print("emtyyyy");
+                                            valueqty = double.parse(values);
+                                          } else {
+                                            valueqty = 0.00;
+                                          }
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .fromDb = false;
+                                          // Provider.of<Controller>(context,
+                                          //         listen: false)
+                                          //     .rawCalculation(
+                                          //         double.parse(
+                                          //             value.salesrate[index].text),
+                                          //         valueqty,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         value.settingsList1[1]['set_value']
+                                          //             .toString(),
+                                          //         0,
+                                          //         index,
+                                          //         true,
+                                          //         "qty");
+                                        },
+                                        textAlign: TextAlign.right,
+                                        // controller: value.salesqty[index],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -144,9 +204,78 @@ class CoconutSheet {
                                       style: TextStyle(fontSize: 15),
                                     ),
                                     Spacer(),
-                                    Text(
-                                      "rate",
-                                      style: TextStyle(fontSize: 15),
+                                    // Text(
+                                    //   "\u{20B9}${rate}",
+                                    //   style: TextStyle(fontSize: 15),
+                                    // ),
+                                    Container(
+                                      width: size.width * 0.2,
+                                      child: TextField(
+                                        onTap: () {
+                                          value.discount_prercent[index]
+                                                  .selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: value
+                                                      .discount_prercent[index]
+                                                      .value
+                                                      .text
+                                                      .length);
+                                        },
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                        decoration: InputDecoration(
+                                          //labelText: "Phone number",
+                                          // hintText: "Phone number",
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(
+                                              0), //  <- you can it to 0.0 for no space
+
+                                          //border: InputBorder.none
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        onSubmitted: (values) {
+                                          double valuediscper = 0.0;
+                                          print("values---$values");
+                                          if (values.isNotEmpty) {
+                                            print("emtyyyy");
+                                            valuediscper = double.parse(values);
+                                          } else {
+                                            valuediscper = 0.00;
+                                          }
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .fromDb = false;
+
+                                          // Provider.of<Controller>(context,
+                                          //         listen: false)
+                                          //     .rawCalculation(
+                                          //         double.parse(value
+                                          //             .salesrate[index].text),
+                                          //         double.parse(value
+                                          //             .salesqty[index].text),
+                                          //         valuediscper,
+                                          //         double.parse(value
+                                          //             .discount_amount[index]
+                                          //             .text),
+                                          //         tax_per,
+                                          //         0.0,
+                                          //         value.settingsList1[1]
+                                          //                 ['set_value']
+                                          //             .toString(),
+                                          //         0,
+                                          //         index,
+                                          //         true,
+                                          //         "disc_per");
+                                        },
+                                        // controller:
+                                        //     value.discount_prercent[index],
+                                        textAlign: TextAlign.right,
+                                        // decoration: InputDecoration(
+                                        //   border: InputBorder.none,
+                                        // ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -311,38 +440,7 @@ class CoconutSheet {
                               //           ],
                               //         ),
                               //       ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Packing",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      "pkg.toString()",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Unit name",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      " unit_name",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                              ),
+
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
@@ -353,7 +451,7 @@ class CoconutSheet {
                                     ),
                                     Spacer(),
                                     Text(
-                                      "gross",
+                                      gross.toString(),
                                       // value.fromDb!
                                       //     ? "\u{20B9}gross.toStringAsFixed(2)"
                                       //     : "\u{20B9}${value.gross.toStringAsFixed(2)}",
@@ -514,6 +612,168 @@ class CoconutSheet {
                               //     ],
                               //   ),
                               // ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Discount %",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    Spacer(),
+                                    // Text(
+                                    //   dis_per!.toStringAsFixed(2),
+                                    //   style: TextStyle(fontSize: 15),
+                                    // )
+                                    Container(
+                                      width: size.width * 0.2,
+                                      child: TextField(
+                                        onTap: () {
+                                          value.salesqty[index].selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: value
+                                                      .salesqty[index]
+                                                      .value
+                                                      .text
+                                                      .length);
+                                        },
+                                        // autofocus: true,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(0),
+                                          //border: InputBorder.none
+                                        ),
+
+                                        // maxLines: 1,
+                                        // minLines: 1,
+                                        keyboardType: TextInputType.number,
+                                        onSubmitted: (values) {
+                                          print("values----$values");
+                                          double valueqty = 0.0;
+                                          // value.discount_amount[index].text=;
+                                          if (values.isNotEmpty) {
+                                            print("emtyyyy");
+                                            valueqty = double.parse(values);
+                                          } else {
+                                            valueqty = 0.00;
+                                          }
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .fromDb = false;
+                                          // Provider.of<Controller>(context,
+                                          //         listen: false)
+                                          //     .rawCalculation(
+                                          //         double.parse(
+                                          //             value.salesrate[index].text),
+                                          //         valueqty,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         0.0,
+                                          //         value.settingsList1[1]['set_value']
+                                          //             .toString(),
+                                          //         0,
+                                          //         index,
+                                          //         true,
+                                          //         "qty");
+                                        },
+                                        textAlign: TextAlign.right,
+                                        // controller: value.salesqty[index],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Discount amt",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    Spacer(),
+                                    // Text(
+                                    //   dis_amt!.toStringAsFixed(2),
+                                    //   style: TextStyle(fontSize: 15),
+                                    // )
+                                    Container(
+                                      width: size.width * 0.2,
+                                      child: TextField(
+                                        onTap: () {
+                                          value.discount_prercent[index]
+                                                  .selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: value
+                                                      .discount_prercent[index]
+                                                      .value
+                                                      .text
+                                                      .length);
+                                        },
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                        decoration: InputDecoration(
+                                          //labelText: "Phone number",
+                                          // hintText: "Phone number",
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(
+                                              0), //  <- you can it to 0.0 for no space
+
+                                          //border: InputBorder.none
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        onSubmitted: (values) {
+                                          double valuediscper = 0.0;
+                                          print("values---$values");
+                                          if (values.isNotEmpty) {
+                                            print("emtyyyy");
+                                            valuediscper = double.parse(values);
+                                          } else {
+                                            valuediscper = 0.00;
+                                          }
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .fromDb = false;
+
+                                          // Provider.of<Controller>(context,
+                                          //         listen: false)
+                                          //     .rawCalculation(
+                                          //         double.parse(value
+                                          //             .salesrate[index].text),
+                                          //         double.parse(value
+                                          //             .salesqty[index].text),
+                                          //         valuediscper,
+                                          //         double.parse(value
+                                          //             .discount_amount[index]
+                                          //             .text),
+                                          //         tax_per,
+                                          //         0.0,
+                                          //         value.settingsList1[1]
+                                          //                 ['set_value']
+                                          //             .toString(),
+                                          //         0,
+                                          //         index,
+                                          //         true,
+                                          //         "disc_per");
+                                        },
+                                        // controller:
+                                        //     value.discount_prercent[index],
+                                        textAlign: TextAlign.right,
+                                        // decoration: InputDecoration(
+                                        //   border: InputBorder.none,
+                                        // ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
@@ -524,7 +784,7 @@ class CoconutSheet {
                                     ),
                                     Spacer(),
                                     Text(
-                                      "tax_per!.toStringAsFixed(2)",
+                                      tax_per!.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
                                     )
                                   ],
@@ -539,16 +799,14 @@ class CoconutSheet {
                                       style: TextStyle(fontSize: 15),
                                     ),
                                     Spacer(),
-                                    // tax_amt! < 0.00
-                                    //     ? Text(
-                                    //         "\u{20B9}0.00",
-                                    //       )
-                                    //     : Text(
-                                    //         value.fromDb!
-                                    //             ? "\u{20B9}${tax_amt.toStringAsFixed(2)}"
-                                    //             : "\u{20B9}${value.tax.toStringAsFixed(2)}",
-                                    //         style: TextStyle(fontSize: 15),
-                                    //       )
+                                    tax_amt! < 0.00
+                                        ? Text(
+                                            "\u{20B9}0.00",
+                                          )
+                                        : Text(
+                                            "\u{20B9}${tax_amt.toStringAsFixed(2)}",
+                                            style: TextStyle(fontSize: 15),
+                                          )
                                   ],
                                 ),
                               ),
@@ -562,7 +820,7 @@ class CoconutSheet {
                                     ),
                                     Spacer(),
                                     Text(
-                                      "cess_per!.toStringAsFixed(2)",
+                                      cess_per!.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
                                     )
                                   ],
