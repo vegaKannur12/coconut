@@ -79,7 +79,8 @@ class _SalesItemState extends State<SalesItem> {
     print("customer id....os....${widget.customerId}--${widget.os}");
     products = Provider.of<Controller>(context, listen: false).productName;
     print("products---${products}");
-
+    Provider.of<Controller>(context, listen: false).selectSettings(
+        "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
     Provider.of<Controller>(context, listen: false).getOrderno();
     date = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     s = date!.split(" ");
@@ -923,18 +924,6 @@ class _SalesItemState extends State<SalesItem> {
                                                               .product_code =
                                                           value.salesitemList2[
                                                               index]["prcode"];
-                                                      // cocosheet
-                                                      //     .showsalesMoadlBottomsheet(
-                                                      //   context,
-                                                      //   size,
-                                                      //   // index,
-                                                      // );
-                                                      Provider.of<Controller>(
-                                                              context,
-                                                              listen: false)
-                                                          .getProductList(
-                                                        widget.customerId,
-                                                      );
 
                                                       // await Provider.of<
                                                       //             Controller>(
@@ -969,39 +958,68 @@ class _SalesItemState extends State<SalesItem> {
                                                       if (value.isLoading) {
                                                         CircularProgressIndicator();
                                                       } else {
+                                                        value
+                                                            .discount_prercent_X001[
+                                                                index]
+                                                            .text = "0.0";
+                                                        value
+                                                            .discount_amount_X001[
+                                                                index]
+                                                            .text = "0.0";
+                                                        print(
+                                                            "kjdjfkj----${value.salesitemListdata2[0]['tax']}----${value.salesitemListdata2[0]['item']}---${value.salesitemListdata2[0]['rate1']}----${value.salesitemListdata2[0]['tax']}");
+
+                                                        // Provider.of<Controller>(
+                                                        //         context,
+                                                        //         listen: false)
+                                                        //     .rawCalculation_X001(
+                                                        //         double.parse(value
+                                                        //             .salesrate_X001[
+                                                        //                 index]
+                                                        //             .text),
+                                                        //         valueqty,
+                                                        //         0.0,
+                                                        //         0.0,
+                                                        //         0.0,
+                                                        //         0.0,
+                                                        //         value
+                                                        //             .settingsList1[
+                                                        //                 1][
+                                                        //                 'set_value']
+                                                        //             .toString(),
+                                                        //         0,
+                                                        //         index,
+                                                        //         true,
+                                                        //         "");
+
+                                                        // double tot= double.parse(value
+                                                        //           .salesitemListdata2[
+                                                        //       0]['rate1']*1;
                                                         cocosheet
                                                             .showsalesMoadlBottomsheet(
-                                                                value.salesitemListdata2[
-                                                                        0]
-                                                                    ['item'],
-                                                                value.salesitemListdata2[
-                                                                        0]
-                                                                    ['code'],
-                                                                // "",
-                                                                1,
-                                                                double.parse(value
-                                                                        .salesitemListdata2[0]
-                                                                    ['rate1']),
-                                                                0.00,
-                                                                0.00,
-                                                                0.00,
-                                                                double.parse(value
-                                                                        .salesitemListdata2[0]
-                                                                    ['tax']),
-                                                                double.parse(value
-                                                                        .salesitemListdata2[0]
-                                                                    ['tax']),
-                                                                0.00,
-                                                                0.00,
-                                                                0.00,
-                                                                context,
-                                                                size,
-                                                                index,
-                                                                widget
-                                                                    .customerId,
-                                                                widget.os,
-                                                                0.0,
-                                                               );
+                                                          value.salesitemListdata2[
+                                                              0]['item'],
+                                                          value.salesitemListdata2[
+                                                              0]['code'],
+                                                          double.parse(value
+                                                                  .salesitemListdata2[
+                                                              0]['rate1']),
+                                                          0.00,
+                                                          0.00,
+                                                          double.parse(value
+                                                                  .salesitemListdata2[
+                                                              0]['tax']),
+                                                          0.00,
+                                                          0.00,
+                                                          context,
+                                                          size,
+                                                          index,
+                                                          widget.customerId,
+                                                          widget.os,
+                                                          0.0,
+                                                          s[0],
+                                                          s[1],
+                                                        );
                                                       }
                                                     },
                                                     dense: true,

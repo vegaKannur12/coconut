@@ -2034,8 +2034,9 @@ class OrderAppDB {
     //     "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
     //     "inner join 'productUnits' u  ON u.pid = pd.pid ";
 
-    var itemselectionquery = "SELECT p.pid prid,p.code prcode,p.item pritem " +
-        " from 'productDetailsTable' p group by p.pid,p.code,p.item order by p.item";
+    var itemselectionquery =
+        "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn " +
+            " from 'productDetailsTable' p group by p.pid,p.code,p.item order by p.item";
 
     // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
     //     unitquery +

@@ -26,6 +26,7 @@ import '../model/staffdetails_model.dart';
 
 class Controller extends ChangeNotifier {
   bool? fromDb;
+  double? package;
   double gross = 0.0;
   double gross_tot = 0.0;
   double roundoff = 0.0;
@@ -157,7 +158,7 @@ class Controller extends ChangeNotifier {
   List<CD> c_d = [];
   List<Map<String, dynamic>> historyList = [];
   List<Map<String, dynamic>> reportOriginalList = [];
-  List<Map<String, dynamic>> settingsList = [];
+  // List<Map<String, dynamic>> settingsList = [];
   List<Map<String, dynamic>> settingsList1 = [];
 
   List<Map<String, dynamic>> walletList = [];
@@ -3757,6 +3758,107 @@ class Controller extends ChangeNotifier {
     return "success";
   }
 
+  //////////////////////////////////////////////////////
+  String rawCalculation_X001(
+      double rate,
+      double qty,
+      double disc_per,
+      double disc_amount,
+      double tax_per,
+      double cess_per,
+      String method,
+      int state_status,
+      int index,
+      bool onSub,
+      String? disCalc) {
+    flag = false;
+
+    print(
+        "attribute----$rate----$qty-$state_status---$disCalc --$disc_per--$disc_amount--$tax_per--$cess_per--$method");
+    if (method == "0") {
+      /////////////////////////////////method=="0" - excluisive , method=1 - inclusive
+      taxable_rate = rate;
+    } else if (method == "1") {
+      double percnt = tax_per + cess_per;
+      taxable_rate = rate * (1 - (percnt / (100 + percnt)));
+      print("exclusive tax....$percnt...$taxable_rate");
+    }
+    print("exclusive tax......$taxable_rate");
+    // qty=qty+1;
+    gross = taxable_rate * qty;
+    print("gros----$gross");
+
+    if (disCalc == "disc_amt") {
+      disc_per = (disc_amount / gross) * 100;
+      disc_amt = disc_amount;
+      print("discount_prercent---$disc_amount---${discount_prercent.length}");
+      if (onSub) {
+        discount_prercent_X001[index].text = disc_per.toStringAsFixed(4);
+      }
+      print("disc_per----$disc_per");
+    }
+
+    if (disCalc == "disc_per") {
+      print("yes hay---$disc_per");
+      disc_amt = (gross * disc_per) / 100;
+      if (onSub) {
+        discount_amount_X001[index].text = disc_amt.toStringAsFixed(2);
+      }
+      print("disc-amt----$disc_amt");
+    }
+
+    if (disCalc == "qty") {
+      disc_amt = double.parse(discount_amount_X001[index].text);
+      disc_per = double.parse(discount_prercent_X001[index].text);
+      print("disc-amt qty----$disc_amt...$disc_per");
+    }
+
+    // if (disCalc == "rate") {
+    //   rateController[index].text = taxable_rate.toStringAsFixed(2);
+    //   // disc_amt = double.parse(discount_amount[index].text);
+    //   // disc_per = double.parse(discount_prercent[index].text);
+    //   print("disc-amt qty----$disc_amt...$disc_per");
+    // }
+
+    if (state_status == 0) {
+      ///////state_status=0--loacal///////////state_status=1----inter-state
+      cgst_per = tax_per / 2;
+      sgst_per = tax_per / 2;
+      igst_per = 0;
+    } else {
+      cgst_per = 0;
+      sgst_per = 0;
+      igst_per = tax_per;
+    }
+
+    if (disCalc == "") {
+      print("inside nothingg.....");
+      disc_per = (disc_amount / taxable_rate) * 100;
+      disc_amt = disc_amount;
+      print("rsr....$disc_per....$disc_amt..");
+    }
+
+    tax = (gross - disc_amt) * (tax_per / 100);
+    print("tax....$tax....$gross... $disc_amt...$tax_per");
+    if (tax < 0) {
+      tax = 0.00;
+    }
+    cgst_amt = (gross - disc_amt) * (cgst_per / 100);
+    sgst_amt = (gross - disc_amt) * (sgst_per / 100);
+    igst_amt = (gross - disc_amt) * (igst_per / 100);
+    cess = (gross - disc_amt) * (cess_per / 100);
+    net_amt = ((gross - disc_amt) + tax + cess);
+    if (net_amt < 0) {
+      net_amt = 0.00;
+    }
+    print("netamount.cal...$net_amt");
+
+    print(
+        "disc_per calcu mod=0..$tax..$gross... $disc_amt...$tax_per-----$net_amt");
+    notifyListeners();
+    return "success";
+  }
+
   ///////////////////////////////////////////////////////
   // keyContainsListcheck(String key, int index) {
   //   print("rhdhsz---$key-$returnList");
@@ -3973,9 +4075,23 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
-  setUnitSale_X001(String selected) {
+  setUnitSale_X001(String selected, int index) {
+    double? calculatedRate;
     selectedunit_X001 = selected;
-    print("selected---$selected");
+
+    for (int i = 0; i < salesitemListdata2.length; i++) {
+      if (salesitemListdata2[i]["unit"] == selectedunit_X001) {
+        print(
+            "selected---${salesitemListdata2[i]["pkg"]}-----${salesitemListdata2[i]["rate1"]}");
+        // package = salesitemListdata2[i]["pkg"];
+        calculatedRate = salesitemListdata2[i]["pkg"] *
+            double.parse(salesitemListdata2[i]["rate1"]);
+        print("calculatedRate----$calculatedRate");
+        salesrate_X001[index].text = calculatedRate.toString();
+        notifyListeners();
+      }
+    }
+
     notifyListeners();
   }
 }
