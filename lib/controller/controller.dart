@@ -34,7 +34,7 @@ class Controller extends ChangeNotifier {
   double tax_tot = 0.0;
   String? selectunit;
   String? selectedunit_X001;
-  bool prNullvalue=false;
+  bool prNullvalue = false;
   Map<String, dynamic> printSalesData = {};
   List prUnitSaleListData2 = [];
   double disc_amt = 0.0;
@@ -199,9 +199,14 @@ class Controller extends ChangeNotifier {
   List<TextEditingController> rateController = [];
   List<TextEditingController> salesqty = [];
   List<TextEditingController> returnsqty = [];
+  List<TextEditingController> salesqty_X001 = [];
   List<TextEditingController> salesrate = [];
+  List<TextEditingController> salesrate_X001 = [];
   List<TextEditingController> discount_prercent = [];
+  List<TextEditingController> discount_prercent_X001 = [];
   List<TextEditingController> discount_amount = [];
+  List<TextEditingController> discount_amount_X001 = [];
+
   // List<TextEditingController> coconutRate = [];
 
   List<bool> rateEdit = [];
@@ -3920,6 +3925,14 @@ class Controller extends ChangeNotifier {
     for (var item in res) {
       salesitemList2.add(item);
     }
+    salesrate_X001 = List.generate(
+        salesitemList2.length, (index) => TextEditingController());
+    salesqty_X001 = List.generate(
+        salesitemList2.length, (index) => TextEditingController());
+    discount_prercent_X001 = List.generate(
+        salesitemList2.length, (index) => TextEditingController());
+    discount_amount_X001 = List.generate(
+        salesitemList2.length, (index) => TextEditingController());
     print("coconut form salesbag.${salesitemList2}");
     notifyListeners();
   }
@@ -3938,25 +3951,31 @@ class Controller extends ChangeNotifier {
     for (var item in res) {
       salesitemListdata2.add(item);
 
-      prUnitSaleListData2.add(item["pr_unitName"]);
+      prUnitSaleListData2.add(item["unit"]);
     }
+    // salesrate_X001 = List.generate(
+    //     salesitemListdata2.length, (index) => TextEditingController());
+    // salesqty = List.generate(
+    //     salesitemListdata2.length, (index) => TextEditingController());
+
     isLoading = false;
     notifyListeners();
-   if( prUnitSaleListData2[0]==null){
-    prNullvalue=true;
-    notifyListeners();
-   }else{
-    prNullvalue=false;
-    notifyListeners();
-   }
+    // if (prUnitSaleListData2[0] == null) {
+    //   prNullvalue = true;
+    //   notifyListeners();
+    // } else {
+    //   prNullvalue = false;
+    //   notifyListeners();
+    // }
     print("full data ......${salesitemListdata2}");
     print("prUnitSaleListData2.....${prUnitSaleListData2}");
 
     notifyListeners();
   }
 
-  setUnitSale_X001(String selected){
-    selectedunit_X001=selected;
+  setUnitSale_X001(String selected) {
+    selectedunit_X001 = selected;
+    print("selected---$selected");
     notifyListeners();
   }
 }

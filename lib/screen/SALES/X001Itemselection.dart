@@ -965,7 +965,7 @@ class _SalesItemState extends State<SalesItem> {
                                                                   .product_code!,
                                                               index);
                                                       print(
-                                                          "item name...${value.salesitemListdata2[0]['pritem']}");
+                                                          "item name...${value.salesitemListdata2[0]['item']}");
                                                       if (value.isLoading) {
                                                         CircularProgressIndicator();
                                                       } else {
@@ -973,24 +973,24 @@ class _SalesItemState extends State<SalesItem> {
                                                             .showsalesMoadlBottomsheet(
                                                                 value.salesitemListdata2[
                                                                         0]
-                                                                    ['pritem'],
+                                                                    ['item'],
                                                                 value.salesitemListdata2[
                                                                         0]
-                                                                    ['prcode'],
+                                                                    ['code'],
                                                                 // "",
                                                                 1,
                                                                 double.parse(value
                                                                         .salesitemListdata2[0]
-                                                                    ['prrate']),
+                                                                    ['rate1']),
                                                                 0.00,
                                                                 0.00,
                                                                 0.00,
                                                                 double.parse(value
                                                                         .salesitemListdata2[0]
-                                                                    ['prtax']),
+                                                                    ['tax']),
                                                                 double.parse(value
                                                                         .salesitemListdata2[0]
-                                                                    ['prtax']),
+                                                                    ['tax']),
                                                                 0.00,
                                                                 0.00,
                                                                 0.00,
