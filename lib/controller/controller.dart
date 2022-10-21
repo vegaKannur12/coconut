@@ -33,6 +33,7 @@ class Controller extends ChangeNotifier {
   double cess_tot = 0.0;
   double tax_tot = 0.0;
   String? selectunit;
+  String? selectedunit_X001;
   bool prNullvalue=false;
   Map<String, dynamic> printSalesData = {};
   List prUnitSaleListData2 = [];
@@ -3908,7 +3909,7 @@ class Controller extends ChangeNotifier {
   }
 
   ////////////////////////////////////////////////////////////
-  FromSalesbagTable_X001(
+  fromSalesbagTable_X001(
     String custmerId,
   ) async {
     salesitemList2.clear();
@@ -3951,6 +3952,11 @@ class Controller extends ChangeNotifier {
     print("full data ......${salesitemListdata2}");
     print("prUnitSaleListData2.....${prUnitSaleListData2}");
 
+    notifyListeners();
+  }
+
+  setUnitSale_X001(String selected){
+    selectedunit_X001=selected;
     notifyListeners();
   }
 }

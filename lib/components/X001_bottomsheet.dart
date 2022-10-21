@@ -106,29 +106,29 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // Text(
-                                    //   "Unit :",
-                                    //   style: TextStyle(fontSize: 15),
-                                    // ),
-                                    // Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 30),
-                                      child:
-                                      value.prNullvalue?Container(): dropDownUnit(size),
+                                    Text(
+                                      "Unit :",
+                                      style: TextStyle(fontSize: 15),
                                     ),
+                                    // Spacer(),
+                                    value.prNullvalue
+                                        ? Container()
+                                        : dropDownUnit(size),
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Qty",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     // Text(
                                     //   qty.toString(),
                                     //   style: TextStyle(fontSize: 15),
@@ -199,12 +199,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Rate",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     // Text(
                                     //   "\u{20B9}${rate}",
                                     //   style: TextStyle(fontSize: 15),
@@ -445,12 +446,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Gross value",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     Text(
                                       gross.toString(),
                                       // value.fromDb!
@@ -617,12 +619,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Discount %",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     // Text(
                                     //   dis_per!.toStringAsFixed(2),
                                     //   style: TextStyle(fontSize: 15),
@@ -693,12 +696,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Discount amt",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     // Text(
                                     //   dis_amt!.toStringAsFixed(2),
                                     //   style: TextStyle(fontSize: 15),
@@ -778,12 +782,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Tax %",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     Text(
                                       tax_per!.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
@@ -794,12 +799,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Tax amount",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     tax_amt! < 0.00
                                         ? Text(
                                             "\u{20B9}0.00",
@@ -814,12 +820,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Cess %",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     Text(
                                       cess_per!.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
@@ -830,12 +837,13 @@ class CoconutSheet {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Cess amount",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     // cess_amt! < 0.00
                                     //     ? Text(
                                     //         "\u{20B9}0.00",
@@ -854,14 +862,14 @@ class CoconutSheet {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
-                                child: Row(children: [
+                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
                                   Text(
                                     "Net Amount",
                                     style: TextStyle(
                                         color: P_Settings.extracolor,
                                         fontSize: 15),
                                   ),
-                                  Spacer(),
+                                  // Spacer(),
                                   // net_amt! < 0.00
                                   //     ? Text("\u{20B9}0.00",
                                   //         style: TextStyle(
@@ -930,7 +938,7 @@ class CoconutSheet {
         return Padding(
           padding: const EdgeInsets.only(left: 0, right: 0),
           child: Container(
-            width: size.height * 0.4,
+            width: size.height * 0.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               border: Border.all(
@@ -944,7 +952,9 @@ class CoconutSheet {
               // isDense: true,
               hint: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text("Select Unit"),
+                child: Text(value.selectedunit_X001 == null
+                    ? "Select Unit"
+                    : value.selectedunit_X001.toString()),
               ),
               autofocus: true,
               underline: SizedBox(),
@@ -971,13 +981,7 @@ class CoconutSheet {
                 if (item != null) {
                   selected = item;
 
-                  splitted = selected!.split(",");
-                  if (selected != null) {
-                    visible.value = false;
-                  } else {
-                    visible.value = true;
-                  }
-                  print("route id-----${splitted[0]}");
+                  value.setUnitSale_X001(selected!);
                 }
               },
             ),
