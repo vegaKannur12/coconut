@@ -26,6 +26,7 @@ import '../model/staffdetails_model.dart';
 
 class Controller extends ChangeNotifier {
   bool? fromDb;
+  String? selectedItem;
   double? package;
   double gross = 0.0;
   double gross_tot = 0.0;
@@ -103,7 +104,7 @@ class Controller extends ChangeNotifier {
   List<bool> returnselected = [];
   List<bool> returnirtemExists = [];
   // Map<String, dynamic> printSalesData = {};
-
+  String? frstDropDown;
   bool isautodownload = false;
 
   // List<bool> returnSelected = [];
@@ -222,6 +223,8 @@ class Controller extends ChangeNotifier {
   List<Map<String, dynamic>> returnbagList = [];
 
   List<Map<String, dynamic>> newList = [];
+  // List<Map<String, dynamic>> newList = [];
+
   List<Map<String, dynamic>> newreportList = [];
   List<Map<String, dynamic>> remarkreportList = [];
   List<Map<String, dynamic>> masterList = [];
@@ -1326,7 +1329,7 @@ class Controller extends ChangeNotifier {
     await OrderAppDB.instance.deleteFromTableCommonQuery(
         "salesBagTable", "os='${os}' AND customerid='${customer_id}'");
 
-    bagList.clear();
+    salebagList.clear();
     notifyListeners();
     return sales_id;
   }
@@ -2251,7 +2254,7 @@ class Controller extends ChangeNotifier {
       dis_tot = double.parse(res[3]);
       print("result sale...${res[10].runtimeType}");
       roundoff = res[10];
-      // print("result sale.22..${roundoff.runtimeType}");
+      print("result sale.22..${roundoff}");
 
       salesTotal = roundoff + sTotal;
 
@@ -3432,8 +3435,8 @@ class Controller extends ChangeNotifier {
 
 //////////////////////////////////////////////////////////////////
   searchProcess_X001(String customerId, String os, String comid, String type,
-      List<Map<String, dynamic>> list) async {
-    print("searchkey--comid-$type-$searchkey---$comid----$os");
+      List<Map<String, dynamic>> list1) async {
+    print("searchkey--comid-$type-$searchkey---$comid----$os---$list1");
     List<Map<String, dynamic>> result = [];
     List<Map<String, dynamic>> list = type == 'sales'
         ? await OrderAppDB.instance.selectfromsalebagTable_X001(customerId)
@@ -3443,7 +3446,7 @@ class Controller extends ChangeNotifier {
     // List<Map<String, dynamic>> orderlist =
     //     await OrderAppDB.instance.selectfromOrderbagTable(customerId);
     newList.clear();
-    print("jhkzsfz----$list");
+    print("jhkzsffz----$list");
     if (searchkey!.isEmpty) {
       newList = list;
       var length = newList.length;
@@ -3461,9 +3464,9 @@ class Controller extends ChangeNotifier {
       // for (var item in res) {
       //   bagList.add(item);
       // }
-// print("jhfdjkhfjd----$bagList");
+      // print("jhfdjkhfjd----$bagList");
 
-      print(" nw list---$salesitemList2");
+      print("nw list---$salesitemList2");
       newList = list
           .where((product) =>
                   product["pritem"]
@@ -3497,6 +3500,13 @@ class Controller extends ChangeNotifier {
       var length = newList.length;
       selected = List.generate(length, (index) => false);
       qty = List.generate(length, (index) => TextEditingController());
+      salesrate_X001 =
+          List.generate(length, (index) => TextEditingController());
+      salesqty_X001 = List.generate(length, (index) => TextEditingController());
+      discount_prercent_X001 =
+          List.generate(length, (index) => TextEditingController());
+      discount_amount_X001 =
+          List.generate(length, (index) => TextEditingController());
       for (int i = 0; i < newList.length; i++) {
         if (newList[i]["qty"] != null) {
           qty[i].text = newList[i]["qty"].toString();
@@ -3855,7 +3865,7 @@ class Controller extends ChangeNotifier {
 
     print(
         "disc_per calcu mod=0..$tax..$gross... $disc_amt...$tax_per-----$net_amt");
-    notifyListeners();
+    // notifyListeners();
     return "success";
   }
 
@@ -4019,7 +4029,7 @@ class Controller extends ChangeNotifier {
   fromSalesbagTable_X001(
     String custmerId,
   ) async {
-    salesitemList2.clear();
+    // salesitemList2.clear();
     var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
       custmerId,
     );
@@ -4035,7 +4045,7 @@ class Controller extends ChangeNotifier {
         salesitemList2.length, (index) => TextEditingController());
     discount_amount_X001 = List.generate(
         salesitemList2.length, (index) => TextEditingController());
-    print("coconut form salesbag.${salesitemList2}");
+    print("coconut form salesbag.${salesitemList2.length}");
     notifyListeners();
   }
 
@@ -4071,10 +4081,13 @@ class Controller extends ChangeNotifier {
     // }
     print("full data ......${salesitemListdata2}");
     print("prUnitSaleListData2.....${prUnitSaleListData2}");
-
+    frstDropDown = prUnitSaleListData2[0];
+    // selectedItem=prUnitSaleListData2[0];
+    print("frstDropDown.....${frstDropDown}");
     notifyListeners();
   }
 
+///////////////////////////////////////////////////////////////////
   setUnitSale_X001(String selected, int index) {
     double? calculatedRate;
     selectedunit_X001 = selected;
@@ -4082,12 +4095,14 @@ class Controller extends ChangeNotifier {
     for (int i = 0; i < salesitemListdata2.length; i++) {
       if (salesitemListdata2[i]["unit"] == selectedunit_X001) {
         print(
-            "selected---${salesitemListdata2[i]["pkg"]}-----${salesitemListdata2[i]["rate1"]}");
-        // package = salesitemListdata2[i]["pkg"];
+            "selected---${salesitemListdata2[i]["pkg"].runtimeType}-----${salesitemListdata2[i]["rate1"].runtimeType}");
+        package = salesitemListdata2[i]["pkg"].toDouble();
         calculatedRate = salesitemListdata2[i]["pkg"] *
             double.parse(salesitemListdata2[i]["rate1"]);
-        print("calculatedRate----$calculatedRate");
+
         salesrate_X001[index].text = calculatedRate.toString();
+        print("calculatedRate----${ salesrate_X001[index].text}");
+
         notifyListeners();
       }
     }

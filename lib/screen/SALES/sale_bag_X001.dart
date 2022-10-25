@@ -33,6 +33,7 @@ class _SaleCartX001State extends State<SaleCartX001> {
   String? selected;
   PaymentSelect paysheet = PaymentSelect();
   SaleItemDetails saleDetails = SaleItemDetails();
+  SalesBottomSheet sheet = SalesBottomSheet();
 
   List<String> s = [];
   List rawCalcResult = [];
@@ -53,6 +54,11 @@ class _SaleCartX001State extends State<SaleCartX001> {
     Provider.of<Controller>(context, listen: false)
         .calculatesalesTotal(widget.os, widget.custmerId);
     print("jhdjs-----${widget.os}");
+    Provider.of<Controller>(context, listen: false).countFromTable(
+      "salesBagTable",
+      widget.os,
+      widget.custmerId,
+    );
     // TODO: implement initState
     super.initState();
   }
@@ -212,84 +218,39 @@ class _SaleCartX001State extends State<SaleCartX001> {
                           },
                         ),
                       ),
-                      // Container(
-                      //   height: size.height * 0.07,
-                      //   color: Colors.yellow,
-                      //   child: Row(
-                      //     children: [
-                      //       // GestureDetector(
-                      //       //   onTap: () {
-                      //       //     print(
-                      //       //         "............................${value.orderTotal2}");
-                      //       //     sheet.sheet(
-                      //       //         context,
-                      //       //         value.orderTotal2[1].toString(),
-                      //       //         value.orderTotal2[0].toString(),
-                      //       //         value.orderTotal2[3].toString(),
-                      //       //         value.orderTotal2[2].toString(),
-                      //       //         value.orderTotal2[4].toString(),
-                      //       //         value.orderTotal2[5].toString(),
-                      //       //         value.orderTotal2[10]);
-                      //       //   },
-                      //       //   child: Container(
-                      //       //     width: size.width * 0.5,
-                      //       //     height: size.height * 0.07,
-                      //       //     color: Colors.yellow,
-                      //       //     child: Row(
-                      //       //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       //       children: [
-                      //       //         Text(" Sales Total  : ",
-                      //       //             style: TextStyle(
-                      //       //                 fontWeight: FontWeight.bold,
-                      //       //                 fontSize: 15)),
-                      //       //         Flexible(
-                      //       //           child: Text(
-                      //       //               "\u{20B9}${value.salesTotal.toStringAsFixed(2)}",
-                      //       //               style: TextStyle(
-                      //       //                   fontWeight: FontWeight.bold,
-                      //       //                   fontSize: 16)),
-                      //       //         )
-                      //       //       ],
-                      //       //     ),
-                      //       //   ),
-                      //       // ),
-                      //       GestureDetector(
-                      //         onTap: (() async {
-                      //           paysheet.showpaymentSheet(
-                      //               context,
-                      //               widget.areaId,
-                      //               widget.areaname,
-                      //               widget.custmerId,
-                      //               s[0],
-                      //               s[1],
-                      //               " ",
-                      //               " ",
-                      //               value.orderTotal2[11]);
-                      //         }),
-                      //         child: Container(
-                      //           width: size.width * 0.5,
-                      //           height: size.height * 0.07,
-                      //           color: P_Settings.roundedButtonColor,
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.center,
-                      //             children: [
-                      //               Text(
-                      //                 "Sale",
-                      //                 style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18),
-                      //               ),
-                      //               SizedBox(
-                      //                 width: size.width * 0.01,
-                      //               ),
-                      //               Icon(Icons.shopping_basket)
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
+                      Container(
+                        height: size.height * 0.07,
+                        color: Colors.yellow,
+                        child: GestureDetector(
+                          onTap: () {
+                            print(
+                                "............................${value.orderTotal2}");
+                            sheet.sheet(
+                                context,
+                                value.orderTotal2[1].toString(),
+                                value.orderTotal2[0].toString(),
+                                value.orderTotal2[3].toString(),
+                                value.orderTotal2[2].toString(),
+                                value.orderTotal2[4].toString(),
+                                value.orderTotal2[5].toString(),
+                                value.orderTotal2[10]);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(" Sales Total  : ",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
+                              Text(
+                                  "\u{20B9}${value.salesTotal.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16))
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   );
           }

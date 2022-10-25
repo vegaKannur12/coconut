@@ -66,18 +66,18 @@ class StaffLogin extends StatelessWidget {
             //           .deleteFromTableCommonQuery("maxSeriesTable", "");
             //     },
             //     icon: Icon(Icons.delete)),
-            // IconButton(
-            //   onPressed: () async {
-            //     List<Map<String, dynamic>> list =
-            //         await OrderAppDB.instance.getListOfTables();
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) => TableList(list: list)),
-            //     );
-            //   },
-            //   icon: Icon(Icons.table_bar),
-            // ),
+            IconButton(
+              onPressed: () async {
+                List<Map<String, dynamic>> list =
+                    await OrderAppDB.instance.getListOfTables();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TableList(list: list)),
+                );
+              },
+              icon: Icon(Icons.table_bar),
+            ),
             PopupMenuButton<int>(
               itemBuilder: (context) => [
                 PopupMenuItem(

@@ -84,8 +84,7 @@ class _SalesItemState extends State<SalesItem> {
     Provider.of<Controller>(context, listen: false).getOrderno();
     date = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     s = date!.split(" ");
-    Provider.of<Controller>(context, listen: false)
-        .calculatesalesTotal(widget.os, widget.customerId);
+
     Provider.of<Controller>(context, listen: false)
         .getSaleProductList(widget.customerId);
     Future.delayed(Duration(seconds: 1), () {
@@ -101,34 +100,106 @@ class _SalesItemState extends State<SalesItem> {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         // shape: shape,
-        color: P_Settings.ratecolor,
+        // color: P_Settings.ratecolor,
         child: Consumer<Controller>(
           builder: (context, value, child) {
-            return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: P_Settings.ratecolor, // background
-              ),
-              onPressed: () {
-                print("hai");
-                // paysheet.showpaymentSheet(
-                //     context,
-                //     widget.areaId,
-                //     widget.areaName,
-                //     widget.customerId,
-                //     s[0],
-                //     s[1],
-                //     " ",
-                //     " ",
-                //     value.orderTotal2[11]);
-              },
-              child: Text(
-                'Save',
-                style: GoogleFonts.aBeeZee(
-                  textStyle: Theme.of(context).textTheme.bodyText2,
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: P_Settings.tableheadingColor,
-                ),
+            return Container(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    // width: size.width * 0.3,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: P_Settings.ratecolor, // background
+                        ),
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          Provider.of<Controller>(context, listen: false)
+                              .selectSettings(
+                                  "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
+
+                          Provider.of<Controller>(context, listen: false)
+                              .getSaleBagDetails(widget.customerId, widget.os);
+
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              opaque: false, // set to false
+                              pageBuilder: (_, __, ___) => SaleCartX001(
+                                areaId: widget.areaId,
+                                custmerId: widget.customerId,
+                                os: widget.os,
+                                areaname: widget.areaName,
+                                type: widget.type,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "View Data",
+                          style: GoogleFonts.aBeeZee(
+                            textStyle: Theme.of(context).textTheme.bodyText2,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: P_Settings.tableheadingColor,
+                          ),
+                        )),
+                  ),
+                  Expanded(
+                    // width: size.width * 0.3,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.orange, // background
+                      ),
+                      onPressed: () {
+                        print("hai");
+                        if (value.salebagList.length > 0) {
+                          paysheet.showpaymentSheet(
+                              context,
+                              widget.areaId,
+                              widget.areaName,
+                              widget.customerId,
+                              s[0],
+                              s[1],
+                              " ",
+                              " ",
+                              value.orderTotal2[11]);
+                        }
+                      },
+                      child: Text(
+                        'Save',
+                        style: GoogleFonts.aBeeZee(
+                          textStyle: Theme.of(context).textTheme.bodyText2,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: P_Settings.tableheadingColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    // width: size.width * 0.3,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red, // background
+                        ),
+                        onPressed: () async {
+                          await OrderAppDB.instance.deleteFromTableCommonQuery(
+                              "salesBagTable",
+                              "customerid='${widget.customerId}'");
+                        },
+                        child: Text(
+                          "Discard",
+                          style: GoogleFonts.aBeeZee(
+                            textStyle: Theme.of(context).textTheme.bodyText2,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: P_Settings.tableheadingColor,
+                          ),
+                        )),
+                  ),
+                ],
               ),
             );
           },
@@ -152,43 +223,43 @@ class _SalesItemState extends State<SalesItem> {
         elevation: 0,
         backgroundColor: P_Settings.salewaveColor,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: OutlinedButton(
-              onPressed: () {
-                if (widget.customerId == null || widget.customerId.isEmpty) {
-                } else {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  Provider.of<Controller>(context, listen: false).selectSettings(
-                      "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: OutlinedButton(
+          //     onPressed: () {
+          //       if (widget.customerId == null || widget.customerId.isEmpty) {
+          //       } else {
+          //         FocusManager.instance.primaryFocus?.unfocus();
+          //         Provider.of<Controller>(context, listen: false).selectSettings(
+          //             "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
 
-                  Provider.of<Controller>(context, listen: false)
-                      .getSaleBagDetails(widget.customerId, widget.os);
+          //         Provider.of<Controller>(context, listen: false)
+          //             .getSaleBagDetails(widget.customerId, widget.os);
 
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      opaque: false, // set to false
-                      pageBuilder: (_, __, ___) => SaleCartX001(
-                        areaId: widget.areaId,
-                        custmerId: widget.customerId,
-                        os: widget.os,
-                        areaname: widget.areaName,
-                        type: widget.type,
-                      ),
-                    ),
-                  );
-                }
-              },
-              child: Text(
-                "View Data",
-                style: GoogleFonts.aBeeZee(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
+          //         Navigator.of(context).push(
+          //           PageRouteBuilder(
+          //             opaque: false, // set to false
+          //             pageBuilder: (_, __, ___) => SaleCartX001(
+          //               areaId: widget.areaId,
+          //               custmerId: widget.customerId,
+          //               os: widget.os,
+          //               areaname: widget.areaName,
+          //               type: widget.type,
+          //             ),
+          //           ),
+          //         );
+          //       }
+          //     },
+          //     child: Text(
+          //       "View Data",
+          //       style: GoogleFonts.aBeeZee(
+          //         fontSize: 15,
+          //         fontWeight: FontWeight.bold,
+          //         color: Colors.white,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           // Badge(
           //   animationType: BadgeAnimationType.scale,
           //   toAnimate: true,
@@ -365,7 +436,7 @@ class _SalesItemState extends State<SalesItem> {
                                                           listen: false)
                                                       .salefilteredeValue!,
                                                   "sales",
-                                                  value.productName)
+                                                  value.salesitemList2)
                                           : Provider.of<Controller>(context,
                                                   listen: false)
                                               .searchProcess_X001(
@@ -373,7 +444,7 @@ class _SalesItemState extends State<SalesItem> {
                                                   widget.os,
                                                   "",
                                                   "sales",
-                                                  value.productName);
+                                                  value.salesitemList2);
                                     }),
                                 IconButton(
                                     icon: Icon(
@@ -381,13 +452,13 @@ class _SalesItemState extends State<SalesItem> {
                                       size: 20,
                                     ),
                                     onPressed: () {
-                                      // Provider.of<Controller>(context,
-                                      //         listen: false)
-                                      //     .getSaleProductList(
-                                      //         widget.customerId);
-                                      // Provider.of<Controller>(context,
-                                      //         listen: false)
-                                      //     .setIssearch(false);
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .fromSalesbagTable_X001(
+                                              widget.customerId);
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .setIssearch(false);
 
                                       value.setisVisible(false);
                                       Provider.of<Controller>(context,
@@ -448,21 +519,150 @@ class _SalesItemState extends State<SalesItem> {
                                                   bottom: 0.2),
                                               child: Card(
                                                 child: Ink(
-                                                  color: value.newList[index][
-                                                                  "cartrowno"] ==
-                                                              null ||
-                                                          value.qty[index]
-                                                                  .text ==
-                                                              null ||
-                                                          value.qty[index].text
-                                                              .isEmpty
-                                                      ? value.selected[index]
-                                                          ? Color.fromARGB(255,
-                                                              226, 225, 225)
-                                                          : Colors.white
-                                                      : Color.fromARGB(
-                                                          255, 226, 225, 225),
+                                                  // color: value.newList[index][
+                                                  //                 "cartrowno"] ==
+                                                  //             null ||
+                                                  //         value.qty[index]
+                                                  //                 .text ==
+                                                  //             null ||
+                                                  //         value.qty[index].text
+                                                  //             .isEmpty
+                                                  //     ? value.selected[index]
+                                                  //         ? Color.fromARGB(255,
+                                                  //             226, 225, 225)
+                                                  //         : Colors.white
+                                                  //     : Color.fromARGB(
+                                                  //         255, 226, 225, 225),
                                                   child: ListTile(
+                                                    onTap: () async {
+                                                      print("clickedddd---");
+                                                      Provider.of<Controller>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .product_code =
+                                                          value.newList[index]
+                                                              ["prcode"];
+
+                                                      // Provider.of<Controller>(
+                                                      //         context,
+                                                      //         listen: false)
+                                                      //     .fetchProductUnits(
+                                                      //         value.salesitemList2[
+                                                      //                 index]
+                                                      //             ["prid"]);
+                                                      await Provider.of<
+                                                                  Controller>(
+                                                              context,
+                                                              listen: false)
+                                                          .fromSalesListData_X001(
+                                                              widget.customerId,
+                                                              value
+                                                                  .product_code!,
+                                                              index);
+                                                      value.selectedunit_X001 =
+                                                          null;
+                                                      print(
+                                                          "item name...${value.salesitemListdata2[0]['item']}");
+                                                      if (value.isLoading) {
+                                                        CircularProgressIndicator();
+                                                      } else {
+                                                        value
+                                                            .discount_prercent_X001[
+                                                                index]
+                                                            .text = "0.0";
+                                                        value
+                                                            .discount_amount_X001[
+                                                                index]
+                                                            .text = "0.0";
+                                                        print(
+                                                            "kjdjfkj-${value.salesitemListdata2[0]['code']}----${value.salesitemListdata2[0]['item']}---${value.salesitemListdata2[0]['rate1']}----${value.salesitemListdata2[0]['tax']}");
+                                                        // value.selectedItem =
+                                                        //     null;
+                                                        value.selectedunit_X001 =
+                                                            null;
+                                                        value.gross = 0.00;
+                                                        value.net_amt = 0.00;
+                                                        value.tax = 0.00;
+                                                        value.salesqty_X001[
+                                                                index]
+                                                            .clear();
+                                                        value.salesrate_X001[
+                                                                index]
+                                                            .clear();
+                                                        Provider.of<Controller>(
+                                                                context,
+                                                                listen: false)
+                                                            .setUnitSale_X001(
+                                                                value
+                                                                    .frstDropDown!,
+                                                                index);
+                                                        value.selectedItem =
+                                                            value.frstDropDown;
+
+                                                        value
+                                                            .salesqty_X001[
+                                                                index]
+                                                            .text = "1";
+                                                        Provider.of<Controller>(
+                                                                context,
+                                                                listen: false)
+                                                            .rawCalculation_X001(
+                                                                double.parse(value
+                                                                    .salesrate_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .salesqty_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .discount_prercent_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .discount_amount_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                        .salesitemListdata2[0]
+                                                                    ['tax']),
+                                                                0.0,
+                                                                value
+                                                                    .settingsList1[1]
+                                                                        ['set_value']
+                                                                    .toString(),
+                                                                0,
+                                                                index,
+                                                                true,
+                                                                "");
+
+                                                        cocosheet
+                                                            .showsalesMoadlBottomsheet(
+                                                          value.salesitemListdata2[
+                                                              0]['item'],
+                                                          value.salesitemListdata2[
+                                                              0]['code'],
+                                                          double.parse(value
+                                                                  .salesitemListdata2[
+                                                              0]['rate1']),
+                                                          0.00,
+                                                          0.00,
+                                                          double.parse(value
+                                                                  .salesitemListdata2[
+                                                              0]['tax']),
+                                                          0.00,
+                                                          0.00,
+                                                          context,
+                                                          size,
+                                                          index,
+                                                          widget.customerId,
+                                                          widget.os,
+                                                          0.0,
+                                                          s[0],
+                                                          s[1],
+                                                        );
+                                                      }
+                                                    },
                                                     dense: true,
                                                     title: Column(
                                                       mainAxisAlignment:
@@ -482,18 +682,18 @@ class _SalesItemState extends State<SalesItem> {
                                                                 TextOverflow
                                                                     .ellipsis,
                                                             style: TextStyle(
-                                                                color: value.newList[index]
-                                                                            [
-                                                                            "cartrowno"] ==
-                                                                        null
-                                                                    ? value.selected[
-                                                                            index]
-                                                                        ? Colors
-                                                                            .black
-                                                                        : Colors
-                                                                            .black
-                                                                    : Colors
-                                                                        .black,
+                                                                // color: value.newList[index]
+                                                                //             [
+                                                                //             "cartrowno"] ==
+                                                                //         null
+                                                                //     ? value.selected[
+                                                                //             index]
+                                                                //         ? Colors
+                                                                //             .black
+                                                                //         : Colors
+                                                                //             .black
+                                                                //     : Colors
+                                                                //         .black,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
@@ -925,25 +1125,13 @@ class _SalesItemState extends State<SalesItem> {
                                                           value.salesitemList2[
                                                               index]["prcode"];
 
-                                                      // await Provider.of<
-                                                      //             Controller>(
+                                                      // Provider.of<Controller>(
                                                       //         context,
                                                       //         listen: false)
-                                                      //     .FromSalesListData_X001(
-                                                      //         widget.customerId,
-                                                      //         value
-                                                      //             .salesitemList2[
+                                                      //     .fetchProductUnits(
+                                                      //         value.salesitemList2[
                                                       //                 index]
-                                                      //                 ["prcode"]
-                                                      //
-                                                      // .toString());
-                                                      Provider.of<Controller>(
-                                                              context,
-                                                              listen: false)
-                                                          .fetchProductUnits(
-                                                              value.salesitemList2[
-                                                                      index]
-                                                                  ["prid"]);
+                                                      //             ["prid"]);
                                                       await Provider.of<
                                                                   Controller>(
                                                               context,
@@ -953,6 +1141,8 @@ class _SalesItemState extends State<SalesItem> {
                                                               value
                                                                   .product_code!,
                                                               index);
+                                                      value.selectedunit_X001 =
+                                                          null;
                                                       print(
                                                           "item name...${value.salesitemListdata2[0]['item']}");
                                                       if (value.isLoading) {
@@ -967,34 +1157,66 @@ class _SalesItemState extends State<SalesItem> {
                                                                 index]
                                                             .text = "0.0";
                                                         print(
-                                                            "kjdjfkj----${value.salesitemListdata2[0]['tax']}----${value.salesitemListdata2[0]['item']}---${value.salesitemListdata2[0]['rate1']}----${value.salesitemListdata2[0]['tax']}");
+                                                            "kjdjfkj-${value.salesitemListdata2[0]['code']}----${value.salesitemListdata2[0]['item']}---${value.salesitemListdata2[0]['rate1']}----${value.salesitemListdata2[0]['tax']}");
+                                                        // value.selectedItem =
+                                                        //     null;
+                                                        value.gross = 0.00;
+                                                        value.net_amt = 0.00;
+                                                        value.tax = 0.00;
+                                                        value.salesqty_X001[
+                                                                index]
+                                                            .clear();
+                                                        value.salesrate_X001[
+                                                                index]
+                                                            .clear();
 
-                                                        // Provider.of<Controller>(
-                                                        //         context,
-                                                        //         listen: false)
-                                                        //     .rawCalculation_X001(
-                                                        //         double.parse(value
-                                                        //             .salesrate_X001[
-                                                        //                 index]
-                                                        //             .text),
-                                                        //         valueqty,
-                                                        //         0.0,
-                                                        //         0.0,
-                                                        //         0.0,
-                                                        //         0.0,
-                                                        //         value
-                                                        //             .settingsList1[
-                                                        //                 1][
-                                                        //                 'set_value']
-                                                        //             .toString(),
-                                                        //         0,
-                                                        //         index,
-                                                        //         true,
-                                                        //         "");
+                                                        Provider.of<Controller>(
+                                                                context,
+                                                                listen: false)
+                                                            .setUnitSale_X001(
+                                                                value
+                                                                    .frstDropDown!,
+                                                                index);
+                                                        value.selectedItem =
+                                                            value.frstDropDown;
 
-                                                        // double tot= double.parse(value
-                                                        //           .salesitemListdata2[
-                                                        //       0]['rate1']*1;
+                                                        value
+                                                            .salesqty_X001[
+                                                                index]
+                                                            .text = "1";
+                                                        Provider.of<Controller>(
+                                                                context,
+                                                                listen: false)
+                                                            .rawCalculation_X001(
+                                                                double.parse(value
+                                                                    .salesrate_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .salesqty_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .discount_prercent_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                    .discount_amount_X001[
+                                                                        index]
+                                                                    .text),
+                                                                double.parse(value
+                                                                        .salesitemListdata2[0]
+                                                                    ['tax']),
+                                                                0.0,
+                                                                value
+                                                                    .settingsList1[1]
+                                                                        ['set_value']
+                                                                    .toString(),
+                                                                0,
+                                                                index,
+                                                                true,
+                                                                "");
+
                                                         cocosheet
                                                             .showsalesMoadlBottomsheet(
                                                           value.salesitemListdata2[
@@ -1041,18 +1263,18 @@ class _SalesItemState extends State<SalesItem> {
                                                                 TextOverflow
                                                                     .ellipsis,
                                                             style: TextStyle(
-                                                                color: value.productName[index]
-                                                                            [
-                                                                            "cartrowno"] ==
-                                                                        null
-                                                                    ? value.selected[
-                                                                            index]
-                                                                        ? Colors
-                                                                            .black
-                                                                        : Colors
-                                                                            .black
-                                                                    : Colors
-                                                                        .black,
+                                                                // color: value.salesitemList2[index]
+                                                                //             [
+                                                                //             "cartrowno"] ==
+                                                                //         null
+                                                                //     ? value.selected[
+                                                                //             index]
+                                                                //         ? Colors
+                                                                //             .black
+                                                                //         : Colors
+                                                                //             .black
+                                                                //     : Colors
+                                                                //         .black,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight

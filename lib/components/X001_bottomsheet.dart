@@ -8,17 +8,17 @@ import 'package:provider/provider.dart';
 class CoconutSheet {
   List rawCalcResult = [];
   List splitted = [];
-  String? selected;
+  // String? selected;
   ValueNotifier<bool> visible = ValueNotifier(false);
   showsalesMoadlBottomsheet(
       String item,
       String code,
       double rate,
-      double? dis_per,
-      double? dis_amt,
-      double? tax_per,
-      double? cess_per,
-      double? net_amt,
+      double dis_per,
+      double dis_amt,
+      double tax_per,
+      double cess_per,
+      double net_amt,
       BuildContext context,
       Size size,
       int index,
@@ -105,13 +105,13 @@ class CoconutSheet {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Unit :",
+                                      "Unit",
                                       style: TextStyle(fontSize: 15),
                                     ),
                                     // Spacer(),
                                     value.prNullvalue
                                         ? Container()
-                                        : dropDownUnit(size, index,tax_per!),
+                                        : dropDownUnit(size, index, tax_per),
                                   ],
                                 ),
                               ),
@@ -172,30 +172,36 @@ class CoconutSheet {
 
                                           print(
                                               "settingsLits-------${value.settingsList1}");
-                                          Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .rawCalculation_X001(
-                                                  double.parse(value
-                                                      .salesrate_X001[index]
-                                                      .text),
-                                                  valueqty,
-                                                  double.parse(value
-                                                      .discount_prercent_X001[
-                                                          index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .discount_amount_X001[
-                                                          index]
-                                                      .text),
-                                                  tax_per!,
-                                                  0.0,
-                                                  value.settingsList1[1]
-                                                          ['set_value']
-                                                      .toString(),
-                                                  0,
-                                                  index,
-                                                  true,
-                                                  "qty");
+                                          if (value.salesrate_X001[index]
+                                                      .text !=
+                                                  null &&
+                                              value.salesrate_X001[index].text
+                                                  .isNotEmpty) {
+                                            Provider.of<Controller>(context,
+                                                    listen: false)
+                                                .rawCalculation_X001(
+                                                    double.parse(value
+                                                        .salesrate_X001[index]
+                                                        .text),
+                                                    valueqty,
+                                                    double.parse(value
+                                                        .discount_prercent_X001[
+                                                            index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .discount_amount_X001[
+                                                            index]
+                                                        .text),
+                                                    tax_per,
+                                                    0.0,
+                                                    value.settingsList1[1]
+                                                            ['set_value']
+                                                        .toString(),
+                                                    0,
+                                                    index,
+                                                    true,
+                                                    "qty");
+                                          }
                                         },
                                         textAlign: TextAlign.right,
                                         controller: value.salesqty_X001[index],
@@ -258,32 +264,37 @@ class CoconutSheet {
                                           Provider.of<Controller>(context,
                                                   listen: false)
                                               .fromDb = false;
-                                          Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .rawCalculation_X001(
-                                                  double.parse(value
-                                                      .salesrate_X001[index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .salesqty_X001[index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .discount_prercent_X001[
-                                                          index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .discount_amount_X001[
-                                                          index]
-                                                      .text),
-                                                  tax_per!,
-                                                  0.0,
-                                                  value.settingsList1[1]
-                                                          ['set_value']
-                                                      .toString(),
-                                                  0,
-                                                  index,
-                                                  true,
-                                                  "");
+                                          if (value.salesqty_X001[index].text !=
+                                                  null &&
+                                              value.salesqty_X001[index].text
+                                                  .isNotEmpty) {
+                                            Provider.of<Controller>(context,
+                                                    listen: false)
+                                                .rawCalculation_X001(
+                                                    double.parse(value
+                                                        .salesrate_X001[index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .salesqty_X001[index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .discount_prercent_X001[
+                                                            index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .discount_amount_X001[
+                                                            index]
+                                                        .text),
+                                                    tax_per,
+                                                    0.0,
+                                                    value.settingsList1[1]
+                                                            ['set_value']
+                                                        .toString(),
+                                                    0,
+                                                    index,
+                                                    true,
+                                                    "");
+                                          }
                                         },
                                         controller: value.salesrate_X001[index],
                                         textAlign: TextAlign.right,
@@ -372,29 +383,35 @@ class CoconutSheet {
                                           Provider.of<Controller>(context,
                                                   listen: false)
                                               .fromDb = false;
-                                          Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .rawCalculation_X001(
-                                                  double.parse(value
-                                                      .salesrate_X001[index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .salesqty_X001[index]
-                                                      .text),
-                                                  valuediscper,
-                                                  double.parse(value
-                                                      .discount_amount_X001[
-                                                          index]
-                                                      .text),
-                                                  tax_per!,
-                                                  0.0,
-                                                  value.settingsList1[1]
-                                                          ['set_value']
-                                                      .toString(),
-                                                  0,
-                                                  index,
-                                                  true,
-                                                  "disc_per");
+                                          if (value.salesrate_X001[index]
+                                                      .text !=
+                                                  null &&
+                                              value.salesrate_X001[index].text
+                                                  .isNotEmpty) {
+                                            Provider.of<Controller>(context,
+                                                    listen: false)
+                                                .rawCalculation_X001(
+                                                    double.parse(value
+                                                        .salesrate_X001[index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .salesqty_X001[index]
+                                                        .text),
+                                                    valuediscper,
+                                                    double.parse(value
+                                                        .discount_amount_X001[
+                                                            index]
+                                                        .text),
+                                                    tax_per,
+                                                    0.0,
+                                                    value.settingsList1[1]
+                                                            ['set_value']
+                                                        .toString(),
+                                                    0,
+                                                    index,
+                                                    true,
+                                                    "disc_per");
+                                          }
                                         },
                                         textAlign: TextAlign.right,
                                         controller:
@@ -459,30 +476,35 @@ class CoconutSheet {
                                           Provider.of<Controller>(context,
                                                   listen: false)
                                               .fromDb = false;
-
-                                          Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .rawCalculation_X001(
-                                                  double.parse(value
-                                                      .salesrate_X001[index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .salesqty_X001[index]
-                                                      .text),
-                                                  double.parse(value
-                                                      .discount_prercent_X001[
-                                                          index]
-                                                      .text),
-                                                  valuediscamt,
-                                                  tax_per!,
-                                                  0.0,
-                                                  value.settingsList1[1]
-                                                          ['set_value']
-                                                      .toString(),
-                                                  0,
-                                                  index,
-                                                  true,
-                                                  "disc_amt");
+                                          if (value.salesrate_X001[index]
+                                                      .text !=
+                                                  null &&
+                                              value.salesrate_X001[index].text
+                                                  .isNotEmpty) {
+                                            Provider.of<Controller>(context,
+                                                    listen: false)
+                                                .rawCalculation_X001(
+                                                    double.parse(value
+                                                        .salesrate_X001[index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .salesqty_X001[index]
+                                                        .text),
+                                                    double.parse(value
+                                                        .discount_prercent_X001[
+                                                            index]
+                                                        .text),
+                                                    valuediscamt,
+                                                    tax_per,
+                                                    0.0,
+                                                    value.settingsList1[1]
+                                                            ['set_value']
+                                                        .toString(),
+                                                    0,
+                                                    index,
+                                                    true,
+                                                    "disc_amt");
+                                          }
                                         },
                                         controller:
                                             value.discount_amount_X001[index],
@@ -507,7 +529,7 @@ class CoconutSheet {
                                     ),
                                     // Spacer(),
                                     Text(
-                                      tax_per!.toStringAsFixed(2),
+                                      tax_per.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
                                     )
                                   ],
@@ -547,7 +569,7 @@ class CoconutSheet {
                                     ),
                                     // Spacer(),
                                     Text(
-                                      cess_per!.toStringAsFixed(2),
+                                      cess_per.toStringAsFixed(2),
                                       style: TextStyle(fontSize: 15),
                                     )
                                   ],
@@ -591,7 +613,7 @@ class CoconutSheet {
                                             fontSize: 15),
                                       ),
                                       Spacer(),
-                                      net_amt! < 0.00
+                                      net_amt < 0.00
                                           ? Text("\u{20B9}0.00",
                                               style: TextStyle(
                                                   color: P_Settings.extracolor,
@@ -629,72 +651,75 @@ class CoconutSheet {
                                                       'salesBagTable',
                                                       'cartrowno',
                                                       "os='${os}' AND customerid='${customerId}'");
-                                              var pid = value.productName[index]
-                                                  ['prid'];
+                                              var pid =
+                                                  value.salesitemList2[index]
+                                                      ['prid'];
+                                              if (value.salesqty_X001[index]
+                                                          .text !=
+                                                      null &&
+                                                  value.salesqty_X001[index]
+                                                      .text.isNotEmpty) {
+                                                double total = double.parse(
+                                                        value
+                                                            .salesrate_X001[
+                                                                index]
+                                                            .text) *
+                                                    double.parse(value
+                                                        .salesqty_X001[index]
+                                                        .text);
+                                                await OrderAppDB.instance
+                                                    .insertsalesBagTable(
+                                                        item,
+                                                        date,
+                                                        time,
+                                                        os,
+                                                        customerId,
+                                                        max,
+                                                        code,
+                                                        double.parse(
+                                                            value
+                                                                .salesqty_X001[
+                                                                    index]
+                                                                .text),
+                                                        value
+                                                            .salesrate_X001[
+                                                                index]
+                                                            .text,
+                                                        value.taxable_rate,
+                                                        total,
+                                                        "0",
+                                                        value.salesitemList2[
+                                                            index]["hsn"],
+                                                        tax_per,
+                                                        value.tax,
+                                                        value.cgst_per,
+                                                        value.cgst_amt,
+                                                        value.sgst_per,
+                                                        value.sgst_amt,
+                                                        value.igst_per,
+                                                        value.igst_amt,
+                                                        double.parse(value
+                                                            .discount_prercent_X001[
+                                                                index]
+                                                            .text),
+                                                        double.parse(value
+                                                            .discount_amount_X001[
+                                                                index]
+                                                            .text),
+                                                        cess_per,
+                                                        value.cess,
+                                                        0,
+                                                        value.net_amt,
+                                                        pid,
+                                                        value.selectedItem,
+                                                        value.package!,
+                                                        rate);
+                                              }
 
-                                              double total = double.parse(value
-                                                      .salesrate_X001[index]
-                                                      .text) *
-                                                  double.parse(value
-                                                      .salesqty_X001[index]
-                                                      .text);
-                                              await OrderAppDB.instance
-                                                  .insertsalesBagTable(
-                                                      item,
-                                                      date,
-                                                      time,
-                                                      os,
-                                                      customerId,
-                                                      max,
-                                                      code,
-                                                      double.parse(value
-                                                          .qty[index].text),
-                                                      value
-                                                          .salesrate_X001[index]
-                                                          .text,
-                                                      value.taxable_rate,
-                                                      total,
-                                                      "0",
-                                                      value.salesitemList2[
-                                                          index]["hsn"],
-                                                      tax_per,
-                                                      value.tax,
-                                                      value.cgst_per,
-                                                      value.cgst_amt,
-                                                      value.sgst_per,
-                                                      value.sgst_amt,
-                                                      value.igst_per,
-                                                      value.igst_amt,
-                                                      double.parse(value
-                                                          .discount_prercent_X001[
-                                                              index]
-                                                          .text),
-                                                      double.parse(value
-                                                          .discount_amount_X001[
-                                                              index]
-                                                          .text),
-                                                      cess_per,
-                                                      value.cess,
-                                                      0,
-                                                      value.net_amt,
-                                                      pid,
-                                                      selected,
-                                                      7.7,
-                                                      rate);
-                                              // print(
-                                              //     "indexxxxxx.${value.discount_amount[index].text}");
-                                              // await OrderAppDB.instance.upadteCommonQuery(
-                                              //     "salesBagTable",
-                                              //     "rate=${value.salesrate[index].text},unit_rate=${value.taxable_rate},net_amt=${value.net_amt},discount_per=${value.discount_prercent[index].text},discount_amt=${value.discount_amount[index].text},qty=${value.salesqty[index].text},totalamount=${value.gross},tax_amt=${value.tax},cgst_amt=${value.cgst_amt},sgst_amt=${value.sgst_amt},igst_amt=${value.igst_amt}",
-                                              //     "code='$code' and customerid='$customerId' and unit_name='$unit_name'");
-                                              // print("calculate new total");
-                                              // await Provider.of<Controller>(context,
-                                              //         listen: false)
-                                              //     .calculatesalesTotal(
-                                              //         os, customerId);
-                                              // Provider.of<Controller>(context,
-                                              //         listen: false)
-                                              //     .getSaleBagDetails(customerId, os);
+                                              Provider.of<Controller>(context,
+                                                      listen: false)
+                                                  .calculatesalesTotal(
+                                                      os, customerId);
 
                                               Navigator.pop(context);
                                             },
@@ -716,9 +741,14 @@ class CoconutSheet {
   }
 
   //////////////////
-  Widget dropDownUnit(Size size, int index,double tax_per) {
+  Widget dropDownUnit(Size size, int index, double tax_per) {
+    double qty;
     return Consumer<Controller>(
       builder: (context, value, child) {
+        // value.selectedunit_X001 = null;
+        // selected=null;
+        print(
+            "value.prUnitSaleListData2----${value.prUnitSaleListData2}------${value.selectedItem}");
         return Padding(
           padding: const EdgeInsets.only(left: 0, right: 0),
           child: Container(
@@ -732,13 +762,14 @@ class CoconutSheet {
             ),
             child: DropdownButton<String>(
               isExpanded: true,
-              value: selected,
+              value: value.selectedItem,
               // isDense: true,
               hint: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(value.selectedunit_X001 == null
-                    ? "Select Unit"
-                    : value.selectedunit_X001.toString()),
+                child: Text(value.frstDropDown.toString()),
+                // child: Text(value.selectedunit_X001 == null
+                //     ? "Select Unit"
+                //     : value.selectedunit_X001.toString()),
               ),
               autofocus: true,
               underline: SizedBox(),
@@ -763,25 +794,27 @@ class CoconutSheet {
               onChanged: (item) {
                 print("clicked");
                 if (item != null) {
-                  selected = item;
-
-                  value.setUnitSale_X001(selected!, index);
-
+                  value.selectedItem = item;
+                  value.setUnitSale_X001(value.selectedItem!, index);
+                  if(value.salesqty_X001[index].text==null ||value.salesqty_X001[index].text.isEmpty ){
+                    qty=1;
+                  }else{
+                    qty=double.parse(value.salesqty_X001[index].text);
+                  }
                   Provider.of<Controller>(context, listen: false)
                       .rawCalculation_X001(
                           double.parse(value.salesrate_X001[index].text),
-                          double.parse(
-                              value.salesqty_X001[index].text),
+                          qty,
                           double.parse(
                               value.discount_prercent_X001[index].text),
                           double.parse(value.discount_amount_X001[index].text),
-                          tax_per!,
+                          tax_per,
                           0.0,
                           value.settingsList1[1]['set_value'].toString(),
                           0,
                           index,
                           true,
-                          " ");
+                          "");
                 }
               },
             ),
