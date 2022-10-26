@@ -108,6 +108,7 @@ class CoconutSheet {
                                       "Unit",
                                       style: TextStyle(fontSize: 15),
                                     ),
+                                    // Text("Pkg : ${value.package}"),
                                     // Spacer(),
                                     value.prNullvalue
                                         ? Container()
@@ -116,7 +117,28 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Package",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    // Spacer(),
+                                    Text(
+                                      "${value.package}",
+                                      // value.fromDb!
+                                      //     ? "\u{20B9}gross.toStringAsFixed(2)"
+                                      //     : "\u{20B9}${value.gross.toStringAsFixed(2)}",
+                                      style: TextStyle(fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -211,7 +233,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -307,7 +329,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -328,7 +350,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -422,7 +444,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -518,7 +540,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -536,7 +558,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -558,7 +580,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -576,7 +598,7 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -601,7 +623,7 @@ class CoconutSheet {
                                 thickness: 1,
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -632,7 +654,7 @@ class CoconutSheet {
                                     ]),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -667,8 +689,14 @@ class CoconutSheet {
                                                     double.parse(value
                                                         .salesqty_X001[index]
                                                         .text);
+
+                                                 double baseRate=double.parse(value
+                                                            .salesrate_X001[
+                                                                index]
+                                                            .text)/value.package!;
+                                                print("rateggg----$baseRate");
                                                 await OrderAppDB.instance
-                                                    .insertsalesBagTable(
+                                                    .insertsalesBagTable_X001(
                                                         item,
                                                         date,
                                                         time,
@@ -676,18 +704,19 @@ class CoconutSheet {
                                                         customerId,
                                                         max,
                                                         code,
-                                                        double.parse(
-                                                            value
-                                                                .salesqty_X001[
-                                                                    index]
-                                                                .text),
+                                                        double.parse(value
+                                                            .salesqty_X001[
+                                                                index]
+                                                            .text),
                                                         value
                                                             .salesrate_X001[
                                                                 index]
                                                             .text,
                                                         value.taxable_rate,
                                                         total,
-                                                        "0",
+                                                        value.settingsList1[1]
+                                                                ['set_value']
+                                                            .toString(),
                                                         value.salesitemList2[
                                                             index]["hsn"],
                                                         tax_per,
@@ -713,7 +742,7 @@ class CoconutSheet {
                                                         pid,
                                                         value.selectedItem,
                                                         value.package!,
-                                                        rate);
+                                                        baseRate);
                                               }
 
                                               Provider.of<Controller>(context,
@@ -796,10 +825,11 @@ class CoconutSheet {
                 if (item != null) {
                   value.selectedItem = item;
                   value.setUnitSale_X001(value.selectedItem!, index);
-                  if(value.salesqty_X001[index].text==null ||value.salesqty_X001[index].text.isEmpty ){
-                    qty=1;
-                  }else{
-                    qty=double.parse(value.salesqty_X001[index].text);
+                  if (value.salesqty_X001[index].text == null ||
+                      value.salesqty_X001[index].text.isEmpty) {
+                    qty = 1;
+                  } else {
+                    qty = double.parse(value.salesqty_X001[index].text);
                   }
                   Provider.of<Controller>(context, listen: false)
                       .rawCalculation_X001(

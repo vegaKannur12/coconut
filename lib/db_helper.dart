@@ -870,11 +870,12 @@ class OrderAppDB {
     var query3;
     var query2;
     print(
-        "baseRate calculated....$rate.....$baseRate...$unit_name.....$net_amt......$packagenm----$tax");
+        "baseRate calculated....$rate.....$baseRate...$unit_name.....$net_amt......$packagenm----$tax---$discount_per----$discount_amt");
 
     List<Map<String, dynamic>> res1 = await db.rawQuery(
         'SELECT  * FROM salesBagTable WHERE customerid="${customerid}" AND os = "${os}" AND code="${code}" AND unit_name="${unit_name}"');
     print("res1cvc ---$res1");
+
     if (res1.length == 1) {
       var que =
           'UPDATE salesBagTable SET qty=$qty , totalamount="${totalamount}" , net_amt=$net_amt ,tax_amt=$tax ,discount_per=$discount_per, discount_amt=$discount_amt,cgst_amt=$cgst_amt,sgst_amt=$sgst_amt,igst_amt=$igst_amt,unit_rate=$unit_rate  WHERE customerid="${customerid}" AND os = "${os}" AND code="${code}" AND unit_name="${unit_name}"';
@@ -888,6 +889,59 @@ class OrderAppDB {
 
       var res = await db.rawInsert(query2);
     }
+
+    print("insert query result $res");
+    print("insert-query2----$query2");
+    return res;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  insertsalesBagTable_X001(
+    String itemName,
+    String cartdate,
+    String carttime,
+    String os,
+    String customerid,
+    int cartrowno,
+    String code,
+    double qty,
+    String rate,
+    double unit_rate,
+    double totalamount,
+    String method,
+    String hsn,
+    double tax_per,
+    double tax,
+    double cgst_per,
+    double cgst_amt,
+    double sgst_per,
+    double sgst_amt,
+    double igst_per,
+    double igst_amt,
+    double discount_per,
+    double discount_amt,
+    double ces_per,
+    double ces_amt,
+    int cstatus,
+    double net_amt,
+    int pid,
+    String? unit_name,
+    double packagenm,
+    double baseRate,
+  ) async {
+    print("qty--$qty");
+    print("unit_name...........$unit_name");
+    final db = await database;
+
+    var query3;
+    var query2;
+    print(
+        "baseRate calculated....$rate.....$baseRate...$unit_name.....$net_amt......$packagenm----$tax---$discount_per----$discount_amt");
+
+    query2 =
+        'INSERT INTO salesBagTable (itemName, cartdate, carttime , os, customerid, cartrowno, code, qty, rate,unit_rate, totalamount, method, hsn,tax_per, tax_amt, cgst_per, cgst_amt, sgst_per, sgst_amt, igst_per, igst_amt, discount_per, discount_amt, ces_per,ces_amt, cstatus, net_amt, pid, unit_name, package, baseRate) VALUES ("${itemName}","${cartdate}","${carttime}", "${os}", "${customerid}", $cartrowno, "${code}", $qty, "${rate}",$unit_rate, "${totalamount}","${method}", "${hsn}",${tax_per}, ${tax}, ${cgst_per}, ${cgst_amt}, ${sgst_per}, ${sgst_amt}, ${igst_per}, ${igst_amt}, ${discount_per}, ${discount_amt}, ${ces_per},${ces_amt}, $cstatus,"$net_amt" , $pid, "$unit_name", $packagenm, $baseRate)';
+
+    var res = await db.rawInsert(query2);
 
     print("insert query result $res");
     print("insert-query2----$query2");

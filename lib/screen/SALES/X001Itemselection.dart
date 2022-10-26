@@ -223,148 +223,65 @@ class _SalesItemState extends State<SalesItem> {
         elevation: 0,
         backgroundColor: P_Settings.salewaveColor,
         actions: <Widget>[
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: OutlinedButton(
-          //     onPressed: () {
-          //       if (widget.customerId == null || widget.customerId.isEmpty) {
-          //       } else {
-          //         FocusManager.instance.primaryFocus?.unfocus();
-          //         Provider.of<Controller>(context, listen: false).selectSettings(
-          //             "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
+          // Consumer<Controller>(
+          //   builder: (context, _value, child) {
+          //     return PopupMenuButton<String>(
+          //       onSelected: (value) {
+          //         print("selected val............$selected");
+          //         //  Provider.of<Controller>(context, listen: false)
+          //         //     .filteredeValue = value;
+
+          //         // if (value == "0") {
+          //         //   setState(() {
+          //         //     Provider.of<Controller>(context, listen: false)
+          //         //         .filterCompany = false;
+          //         //   });
+
+          //         //   Provider.of<Controller>(context, listen: false)
+          //         //       .filteredProductList
+          //         //       .clear();
+          //         //   Provider.of<Controller>(context, listen: false)
+          //         //       .getProductList(widget.customerId);
+          //         // } else {
+          //         //   print("value---$value");
+          //         //   Provider.of<Controller>(context, listen: false)
+          //         //         .filterCompany = true;
+          //         //   Provider.of<Controller>(context, listen: false)
+          //         //       .filterwithCompany(widget.customerId, value,"sale order");
+          //         // }///////////////
 
           //         Provider.of<Controller>(context, listen: false)
-          //             .getSaleBagDetails(widget.customerId, widget.os);
+          //             .salefilteredeValue = value;
+          //         if (value == "0") {
+          //           setState(() {
+          //             Provider.of<Controller>(context, listen: false)
+          //                 .salefilterCompany = false;
+          //           });
 
-          //         Navigator.of(context).push(
-          //           PageRouteBuilder(
-          //             opaque: false, // set to false
-          //             pageBuilder: (_, __, ___) => SaleCartX001(
-          //               areaId: widget.areaId,
-          //               custmerId: widget.customerId,
-          //               os: widget.os,
-          //               areaname: widget.areaName,
-          //               type: widget.type,
-          //             ),
-          //           ),
-          //         );
-          //       }
-          //     },
-          //     child: Text(
-          //       "View Data",
-          //       style: GoogleFonts.aBeeZee(
-          //         fontSize: 15,
-          //         fontWeight: FontWeight.bold,
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //   ),
+          //           Provider.of<Controller>(context, listen: false)
+          //               .salefilteredProductList
+          //               .clear();
+          //           Provider.of<Controller>(context, listen: false)
+          //               .getSaleProductList(widget.customerId);
+          //         } else {
+          //           print("value---$value");
+          //           Provider.of<Controller>(context, listen: false)
+          //               .salefilterCompany = true;
+          //           Provider.of<Controller>(context, listen: false)
+          //               .filterwithCompany(widget.customerId, value, "sales");
+          //         }
+          //       },
+          //       itemBuilder: (context) => _value.productcompanyList
+          //           .map((item) => PopupMenuItem<String>(
+          //                 value: item["comid"],
+          //                 child: Text(
+          //                   item["comanme"],
+          //                 ),
+          //               ))
+          //           .toList(),
+          //     );
+          //   },
           // ),
-          // Badge(
-          //   animationType: BadgeAnimationType.scale,
-          //   toAnimate: true,
-          //   badgeColor: Colors.white,
-          //   badgeContent: Consumer<Controller>(
-          //     builder: (context, value, child) {
-          //       if (value.count == null) {
-          //         return SpinKitChasingDots(
-          //             color: P_Settings.wavecolor, size: 9);
-          //       } else {
-          //         return Text(
-          //           "${value.count}",
-          //           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          //         );
-          //       }
-          //     },
-          //   ),
-          //   position: const BadgePosition(start: 33, bottom: 25),
-          //   child: IconButton(
-          //     onPressed: () async {
-          //       if (widget.customerId == null || widget.customerId.isEmpty) {
-          //       } else {
-          //         FocusManager.instance.primaryFocus?.unfocus();
-          //         Provider.of<Controller>(context, listen: false).selectSettings(
-          //             "set_code in ('SL_RATE_EDIT','SL_TAX_CALC','SL_UPLOAD_DIRECT') ");
-
-          //         Provider.of<Controller>(context, listen: false)
-          //             .getSaleBagDetails(widget.customerId, widget.os);
-
-          //         Navigator.of(context).push(
-          //           PageRouteBuilder(
-          //             opaque: false, // set to false
-          //             pageBuilder: (_, __, ___) => SaleCartX001(
-          //               areaId: widget.areaId,
-          //               custmerId: widget.customerId,
-          //               os: widget.os,
-          //               areaname: widget.areaName,
-          //               type: widget.type,
-          //             ),
-          //           ),
-          //         );
-          //       }
-          //     },
-          //     icon: const Icon(Icons.shopping_cart),
-          //   ),
-          // ),
-          Consumer<Controller>(
-            builder: (context, _value, child) {
-              return PopupMenuButton<String>(
-                onSelected: (value) {
-                  print("selected val............$selected");
-                  //  Provider.of<Controller>(context, listen: false)
-                  //     .filteredeValue = value;
-
-                  // if (value == "0") {
-                  //   setState(() {
-                  //     Provider.of<Controller>(context, listen: false)
-                  //         .filterCompany = false;
-                  //   });
-
-                  //   Provider.of<Controller>(context, listen: false)
-                  //       .filteredProductList
-                  //       .clear();
-                  //   Provider.of<Controller>(context, listen: false)
-                  //       .getProductList(widget.customerId);
-                  // } else {
-                  //   print("value---$value");
-                  //   Provider.of<Controller>(context, listen: false)
-                  //         .filterCompany = true;
-                  //   Provider.of<Controller>(context, listen: false)
-                  //       .filterwithCompany(widget.customerId, value,"sale order");
-                  // }///////////////
-
-                  Provider.of<Controller>(context, listen: false)
-                      .salefilteredeValue = value;
-                  if (value == "0") {
-                    setState(() {
-                      Provider.of<Controller>(context, listen: false)
-                          .salefilterCompany = false;
-                    });
-
-                    Provider.of<Controller>(context, listen: false)
-                        .salefilteredProductList
-                        .clear();
-                    Provider.of<Controller>(context, listen: false)
-                        .getSaleProductList(widget.customerId);
-                  } else {
-                    print("value---$value");
-                    Provider.of<Controller>(context, listen: false)
-                        .salefilterCompany = true;
-                    Provider.of<Controller>(context, listen: false)
-                        .filterwithCompany(widget.customerId, value, "sales");
-                  }
-                },
-                itemBuilder: (context) => _value.productcompanyList
-                    .map((item) => PopupMenuItem<String>(
-                          value: item["comid"],
-                          child: Text(
-                            item["comanme"],
-                          ),
-                        ))
-                    .toList(),
-              );
-            },
-          ),
         ],
       ),
       body: Consumer<Controller>(

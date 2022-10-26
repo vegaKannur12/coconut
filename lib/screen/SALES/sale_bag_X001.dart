@@ -218,23 +218,10 @@ class _SaleCartX001State extends State<SaleCartX001> {
                           },
                         ),
                       ),
-                      Container(
-                        height: size.height * 0.07,
-                        color: Colors.yellow,
-                        child: GestureDetector(
-                          onTap: () {
-                            print(
-                                "............................${value.orderTotal2}");
-                            sheet.sheet(
-                                context,
-                                value.orderTotal2[1].toString(),
-                                value.orderTotal2[0].toString(),
-                                value.orderTotal2[3].toString(),
-                                value.orderTotal2[2].toString(),
-                                value.orderTotal2[4].toString(),
-                                value.orderTotal2[5].toString(),
-                                value.orderTotal2[10]);
-                          },
+                      GestureDetector(
+                        child: Container(
+                          height: size.height * 0.07,
+                          color: Colors.yellow,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -345,10 +332,11 @@ class _SaleCartX001State extends State<SaleCartX001> {
                             child: Container(
                               height: size.height * 0.3,
                               width: size.width * 0.2,
-                              child: Image.network(
-                                'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
-                                fit: BoxFit.cover,
-                              ),
+                              child: Image.asset("asset/noImage.jpg",fit:  BoxFit.cover,),
+                              // child: Image.network(
+                              //   'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                              //   fit: BoxFit.cover,
+                              // ),
                               color: Colors.grey,
                             ),
                           ),

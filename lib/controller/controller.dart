@@ -3948,6 +3948,8 @@ class Controller extends ChangeNotifier {
         body: {'cid': cid, 'table': varJsonEncode},
       );
       var map = jsonDecode(response.body);
+
+      print("maxseris-----$map");
       var selectReslt =
           await OrderAppDB.instance.selectAllcommon('maxSeriesTable', '');
       print("mapuser ${map}");
@@ -4095,13 +4097,13 @@ class Controller extends ChangeNotifier {
     for (int i = 0; i < salesitemListdata2.length; i++) {
       if (salesitemListdata2[i]["unit"] == selectedunit_X001) {
         print(
-            "selected---${salesitemListdata2[i]["pkg"].runtimeType}-----${salesitemListdata2[i]["rate1"].runtimeType}");
+            "selected---${salesitemListdata2[i]["pkg"]}-----${salesitemListdata2[i]["rate1"]}");
         package = salesitemListdata2[i]["pkg"].toDouble();
         calculatedRate = salesitemListdata2[i]["pkg"] *
             double.parse(salesitemListdata2[i]["rate1"]);
 
         salesrate_X001[index].text = calculatedRate.toString();
-        print("calculatedRate----${ salesrate_X001[index].text}");
+        print("calculatedRate----${salesrate_X001[index].text}");
 
         notifyListeners();
       }

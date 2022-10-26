@@ -161,7 +161,7 @@ class _RemarkPageState extends State<RemarkPage> {
                                           .getMaxCommonQuery('remarksTable',
                                               'rem_row_num', " ");
                                       // int max = await OrderAppDB.instance
-                                      //     .calculateMaxSeries('$os1',
+                                      //     .('$os1',
                                       //         'remarksTable', 'rem_row_num');
                                       print("jhjdfmax---$max");
 
