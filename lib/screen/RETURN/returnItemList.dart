@@ -99,83 +99,124 @@ class _ReturnItemState extends State<ReturnItem> {
         elevation: 0,
         backgroundColor: P_Settings.returnbuttnColor,
         actions: <Widget>[
-          Badge(
-            animationType: BadgeAnimationType.scale,
-            toAnimate: true,
-            badgeColor: Colors.white,
-            badgeContent: Consumer<Controller>(
-              builder: (context, value, child) {
-                if (value.count == null) {
-                  return SpinKitChasingDots(
-                      color: P_Settings.wavecolor, size: 9);
-                } else {
-                  return Text(
-                    "${value.count}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                  );
-                }
-              },
-            ),
-            position: const BadgePosition(start: 33, bottom: 25),
-            child: IconButton(
-              onPressed: () async {
-                if (widget.customerId == null || widget.customerId.isEmpty) {
-                } else {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  Provider.of<Controller>(context, listen: false)
-                      .selectSettings("set_code in ('RT_UPLOAD_DIRECT')");
-
-                  Provider.of<Controller>(context, listen: false)
-                      .getreturnBagDetails(widget.customerId, widget.os);
-
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      opaque: false, // set to false
-                      pageBuilder: (_, __, ___) => ReturnCart(
-                        areaId: widget.areaId,
-                        custmerId: widget.customerId,
-                        os: widget.os,
-                        areaname: widget.areaName,
-                        type: widget.type,
-                      ),
+          Stack(
+            children: [
+              Positioned(
+                right: 3,
+                child: Container(
+                  // height: 20,
+                  // width: 20,
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  child: Center(
+                    child: Consumer<Controller>(
+                      builder: (context, value, child) {
+                        if (value.count == null) {
+                          return SpinKitChasingDots(
+                              color: P_Settings.wavecolor, size: 9);
+                        } else {
+                          return Text(
+                            "${value.count}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          );
+                        }
+                      },
                     ),
-                  );
-                }
-              },
-              icon: const Icon(Icons.shopping_cart),
-            ),
+                    // child: Text(
+                    //   value.deliveryListCount != null
+                    //       ? value.deliveryListCount!
+                    //       : "..",
+                    //   style: TextStyle(
+                    //       fontSize: 16,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.white),
+                    // ),
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () async {
+                  if (widget.customerId == null || widget.customerId.isEmpty) {
+                  } else {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    Provider.of<Controller>(context, listen: false)
+                        .selectSettings("set_code in ('RT_UPLOAD_DIRECT')");
+
+                    Provider.of<Controller>(context, listen: false)
+                        .getreturnBagDetails(widget.customerId, widget.os);
+
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        opaque: false, // set to false
+                        pageBuilder: (_, __, ___) => ReturnCart(
+                          areaId: widget.areaId,
+                          custmerId: widget.customerId,
+                          os: widget.os,
+                          areaname: widget.areaName,
+                          type: widget.type,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                icon: const Icon(Icons.shopping_cart),
+              ),
+            ],
           ),
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.shopping_cart,
-          //     color: Colors.white,
-          //     size: 25,
+          // Badge(
+          //   animationType: BadgeAnimationType.scale,
+          //   toAnimate: true,
+          //   badgeColor: Colors.white,
+          //   badgeContent: Consumer<Controller>(
+          //     builder: (context, value, child) {
+          //       if (value.count == null) {
+          //         return SpinKitChasingDots(
+          //             color: P_Settings.wavecolor, size: 9);
+          //       } else {
+          //         return Text(
+          //           "${value.count}",
+          //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          //         );
+          //       }
+          //     },
           //   ),
-          //   onPressed: () async {
-          //     if (widget.customerId == null || widget.customerId.isEmpty) {
-          //     } else {
-          //       FocusManager.instance.primaryFocus?.unfocus();
-          //       Provider.of<Controller>(context, listen: false)
-          //           .selectSettings();
+          //   position: const BadgePosition(start: 33, bottom: 25),
+          //   child: IconButton(
+          //     onPressed: () async {
+          //       if (widget.customerId == null || widget.customerId.isEmpty) {
+          //       } else {
+          //         FocusManager.instance.primaryFocus?.unfocus();
+          //         Provider.of<Controller>(context, listen: false)
+          //             .selectSettings("set_code in ('RT_UPLOAD_DIRECT')");
 
-          //       Provider.of<Controller>(context, listen: false)
-          //           .getreturnBagDetails(widget.customerId, widget.os);
+          //         Provider.of<Controller>(context, listen: false)
+          //             .getreturnBagDetails(widget.customerId, widget.os);
 
-          //       Navigator.of(context).push(
-          //         PageRouteBuilder(
-          //           opaque: false, // set to false
-          //           pageBuilder: (_, __, ___) => ReturnCart(
-          //             areaId: widget.areaId,
-          //             custmerId: widget.customerId,
-          //             os: widget.os,
-          //             areaname: widget.areaName,
-          //             type: widget.type,
+          //         Navigator.of(context).push(
+          //           PageRouteBuilder(
+          //             opaque: false, // set to false
+          //             pageBuilder: (_, __, ___) => ReturnCart(
+          //               areaId: widget.areaId,
+          //               custmerId: widget.customerId,
+          //               os: widget.os,
+          //               areaname: widget.areaName,
+          //               type: widget.type,
+          //             ),
           //           ),
-          //         ),
-          //       );
-          //     }
-          //   },
+          //         );
+          //       }
+          //     },
+          //     icon: const Icon(Icons.shopping_cart),
+          //   ),
           // ),
+
           Consumer<Controller>(
             builder: (context, _value, child) {
               return PopupMenuButton<String>(

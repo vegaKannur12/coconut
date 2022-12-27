@@ -275,7 +275,7 @@ class Controller extends ChangeNotifier {
       if (value == true) {
         try {
           Uri url =
-              Uri.parse("http://trafiqerp.in/order/fj/get_registration.php");
+              Uri.parse("https://trafiqerp.in/order/fj/get_registration.php");
           Map body = {
             'company_code': company_code,
             'fcode': fingerprints,
@@ -461,7 +461,7 @@ class Controller extends ChangeNotifier {
         print("company_code---fp-${company_code}---${fp}..${apk_key}");
 
         try {
-          Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_menu.php");
+          Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_menu.php");
           Map body = {
             'apk_key': apk_key,
             'company_code': company_code,
@@ -478,6 +478,7 @@ class Controller extends ChangeNotifier {
           print("map menu ${map}");
           SideMenu sidemenuModel = SideMenu.fromJson(map);
           firstMenu = sidemenuModel.first;
+          menu_index = firstMenu;
           print("menuitem----${sidemenuModel.menu![0].menu_name}");
           print("firstMenu----$firstMenu");
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -503,7 +504,7 @@ class Controller extends ChangeNotifier {
     print("get balance...............${cid}");
     var restaff;
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_balance.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_balance.php");
       Map body = {
         'cid': cid,
         'code': code,
@@ -534,7 +535,7 @@ class Controller extends ChangeNotifier {
     print("getStaffDetails...............${cid}");
     var restaff;
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_staff.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_staff.php");
       Map body = {
         'cid': cid,
       };
@@ -593,7 +594,7 @@ class Controller extends ChangeNotifier {
     print("getuserType...............${cid}");
     var resuser;
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_user.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_user.php");
       Map body = {
         'cid': cid,
       };
@@ -626,7 +627,7 @@ class Controller extends ChangeNotifier {
   Future<StaffArea?> getAreaDetails(String cid, int index, String page) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_area.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_area.php");
       Map body = {
         'cid': cid,
       };
@@ -680,7 +681,7 @@ class Controller extends ChangeNotifier {
     String? sid = prefs.getString("sid");
 
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_achead.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_achead.php");
       Map body = {
         'cid': cid,
       };
@@ -741,7 +742,7 @@ class Controller extends ChangeNotifier {
       // await OrderAppDB.instance.deleteFromTableCommonQuery('menuTable', "");
       if (value == true) {
         try {
-          Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_wallet.php");
+          Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_wallet.php");
           Map body = {
             'cid': cid,
           };
@@ -785,7 +786,7 @@ class Controller extends ChangeNotifier {
       // await OrderAppDB.instance.deleteFromTableCommonQuery('menuTable', "");
       if (value == true) {
         try {
-          Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_settings.php");
+          Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_settings.php");
           Map body = {
             'cid': cid,
           };
@@ -831,7 +832,7 @@ class Controller extends ChangeNotifier {
         try {
           print("haiii");
           Uri url =
-              Uri.parse("http://trafiqerp.in/order/fj/stock_return_save.php");
+              Uri.parse("https://trafiqerp.in/order/fj/stock_return_save.php");
           isLoading = true;
           notifyListeners();
           // print("body--${body}");
@@ -868,7 +869,7 @@ class Controller extends ChangeNotifier {
   adminDashboard(String cid) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_today.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_today.php");
       Map body = {
         'cid': cid,
       };
@@ -913,7 +914,7 @@ class Controller extends ChangeNotifier {
   Future<ProductDetails?> getProductDetails(String cid, int index) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_prod.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_prod.php");
       Map body = {
         'cid': cid,
       };
@@ -955,7 +956,7 @@ class Controller extends ChangeNotifier {
       if (value == true) {
         try {
           print("haiii");
-          Uri url = Uri.parse("http://trafiqerp.in/order/fj/order_save.php");
+          Uri url = Uri.parse("https://trafiqerp.in/order/fj/order_save.php");
           isLoading = true;
           notifyListeners();
           // print("body--${body}");
@@ -999,7 +1000,7 @@ class Controller extends ChangeNotifier {
       if (value == true) {
         try {
           print("haiii");
-          Uri url = Uri.parse("http://trafiqerp.in/order/fj/sale_save.php");
+          Uri url = Uri.parse("https://trafiqerp.in/order/fj/sale_save.php");
           isLoading = true;
           notifyListeners();
           // print("body--${body}");
@@ -1038,7 +1039,7 @@ class Controller extends ChangeNotifier {
       String cid, int index) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_cat.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_cat.php");
       Map body = {
         'cid': cid,
       };
@@ -1079,7 +1080,7 @@ class Controller extends ChangeNotifier {
   Future<ProductCompanymodel?> getProductCompany(String cid, int index) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_com.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_com.php");
       Map body = {
         'cid': cid,
       };
@@ -1118,7 +1119,7 @@ class Controller extends ChangeNotifier {
   Future<ProductCompanymodel?> getProductUnits(String cid, int index) async {
     print("cid...............${cid}");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_unit.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_unit.php");
       Map body = {
         'cid': cid,
       };
@@ -3052,7 +3053,7 @@ class Controller extends ChangeNotifier {
           var result =
               await OrderAppDB.instance.selectAllcommon('customerTable', "");
           if (result.length > 0) {
-            Uri url = Uri.parse("http://trafiqerp.in/order/fj/cus_save.php");
+            Uri url = Uri.parse("https://trafiqerp.in/order/fj/cus_save.php");
             isUpload = true;
             isLoading = true;
             notifyListeners();
@@ -3145,7 +3146,7 @@ class Controller extends ChangeNotifier {
           var result = await OrderAppDB.instance.uploadRemark();
           print("remark result......$result");
           if (result.length > 0) {
-            Uri url = Uri.parse("http://trafiqerp.in/order/fj/rem_save.php");
+            Uri url = Uri.parse("https://trafiqerp.in/order/fj/rem_save.php");
             isUpload = true;
             isLoading = true;
             notifyListeners();
@@ -3205,7 +3206,7 @@ class Controller extends ChangeNotifier {
           var result = await OrderAppDB.instance.uploadCollections();
           print("collection result......$result");
           if (result.length > 0) {
-            Uri url = Uri.parse("http://trafiqerp.in/order/fj/col_save.php");
+            Uri url = Uri.parse("https://trafiqerp.in/order/fj/col_save.php");
             isUpload = true;
             isLoading = true;
             notifyListeners();
@@ -3900,7 +3901,7 @@ class Controller extends ChangeNotifier {
   getMaxSerialNumber(String os) async {
     print("series............$os");
     try {
-      Uri url = Uri.parse("http://trafiqerp.in/order/fj/get_max_sl.php");
+      Uri url = Uri.parse("https://trafiqerp.in/order/fj/get_max_sl.php");
       String ordOs = "O" + "$os";
       String salesOs = "S" + "$os";
       String collOs = "C" + "$os";

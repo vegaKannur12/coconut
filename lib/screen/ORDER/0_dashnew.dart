@@ -97,7 +97,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
     Provider.of<Controller>(context, listen: false).fetchMenusFromMenuTable();
 
     drawerOpts.clear();
-
+    print("menu from splash------${Provider.of<Controller>(context, listen: false).menu_index}");
     // print(Provider.of<Controller>(context, listen: false).firstMenu);
     // if (Provider.of<Controller>(context, listen: false).firstMenu != null) {
     //   Provider.of<Controller>(context, listen: false).menu_index =

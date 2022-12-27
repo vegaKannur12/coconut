@@ -54,6 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
       }
       if (firstMenu != null) {
         Provider.of<Controller>(context, listen: false).menu_index = firstMenu;
+
         print(Provider.of<Controller>(context, listen: false).menu_index);
       }
       print("versof----$versof");
