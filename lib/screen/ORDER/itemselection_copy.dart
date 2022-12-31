@@ -34,8 +34,8 @@ class ItemSelection extends StatefulWidget {
 }
 
 class _ItemSelectionState extends State<ItemSelection> {
-  String rate1 = "1";
-  double baseRate = 1.0;
+  double rate1 = 0.0;
+  // double baseRate = 1.0;
 
   TextEditingController searchcontroll = TextEditingController();
   ShowModal showModal = ShowModal();
@@ -633,13 +633,12 @@ class _ItemSelectionState extends State<ItemSelection> {
                                                                       "max----$max");
                                                                   // print("value.qty[index].text---${value.qty[index].text}");
 
-                                                                  // rate1 =
-                                                                  //     value.newList[
-                                                                  //             index]
-                                                                  //         ["prrate1"];
-                                                                  var total = double
-                                                                          .parse(
-                                                                              rate1) *
+                                                                  rate1 = value
+                                                                              .newList[
+                                                                          index]
+                                                                      [
+                                                                      "prrate1"];
+                                                                  var total = rate1 *
                                                                       double.parse(value
                                                                           .qty[
                                                                               index]
@@ -664,7 +663,8 @@ class _ItemSelectionState extends State<ItemSelection> {
                                                                           .qty[
                                                                               index]
                                                                           .text),
-                                                                      rate1,
+                                                                      rate1
+                                                                          .toString(),
                                                                       total
                                                                           .toString(),
                                                                       1,
@@ -672,12 +672,11 @@ class _ItemSelectionState extends State<ItemSelection> {
                                                                           [
                                                                           "prunit"],
                                                                       value
-                                                                          .newList[index]
-                                                                              [
-                                                                              "pkg"]
+                                                                          .newList[
+                                                                              index]
+                                                                              ["pkg"]
                                                                           .toDouble(),
-                                                                      double.parse(
-                                                                          rate1),
+                                                                      rate1,
                                                                       0);
                                                                   snackbar.showSnackbar(
                                                                       context,
@@ -1050,15 +1049,16 @@ class _ItemSelectionState extends State<ItemSelection> {
 
                                                                   print(
                                                                       "max----$max");
-                                                                  // print("value.qty[index].text---${value.qty[index].text}");
+                                                                  print(
+                                                                      "value.qty[index].text---${value.productName[index]["prrate1"].runtimeType}--------${value.productName[index]["pkg"].runtimeType}");
 
-                                                                  // rate1 =
-                                                                  //     value.newList[
-                                                                  //             index]
-                                                                  //         ["prrate1"];
-                                                                  var total = double
-                                                                          .parse(
-                                                                              rate1) *
+                                                                  rate1 = value
+                                                                      .productName[
+                                                                          index]
+                                                                          [
+                                                                          "prrate1"]
+                                                                      .toDouble();
+                                                                  var total = rate1 *
                                                                       double.parse(value
                                                                           .qty[
                                                                               index]
@@ -1083,7 +1083,8 @@ class _ItemSelectionState extends State<ItemSelection> {
                                                                           .qty[
                                                                               index]
                                                                           .text),
-                                                                      rate1,
+                                                                      rate1
+                                                                          .toString(),
                                                                       total
                                                                           .toString(),
                                                                       1,
@@ -1091,12 +1092,11 @@ class _ItemSelectionState extends State<ItemSelection> {
                                                                           [
                                                                           "prunit"],
                                                                       value
-                                                                          .productName[index]
-                                                                              [
-                                                                              "pkg"]
+                                                                          .productName[
+                                                                              index]
+                                                                              ["pkg"]
                                                                           .toDouble(),
-                                                                      double.parse(
-                                                                          rate1),
+                                                                      rate1,
                                                                       0);
                                                                   snackbar.showSnackbar(
                                                                       context,

@@ -8,6 +8,7 @@ import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/db_helper.dart';
 import 'package:orderapp/screen/SALES/salesBottomsheet.dart';
 import 'package:orderapp/screen/SALES/saleItemDetails.dart';
+import 'package:orderapp/service/tableList.dart';
 import 'package:provider/provider.dart';
 
 class SaleCartX001 extends StatefulWidget {
@@ -38,7 +39,7 @@ class _SaleCartX001State extends State<SaleCartX001> {
   List<String> s = [];
   List rawCalcResult = [];
   String? gen_condition;
-  TextEditingController rateController = TextEditingController();
+
   DateTime now = DateTime.now();
   String? date;
   String? sid;
@@ -80,17 +81,17 @@ class _SaleCartX001State extends State<SaleCartX001> {
           //           .deleteFromTableCommonQuery("salesDetailTable", "");
           //     },
           //     icon: Icon(Icons.delete)),
-          // IconButton(
-          //   onPressed: () async {
-          //     List<Map<String, dynamic>> list =
-          //         await OrderAppDB.instance.getListOfTables();
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => TableList(list: list)),
-          //     );
-          //   },
-          //   icon: Icon(Icons.table_bar),
-          // ),
+          IconButton(
+            onPressed: () async {
+              List<Map<String, dynamic>> list =
+                  await OrderAppDB.instance.getListOfTables();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TableList(list: list)),
+              );
+            },
+            icon: Icon(Icons.table_bar),
+          ),
         ],
       ),
       body: GestureDetector(onTap: (() {
@@ -225,15 +226,69 @@ class _SaleCartX001State extends State<SaleCartX001> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(" Sales Total  : ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15)),
-                              Text(
-                                  "\u{20B9}${value.salesTotal.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16))
+                              Container(
+                                width: size.width * 0.5,
+                                height: size.height * 0.07,
+                                color: Colors.yellow,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(" Sales Total  : ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15)),
+                                    Flexible(
+                                        child: Text(
+                                            "\u{20B9}${value.salesTotal.toStringAsFixed(2)}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16)))
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (() async {
+                                  // value.areDetails.clear();
+                                  if (value.salebagList.length > 0) {
+                                    paysheet.showpaymentSheet(
+                                        context,
+                                        widget.areaId,
+                                        widget.areaname,
+                                        widget.custmerId,
+                                        s[0],
+                                        s[1],
+                                        " ",
+                                        " ",
+                                        value.orderTotal2[11]);
+                                  }
+
+                                  Provider.of<Controller>(context,
+                                          listen: false)
+                                      .count = "0";
+                                  print("area name ${widget.areaname}");
+                                  // Provider.of<Controller>(context,listen: false).saveOrderDetails(id, value.cid!, series, orderid,  widget.custmerId, orderdate, staffid, widget.areaId, pcode, qty, rate, context)
+                                }),
+                                child: Container(
+                                  width: size.width * 0.5,
+                                  height: size.height * 0.07,
+                                  color: P_Settings.roundedButtonColor,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Save",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.01,
+                                      ),
+                                      Icon(Icons.shopping_basket)
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -332,7 +387,10 @@ class _SaleCartX001State extends State<SaleCartX001> {
                             child: Container(
                               height: size.height * 0.3,
                               width: size.width * 0.2,
-                              child: Image.asset("asset/noImage.jpg",fit:  BoxFit.cover,),
+                              child: Image.asset(
+                                "asset/noImage.jpg",
+                                fit: BoxFit.cover,
+                              ),
                               // child: Image.network(
                               //   'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                               //   fit: BoxFit.cover,

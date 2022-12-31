@@ -9,7 +9,9 @@ import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/db_helper.dart';
 import 'package:orderapp/screen/ORDER/6.1_remarks.dart';
 import 'package:orderapp/screen/ORDER/6_collection.dart';
+import 'package:orderapp/screen/ORDER/X001_orderItemSelection.dart';
 import 'package:orderapp/screen/ORDER/itemselection_copy.dart';
+import 'package:orderapp/screen/ORDER/new_itemSelection.dart';
 import 'package:orderapp/screen/RETURN/returnItemList.dart';
 import 'package:orderapp/screen/SALES/X001Itemselection.dart';
 import 'package:orderapp/screen/SALES/sale_itemlist.dart';
@@ -1293,13 +1295,20 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                               if (_formKey
                                                                   .currentState!
                                                                   .validate()) {
-                                                                Provider.of<Controller>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .getProductList(
-                                                                        custmerId
-                                                                            .toString());
+                                                                      Provider.of<Controller>(
+                                                                          context,
+                                                                          listen:
+                                                                              false)
+                                                                      .fromOrderbagTable_X001(
+                                                                          custmerId
+                                                                              .toString());
+                                                                // Provider.of<Controller>(
+                                                                //         context,
+                                                                //         listen:
+                                                                //             false)
+                                                                //     .getProductList(
+                                                                //         custmerId
+                                                                //             .toString());
                                                                 Provider.of<Controller>(
                                                                         context,
                                                                         listen:
@@ -1336,7 +1345,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                   PageRouteBuilder(
                                                                     opaque:
                                                                         false, // set to false
-                                                                    pageBuilder: (_, __, ___) => ItemSelection(
+                                                                    pageBuilder: (_, __, ___) => X001OrderItemSelection(
                                                                         customerId:
                                                                             custmerId
                                                                                 .toString(),
@@ -1843,7 +1852,6 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
   }
 
 ///////////////////////////////////////////////////////////////////
-
 }
 
 ///////////////////////////////////

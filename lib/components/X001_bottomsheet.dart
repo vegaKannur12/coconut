@@ -117,7 +117,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -138,7 +139,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -233,7 +235,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -329,7 +332,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -350,7 +354,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -444,7 +449,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -540,7 +546,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -558,7 +565,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -580,7 +588,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -598,7 +607,8 @@ class CoconutSheet {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -623,7 +633,8 @@ class CoconutSheet {
                                 thickness: 1,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -654,7 +665,8 @@ class CoconutSheet {
                                     ]),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:15.0,right:15,bottom: 18),
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15, bottom: 18),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -690,10 +702,12 @@ class CoconutSheet {
                                                         .salesqty_X001[index]
                                                         .text);
 
-                                                 double baseRate=double.parse(value
+                                                double baseRate = double.parse(
+                                                        value
                                                             .salesrate_X001[
                                                                 index]
-                                                            .text)/value.package!;
+                                                            .text) /
+                                                    value.package!;
                                                 print("rateggg----$baseRate");
                                                 await OrderAppDB.instance
                                                     .insertsalesBagTable_X001(

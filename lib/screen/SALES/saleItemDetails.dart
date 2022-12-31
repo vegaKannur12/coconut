@@ -591,7 +591,7 @@ class SaleItemDetails {
                                         primary: P_Settings.salewaveColor,
                                       ),
                                       onPressed: () async {
-                                        int indexCalc = index + 1;
+                                        // int indexCalc = index + 1;
                                         print(
                                             "indexxxxxx.${value.discount_amount[index].text}");
                                         await OrderAppDB.instance.upadteCommonQuery(

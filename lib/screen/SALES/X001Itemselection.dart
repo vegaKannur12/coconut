@@ -47,7 +47,7 @@ class _SalesItemState extends State<SalesItem> {
   PaymentSelect paysheet = PaymentSelect();
   CoconutSheet cocosheet = CoconutSheet();
   double baseRate = 1.0;
-  String rate1 = "1";
+  // String rate1 = "1";
   String? selected;
   String tempcode = "";
   double? temp;
@@ -85,8 +85,8 @@ class _SalesItemState extends State<SalesItem> {
     date = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     s = date!.split(" ");
 
-    Provider.of<Controller>(context, listen: false)
-        .getSaleProductList(widget.customerId);
+    // Provider.of<Controller>(context, listen: false)
+    //     .getSaleProductList(widget.customerId);
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
         _isLoading = false;
@@ -185,9 +185,8 @@ class _SalesItemState extends State<SalesItem> {
                           primary: Colors.red, // background
                         ),
                         onPressed: () async {
-                          await OrderAppDB.instance.deleteFromTableCommonQuery(
-                              "salesBagTable",
-                              "customerid='${widget.customerId}'");
+                          if (value.salebagList.length > 0) {
+                          _discardAlert(context, widget.customerId);}
                         },
                         child: Text(
                           "Discard",
@@ -400,7 +399,7 @@ class _SalesItemState extends State<SalesItem> {
                       child: CircularProgressIndicator(
                       color: P_Settings.salewaveColor,
                     ))
-                  : value.prodctItems.length == 0
+                  : value.salesitemList2.length == 0
                       ? _isLoading
                           ? CircularProgressIndicator()
                           : Container(
@@ -1869,4 +1868,40 @@ class _SalesItemState extends State<SalesItem> {
 
   //////////////////////////////////////////////////////////////////////////////////
 
+}
+
+_discardAlert(BuildContext context, String customerId) async {
+  return await showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // title: const Text('AlertDialog Title'),
+        content: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: ListBody(
+            children: const <Widget>[
+              Text('Do you want to Discard ? '),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text('Ok'),
+            onPressed: () async {
+              await OrderAppDB.instance.deleteFromTableCommonQuery(
+                  "salesBagTable", "customerid='${customerId}'");
+              Navigator.pop(context);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('cancel'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

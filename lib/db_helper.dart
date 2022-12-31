@@ -777,6 +777,40 @@ class OrderAppDB {
   }
 
 //////////////////////////////////////////////////////////////////////
+  Future insertorderBagTable_X001(
+    String itemName,
+    String cartdate,
+    String carttime,
+    String os,
+    String customerid,
+    int cartrowno,
+    String code,
+    double qty,
+    String rate,
+    String totalamount,
+    int pid,
+    String? unit_name,
+    double packagenm,
+    double baseRate,
+    int cstatus,
+  ) async {
+    print("qty--$qty");
+    print("unit_name........$customerid...$unit_name");
+    final db = await database;
+
+    var query3;
+    var query2;
+
+    query2 =
+        'INSERT INTO orderBagTable (itemName, cartdate, carttime , os, customerid, cartrowno, code, qty, rate, totalamount, pid, unit_name, package, baseRate, cstatus) VALUES ("${itemName}","${cartdate}","${carttime}", "${os}", "${customerid}", $cartrowno, "${code}", $qty, "${rate}", "${totalamount}",  $pid, "$unit_name", "$packagenm", $baseRate, $cstatus)';
+    var res = await db.rawInsert(query2);
+
+    print("insert query result $res");
+    print("insert-----$query2");
+    return res;
+  }
+
+//////////////////////////////////////////////////////////////////////
   insertreturnBagTable(
     String itemName,
     String cartdate,
@@ -2089,7 +2123,7 @@ class OrderAppDB {
     //     "inner join 'productUnits' u  ON u.pid = pd.pid ";
 
     var itemselectionquery =
-        "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn " +
+        "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn ,p.rate1 prrate1" +
             " from 'productDetailsTable' p group by p.pid,p.code,p.item order by p.item";
 
     // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +

@@ -8,7 +8,7 @@ class PaymentSelect {
     String areaId,
     String areaName,
     String cusid,
-    String Date,
+    String date,
     String time,
     String ref,
     String reason,
@@ -50,12 +50,12 @@ class PaymentSelect {
                               areaId,
                               areaName,
                               cusid,
-                              Date,
+                             date,
                               time,
                               "",
                               "",
                               payment_mode!,
-                              baserate,
+                             
                             ),
                           );
                           print(
@@ -82,12 +82,12 @@ class PaymentSelect {
                               areaId,
                               areaName,
                               cusid,
-                              Date,
+                             date,
                               time,
                               "",
                               "",
                               payment_mode!,
-                              baserate,
+                              
                             ),
                           );
                           // print("payment mode...........$payment_mode");
