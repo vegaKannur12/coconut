@@ -46,7 +46,7 @@ class SalesItem extends StatefulWidget {
 class _SalesItemState extends State<SalesItem> {
   PaymentSelect paysheet = PaymentSelect();
   CoconutSheet cocosheet = CoconutSheet();
-  double baseRate = 1.0;
+  // double baseRate = 1.0;
   // String rate1 = "1";
   String? selected;
   String tempcode = "";
@@ -186,7 +186,8 @@ class _SalesItemState extends State<SalesItem> {
                         ),
                         onPressed: () async {
                           if (value.salebagList.length > 0) {
-                          _discardAlert(context, widget.customerId);}
+                            _discardAlert(context, widget.customerId);
+                          }
                         },
                         child: Text(
                           "Discard",
@@ -518,7 +519,7 @@ class _SalesItemState extends State<SalesItem> {
                                                         value
                                                             .salesqty_X001[
                                                                 index]
-                                                            .text = "1";
+                                                            .text = "1.0";
                                                         Provider.of<Controller>(
                                                                 context,
                                                                 listen: false)
@@ -1099,7 +1100,7 @@ class _SalesItemState extends State<SalesItem> {
                                                         value
                                                             .salesqty_X001[
                                                                 index]
-                                                            .text = "1";
+                                                            .text = "1.0";
                                                         Provider.of<Controller>(
                                                                 context,
                                                                 listen: false)
@@ -1867,7 +1868,6 @@ class _SalesItemState extends State<SalesItem> {
   // }
 
   //////////////////////////////////////////////////////////////////////////////////
-
 }
 
 _discardAlert(BuildContext context, String customerId) async {

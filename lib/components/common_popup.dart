@@ -26,7 +26,6 @@ class CommonPopup {
     String reason,
     String payment_mode,
     // double baserate,
-
   ) {
     return AlertDialog(
       content: Column(
@@ -85,7 +84,6 @@ class CommonPopup {
                         context,
                         payment_mode,
                         value.roundoff,
-                       
                       );
                     }
 
@@ -111,16 +109,15 @@ class CommonPopup {
                         0) {
                       Provider.of<Controller>(context, listen: false)
                           .insertToOrderbagAndMaster(
-                              os!,
-                              date,
-                              time,
-                              custmerId,
-                              sid1!,
-                              areaid,
-                              double.parse(value.orderTotal1!),
-                              context,
-                             
-                              );
+                        os!,
+                        date,
+                        time,
+                        custmerId,
+                        sid1!,
+                        areaid,
+                        double.parse(value.orderTotal1!),
+                        context,
+                      );
                     }
 
                     // if (Provider.of<Controller>(context, listen: false)
@@ -141,18 +138,17 @@ class CommonPopup {
                       String? sOs = "R" + "$os";
                       Provider.of<Controller>(context, listen: false)
                           .insertreturnMasterandDetailsTable(
-                              sOs,
-                              date,
-                              time,
-                              custmerId,
-                              sid1!,
-                              areaid,
-                              value.returnTotal,
-                              ref,
-                              reason,
-                              context,
-                             
-                              );
+                        sOs,
+                        date,
+                        time,
+                        custmerId,
+                        sid1!,
+                        areaid,
+                        value.returnTotal,
+                        ref,
+                        reason,
+                        context,
+                      );
                       Provider.of<Controller>(context, listen: false)
                           .returnCount = 0;
 
@@ -231,16 +227,49 @@ class CommonPopup {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        Navigator.of(context).push(
-                                          PageRouteBuilder(
-                                              opaque: false, // set to false
-                                              pageBuilder: (_, __, ___) =>
-                                                  Dashboard(
-                                                      type: "return from sales",
-                                                      areaName: areaname)
-                                              // OrderForm(widget.areaname,"return"),
-                                              ),
-                                        );
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              Size size =
+                                                  MediaQuery.of(context).size;
+
+                                              Future.delayed(
+                                                  Duration(seconds: 2), () {
+                                                Navigator.of(context).pop(true);
+
+                                                Navigator.of(context).push(
+                                                  PageRouteBuilder(
+                                                      opaque:
+                                                          false, // set to false
+                                                      pageBuilder: (_, __, ___) =>
+                                                          Dashboard(
+                                                              type:
+                                                                  "return from sales",
+                                                              areaName:
+                                                                  areaname)
+                                                      // OrderForm(widget.areaname,"return"),
+                                                      ),
+                                                );
+                                              });
+                                              return AlertDialog(
+                                                  content: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    '$type  Placed!!!!',
+                                                    style: TextStyle(
+                                                        color: P_Settings
+                                                            .extracolor),
+                                                  ),
+                                                  Icon(
+                                                    Icons.done,
+                                                    color: Colors.green,
+                                                  )
+                                                ],
+                                              ));
+                                            });
+
                                         // Navigator.pop(context);
                                       },
                                       child: Text("No"),

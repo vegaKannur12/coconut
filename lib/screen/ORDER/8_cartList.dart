@@ -85,17 +85,17 @@ class _CartListState extends State<CartList> {
           //           .deleteFromTableCommonQuery("orderBagTable", "");
           //     },
           //     icon: Icon(Icons.delete)),
-          IconButton(
-            onPressed: () async {
-              List<Map<String, dynamic>> list =
-                  await OrderAppDB.instance.getListOfTables();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TableList(list: list)),
-              );
-            },
-            icon: Icon(Icons.table_bar),
-          ),
+          // IconButton(
+          //   onPressed: () async {
+          //     List<Map<String, dynamic>> list =
+          //         await OrderAppDB.instance.getListOfTables();
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => TableList(list: list)),
+          //     );
+          //   },
+          //   icon: Icon(Icons.table_bar),
+          // ),
         ],
       ),
       body: GestureDetector(onTap: (() {
@@ -310,7 +310,7 @@ class _CartListState extends State<CartList> {
     String date,
     String time,
   ) {
-    print("rate---xx--$rate");
+    print("rate---xx--$rate---$unit_name");
 
     return Consumer<Controller>(
       builder: (context, value, child) {
@@ -328,11 +328,11 @@ class _CartListState extends State<CartList> {
               child: ListTile(
                 onTap: () {
                   Provider.of<Controller>(context, listen: false).fromDb = true;
-                  value.qty[index].text = qty.toStringAsFixed(2);
+                  value.qty[index].text = qty.toStringAsFixed(1);
 
                   double rate1 = double.parse(rate);
                   value.orderrate[index].text = rate1.toStringAsFixed(2);
-
+                  print("unitjdksjksd---$unit_name");
                   Provider.of<Controller>(context, listen: false)
                       .calculateOrderNetAmount(
                     index,

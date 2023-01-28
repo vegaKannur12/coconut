@@ -20,6 +20,7 @@ class OrderItemDetails {
       String os,
       double pkg,
       String unit_name) {
+    print("dghjsgd-----$unit_name");
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -64,7 +65,7 @@ class OrderItemDetails {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color:P_Settings.wavecolor),
+                                      color: P_Settings.wavecolor),
                                 ),
                                 Text("-"),
                                 Text(
@@ -94,50 +95,103 @@ class OrderItemDetails {
                                 style: TextStyle(fontSize: 15),
                               ),
                               Spacer(),
-                              Container(
-                                width: size.width * 0.2,
-                                child: TextField(
-                                  onTap: () {
-                                    value.qty[index].selection = TextSelection(
-                                        baseOffset: 0,
-                                        extentOffset:
-                                            value.qty[index].value.text.length);
-                                  },
-                                  // autofocus: true,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                  ),
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(0),
-                                    //border: InputBorder.none
-                                  ),
-
-                                  // maxLines: 1,
-                                  // minLines: 1,
-                                  keyboardType: TextInputType.number,
-                                  onSubmitted: (values) {
-                                    print("values----$values");
-                                    double valueqty = 0.0;
-                                    // value.discount_amount[index].text=;
-                                    if (values.isNotEmpty) {
-                                      print("emtyyyy");
-                                      valueqty = double.parse(values);
+                              Row(
+                                children: [
+                                  FloatingActionButton.small(
+                                    child: Icon(
+                                      Icons.add,
+                                      color: P_Settings.wavecolor,
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      double q =
+                                          double.parse(value.qty[index].text);
+                                      q = q + 1;
+                                      value.qty[index].text = q.toString();
                                       value.calculateOrderNetAmount(
                                           index,
                                           double.parse(
                                               value.orderrate[index].text),
                                           double.parse(value.qty[index].text));
-                                    } else {
-                                      valueqty = 0.00;
-                                    }
-                                    Provider.of<Controller>(context,
-                                            listen: false)
-                                        .fromDb = false;
-                                  },
-                                  textAlign: TextAlign.right,
-                                  controller: value.qty[index],
-                                ),
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .fromDb = false;
+                                    },
+                                  ),
+                                  Container(
+                                    width: size.width * 0.14,
+                                    child: TextField(
+                                      onTap: () {
+                                        value.qty[index].selection =
+                                            TextSelection(
+                                                baseOffset: 0,
+                                                extentOffset: value.qty[index]
+                                                    .value.text.length);
+                                      },
+                                      // autofocus: true,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(0),
+                                        //border: InputBorder.none
+                                      ),
+
+                                      // maxLines: 1,
+                                      // minLines: 1,
+                                      keyboardType: TextInputType.number,
+                                      onSubmitted: (values) {
+                                        print("values----$values");
+                                        double valueqty = 0.0;
+                                        // value.discount_amount[index].text=;
+                                        if (values.isNotEmpty) {
+                                          print("emtyyyy");
+                                          valueqty = double.parse(values);
+                                          value.calculateOrderNetAmount(
+                                              index,
+                                              double.parse(
+                                                  value.orderrate[index].text),
+                                              double.parse(
+                                                  value.qty[index].text));
+                                        } else {
+                                          valueqty = 0.00;
+                                        }
+                                        Provider.of<Controller>(context,
+                                                listen: false)
+                                            .fromDb = false;
+                                      },
+                                      textAlign: TextAlign.center,
+                                      controller: value.qty[index],
+                                    ),
+                                  ),
+                                  FloatingActionButton.small(
+                                    child: Icon(
+                                      Icons.remove,
+                                      color: P_Settings.wavecolor,
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      double q =
+                                          double.parse(value.qty[index].text);
+                                      q = q - 1;
+                                      if (q >= 0) {
+                                        value.qty[index].text = q.toString();
+                                        value.calculateOrderNetAmount(
+                                            index,
+                                            double.parse(
+                                                value.orderrate[index].text),
+                                            double.parse(
+                                                value.qty[index].text));
+                                      } else {
+                                        // value.qty[index].text = "0";
+                                      }
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .fromDb = false;
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -203,14 +257,15 @@ class OrderItemDetails {
                                         },
                                         keyboardType: TextInputType.number,
                                         onSubmitted: (values) {
-                                           value.calculateOrderNetAmount(
-                                          index,
-                                          double.parse(
-                                              value.orderrate[index].text),
-                                          double.parse(value.qty[index].text));
-                                             Provider.of<Controller>(context,
-                                            listen: false)
-                                        .fromDb = false;
+                                          value.calculateOrderNetAmount(
+                                              index,
+                                              double.parse(
+                                                  value.orderrate[index].text),
+                                              double.parse(
+                                                  value.qty[index].text));
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .fromDb = false;
                                         },
                                         textAlign: TextAlign.right,
                                         controller: value.orderrate[index],
@@ -302,7 +357,7 @@ class OrderItemDetails {
                                         await OrderAppDB.instance.upadteCommonQuery(
                                             "orderBagTable",
                                             "rate=${value.orderrate[index].text},totalamount=${value.orderNetAmount},qty=${value.qty[index].text}",
-                                            "code='$code' and customerid='$customerId' and unit_name='${value.selectedItem}'");
+                                            "code='$code' and customerid='$customerId' and unit_name='${unit_name}'");
                                         print("calculate new total");
                                         await Provider.of<Controller>(context,
                                                 listen: false)

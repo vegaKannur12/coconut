@@ -11,7 +11,7 @@ import 'package:orderapp/screen/ORDER/6.1_remarks.dart';
 import 'package:orderapp/screen/ORDER/6_collection.dart';
 import 'package:orderapp/screen/ORDER/X001_orderItemSelection.dart';
 import 'package:orderapp/screen/ORDER/itemselection_copy.dart';
-import 'package:orderapp/screen/ORDER/new_itemSelection.dart';
+
 import 'package:orderapp/screen/RETURN/returnItemList.dart';
 import 'package:orderapp/screen/SALES/X001Itemselection.dart';
 import 'package:orderapp/screen/SALES/sale_itemlist.dart';
@@ -153,6 +153,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: () => _onBackPressed(context),
       child: Scaffold(
+        // resizeToAvoidBottomInset: true,
         body: InkWell(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
@@ -588,6 +589,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                                           customertext.text = values.custmerDetails[index]['hname'];
                                                                                           custmerId = values.custmerDetails[index]['ac_code'];
                                                                                         });
+                                                                                        FocusManager.instance.primaryFocus?.unfocus();
                                                                                         // Provider.of<Controller>(context, listen: false).setCustomerName(values.custmerDetails[index]['hname']);
                                                                                         // Navigator.of(context).push(
                                                                                         //   PageRouteBuilder(
@@ -616,7 +618,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                                 )),
                                                                           )
                                                                         : Text(
-                                                                            "Empty...",
+                                                                            "No Data Found!!!",
                                                                             style:
                                                                                 TextStyle(fontSize: 17, color: P_Settings.extracolor),
                                                                           ),
@@ -1295,13 +1297,13 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                               if (_formKey
                                                                   .currentState!
                                                                   .validate()) {
-                                                                      Provider.of<Controller>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .fromOrderbagTable_X001(
-                                                                          custmerId
-                                                                              .toString());
+                                                                Provider.of<Controller>(
+                                                                        context,
+                                                                        listen:
+                                                                            false)
+                                                                    .fromOrderbagTable_X001(
+                                                                        custmerId
+                                                                            .toString());
                                                                 // Provider.of<Controller>(
                                                                 //         context,
                                                                 //         listen:

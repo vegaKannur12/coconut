@@ -3885,6 +3885,7 @@ class Controller extends ChangeNotifier {
     if (net_amt < 0) {
       net_amt = 0.00;
     }
+    notifyListeners();
     print("netamount.cal...$net_amt");
 
     print(

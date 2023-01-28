@@ -119,62 +119,144 @@ class SaleItemDetails {
                                 style: TextStyle(fontSize: 15),
                               ),
                               Spacer(),
-                              Container(
-                                width: size.width * 0.2,
-                                child: TextField(
-                                  onTap: () {
-                                    value.salesqty[index].selection =
-                                        TextSelection(
-                                            baseOffset: 0,
-                                            extentOffset: value.salesqty[index]
-                                                .value.text.length);
-                                  },
-                                  // autofocus: true,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
+                              Row(
+                                children: [
+                                  FloatingActionButton.small(
+                                    child: Icon(
+                                      Icons.add,
+                                      color: P_Settings.salewaveColor,
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      double q = double.parse(
+                                          value.salesqty[index].text);
+                                      q = q + 1;
+                                      value.salesqty[index].text = q.toString();
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .rawCalculation(
+                                              double.parse(
+                                                  value.salesrate[index].text),
+                                              double.parse(
+                                                  value.salesqty[index].text),
+                                              dis_per,
+                                              dis_amt,
+                                              tax_per,
+                                              0.0,
+                                              value.settingsList1[1]
+                                                      ['set_value']
+                                                  .toString(),
+                                              0,
+                                              index,
+                                              true,
+                                              "qty");
+                                      Provider.of<Controller>(context,
+                                                listen: false)
+                                            .fromDb = false;
+                                    },
                                   ),
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(0),
-                                    //border: InputBorder.none
-                                  ),
+                                  Container(
+                                    width: size.width * 0.14,
+                                    child: TextField(
+                                      onTap: () {
+                                        value.salesqty[index].selection =
+                                            TextSelection(
+                                                baseOffset: 0,
+                                                extentOffset: value
+                                                    .salesqty[index]
+                                                    .value
+                                                    .text
+                                                    .length);
+                                      },
+                                      // autofocus: true,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(0),
+                                        //border: InputBorder.none
+                                      ),
 
-                                  // maxLines: 1,
-                                  // minLines: 1,
-                                  keyboardType: TextInputType.number,
-                                  onSubmitted: (values) {
-                                    print("values----$values");
-                                    double valueqty = 0.0;
-                                    // value.discount_amount[index].text=;
-                                    if (values.isNotEmpty) {
-                                      print("emtyyyy");
-                                      valueqty = double.parse(values);
-                                    } else {
-                                      valueqty = 0.00;
-                                    }
-                                    Provider.of<Controller>(context,
-                                            listen: false)
-                                        .fromDb = false;
-                                    Provider.of<Controller>(context,
-                                            listen: false)
-                                        .rawCalculation(
-                                            double.parse(
-                                                value.salesrate[index].text),
-                                            valueqty,
-                                            dis_per,
-                                            dis_amt,
-                                            tax_per,
-                                            0.0,
-                                            value.settingsList1[1]['set_value']
-                                                .toString(),
-                                            0,
-                                            index,
-                                            true,
-                                            "qty");
-                                  },
-                                  textAlign: TextAlign.right,
-                                  controller: value.salesqty[index],
-                                ),
+                                      // maxLines: 1,
+                                      // minLines: 1,
+                                      keyboardType: TextInputType.number,
+                                      onSubmitted: (values) {
+                                        print("values----$values");
+                                        double valueqty = 0.0;
+                                        // value.discount_amount[index].text=;
+                                        if (values.isNotEmpty) {
+                                          print("emtyyyy");
+                                          valueqty = double.parse(values);
+                                        } else {
+                                          valueqty = 0.00;
+                                        }
+                                        Provider.of<Controller>(context,
+                                                listen: false)
+                                            .fromDb = false;
+                                        Provider.of<Controller>(context,
+                                                listen: false)
+                                            .rawCalculation(
+                                                double.parse(value
+                                                    .salesrate[index].text),
+                                                double.parse(
+                                                    value.salesqty[index].text),
+                                                dis_per,
+                                                dis_amt,
+                                                tax_per,
+                                                0.0,
+                                                value.settingsList1[1]
+                                                        ['set_value']
+                                                    .toString(),
+                                                0,
+                                                index,
+                                                true,
+                                                "qty");
+                                      },
+                                      textAlign: TextAlign.center,
+                                      controller: value.salesqty[index],
+                                    ),
+                                  ),
+                                  FloatingActionButton.small(
+                                    child: Icon(
+                                      Icons.remove,
+                                      color: P_Settings.salewaveColor,
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      double q = double.parse(
+                                          value.salesqty[index].text);
+                                      q = q - 1;
+                                      if (q >= 0) {
+                                        value.salesqty[index].text =
+                                            q.toString();
+                                        Provider.of<Controller>(context,
+                                                listen: false)
+                                            .rawCalculation(
+                                                double.parse(value
+                                                    .salesrate[index].text),
+                                                double.parse(
+                                                    value.salesqty[index].text),
+                                                dis_per,
+                                                dis_amt,
+                                                tax_per,
+                                                0.0,
+                                                value.settingsList1[1]
+                                                        ['set_value']
+                                                    .toString(),
+                                                0,
+                                                index,
+                                                true,
+                                                "qty");
+                                      } else {
+                                        // value.qty[index].text = "0";
+                                      }
+                                     Provider.of<Controller>(context,
+                                                listen: false)
+                                            .fromDb = false;
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -190,8 +272,7 @@ class SaleItemDetails {
                               Spacer(),
                               Text(
                                 pkg.toString(),
-                                style: TextStyle(
-                                     fontSize: 15),
+                                style: TextStyle(fontSize: 15),
                               ),
                             ],
                           ),
@@ -207,8 +288,7 @@ class SaleItemDetails {
                               Spacer(),
                               Text(
                                 unit_name,
-                                style: TextStyle(
-                                     fontSize: 15),
+                                style: TextStyle(fontSize: 15),
                               ),
                             ],
                           ),

@@ -81,17 +81,17 @@ class _SaleCartX001State extends State<SaleCartX001> {
           //           .deleteFromTableCommonQuery("salesDetailTable", "");
           //     },
           //     icon: Icon(Icons.delete)),
-          IconButton(
-            onPressed: () async {
-              List<Map<String, dynamic>> list =
-                  await OrderAppDB.instance.getListOfTables();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TableList(list: list)),
-              );
-            },
-            icon: Icon(Icons.table_bar),
-          ),
+          // IconButton(
+          //   onPressed: () async {
+          //     List<Map<String, dynamic>> list =
+          //         await OrderAppDB.instance.getListOfTables();
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => TableList(list: list)),
+          //     );
+          //   },
+          //   icon: Icon(Icons.table_bar),
+          // ),
         ],
       ),
       body: GestureDetector(onTap: (() {
@@ -343,7 +343,7 @@ class _SaleCartX001State extends State<SaleCartX001> {
                 onTap: () {
                   print("net amount............$net_amt");
                   Provider.of<Controller>(context, listen: false).fromDb = true;
-                  value.salesqty[index].text = qty.toStringAsFixed(2);
+                  value.salesqty[index].text = qty.toStringAsFixed(1);
                   value.salesrate[index].text = rate.toStringAsFixed(2);
                   value.discount_prercent[index].text =
                       disc_per.toStringAsFixed(4);

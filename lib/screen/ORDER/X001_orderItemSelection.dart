@@ -436,7 +436,7 @@ class _X001OrderItemSelectionState extends State<X001OrderItemSelection> {
                                                             value.frstDropDown;
 
                                                         value.qty[index].text =
-                                                            "1";
+                                                            "1.0";
                                                         // Provider.of<Controller>(
                                                         //         context,
                                                         //         listen: false)
@@ -609,7 +609,7 @@ class _X001OrderItemSelectionState extends State<X001OrderItemSelection> {
                                                             value.frstDropDown;
 
                                                         value.qty[index].text =
-                                                            "1";
+                                                            "1.0 ";
                                                         Provider.of<Controller>(
                                                                 context,
                                                                 listen: false)
