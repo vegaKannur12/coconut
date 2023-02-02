@@ -1715,11 +1715,17 @@ class Controller extends ChangeNotifier {
 
   /////////////////////GET CUSTOMER////////////////////////////////
   getCustomer(String? aid) async {
+    String arid;
     print("aid...............${aid}");
     try {
       print("custmerDetails after clear----${custmerDetails}");
       custmerDetails.clear();
-      customerList = await OrderAppDB.instance.getCustomer(aid!);
+      if (aid == null) {
+        arid = ' ';
+      } else {
+        arid = aid;
+      }
+      customerList = await OrderAppDB.instance.getCustomer(arid);
       print("customerList----${customerList}");
       for (var item in customerList) {
         custmerDetails.add(item);
@@ -2592,7 +2598,7 @@ class Controller extends ChangeNotifier {
       // notifyListeners();
       // snackbar.showSnackbar(context, "please download customers !!!");
     }
-    print('report data----${reportData.length}');
+    print('report data----${reportData}');
     isLoading = false;
     notifyListeners();
   }
@@ -3463,11 +3469,11 @@ class Controller extends ChangeNotifier {
 
 //////////////////////////////////////////////////////////////////
   searchProcess_X001(String customerId, String os, String comid, String type,
-      List<Map<String, dynamic>> list1) async {
+      List<Map<String, dynamic>> list1,String type1) async {
     print("searchkey--comid-$type-$searchkey---$comid----$os---$list1");
     List<Map<String, dynamic>> result = [];
     List<Map<String, dynamic>> list =
-        await OrderAppDB.instance.selectfromsalebagTable_X001(customerId);
+        await OrderAppDB.instance.selectfromsalebagTable_X001(customerId,type1);
 
     //     await OrderAppDB.instance.selectfromOrderbagTable(customerId);
     newList.clear();
@@ -4054,11 +4060,11 @@ class Controller extends ChangeNotifier {
 
   ////////////////////////////////////////////////////////////
   fromSalesbagTable_X001(
-    String custmerId,
+    String custmerId,String type
   ) async {
-    // salesitemList2.clear();
+    print("dgsdgg---$type");
     var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
-      custmerId,
+      custmerId,type
     );
     salesitemList2.clear();
     for (var item in res) {
@@ -4078,11 +4084,11 @@ class Controller extends ChangeNotifier {
 
 /////////////////////////////////////////////////
   fromOrderbagTable_X001(
-    String custmerId,
+    String custmerId,String type
   ) async {
     // salesitemList2.clear();
     var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
-      custmerId,
+      custmerId,type
     );
 
     orderitemList2.clear();

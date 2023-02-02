@@ -797,13 +797,28 @@ class OrderAppDB {
     print("qty--$qty");
     print("unit_name........$customerid...$unit_name");
     final db = await database;
-
+    // var res;
     var query3;
     var query2;
+    // List<Map<String, dynamic>> res1 = await db.rawQuery(
+    //     'SELECT  * FROM orderBagTable WHERE customerid="${customerid}" AND os = "${os}" AND code="${code}" AND unit_name="${unit_name}"');
+    // print("insert x001 query result $res1");
 
+    // if (res1.length == 1) {
+    //   double qty1 = res1[0]["qty"];
+    //   double updatedQty = qty1 + qty;
+    //   double amount = double.parse(res1[0]["totalamount"]);
+    //   print("res1.length----${res1.length}");
+
+    //   double amount1 = double.parse(totalamount);
+    //   double updatedAmount = amount + amount1;
+    //   query2 = await db.rawUpdate(
+    //       'UPDATE orderBagTable SET qty=$qty , totalamount="${totalamount}" WHERE customerid="${customerid}" AND os = "${os}" AND code="${code}" AND unit_name="${unit_name}"');
+    // } else {
     query2 =
         'INSERT INTO orderBagTable (itemName, cartdate, carttime , os, customerid, cartrowno, code, qty, rate, totalamount, pid, unit_name, package, baseRate, cstatus) VALUES ("${itemName}","${cartdate}","${carttime}", "${os}", "${customerid}", $cartrowno, "${code}", $qty, "${rate}", "${totalamount}",  $pid, "$unit_name", "$packagenm", $baseRate, $cstatus)';
     var res = await db.rawInsert(query2);
+    // }
 
     print("insert query result $res");
     print("insert-----$query2");
@@ -1634,7 +1649,7 @@ class OrderAppDB {
     }
 
     print('SELECT  hname,ac_code FROM accountHeadsTable WHERE area_id="${aid}');
-    print("hname=======${hname}");
+    print("getCustomer=======${hname}");
     return hname;
   }
 
@@ -2108,23 +2123,27 @@ class OrderAppDB {
   }
 
 //////////////////////////////////////////////////
-  selectfromsalebagTable_X001(
-    String customerId,
-  ) async {
+  selectfromsalebagTable_X001(String customerId, String type) async {
     List<Map<String, dynamic>> result;
     List<Map<String, dynamic>> result1;
     Database db = await instance.database;
     var unitquery = "";
+    var itemselectionquery;
 
     // unitquery = "SELECT p.pid prid,p.code prcode,p.item pritem, p.unit prunit, 1 pkg ,p.companyId prcid,p.hsn prhsn, " +
     //     "p.tax prtax,p.prate prrate,p.mrp prmrp,p.cost prcost,p.rate1 prbaserate, p.categoryId  prcategoryId from 'productDetailsTable' p union all " +
     //     "SELECT pd.pid,pd.code,pd.item,u.unit_name unit,u.package pkg,pd.companyId,pd.hsn, " +
     //     "pd.tax,pd.prate,pd.mrp,pd.cost,pd.rate1 , pd.categoryId  from 'productDetailsTable' pd " +
     //     "inner join 'productUnits' u  ON u.pid = pd.pid ";
-
-    var itemselectionquery =
-        "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn ,p.rate1 prrate1" +
-            " from 'productDetailsTable' p group by p.pid,p.code,p.item order by p.item";
+    if (type == "sale order") {
+      itemselectionquery =
+          "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn ,p.rate1 prrate1,sum(o.qty) qty" +
+              " from 'productDetailsTable' p left join 'orderBagTable' o on p.code =o.code and o.customerid='$customerId' group by p.pid,p.code,p.item order by p.item";
+    } else if (type == "sales") {
+      itemselectionquery =
+          "SELECT p.pid prid,p.code prcode,p.item pritem ,p.hsn hsn ,p.rate1 prrate1,sum(o.qty) qty" +
+              " from 'productDetailsTable' p left join 'salesBagTable' o on p.code =o.code and o.customerid='$customerId' group by p.pid,p.code,p.item order by p.item";
+    }
 
     // unitquery = "select k.*,b.*, (k.prbaserate * k.pkg ) prrate1 from (" +
     //     unitquery +
@@ -2138,7 +2157,7 @@ class OrderAppDB {
     print("unit queryyyy..$itemselectionquery");
     result = await db.rawQuery(itemselectionquery);
 
-    print("length sales unitsss---${result}");
+    print("itemselection daat--${result}");
     return result;
   }
 

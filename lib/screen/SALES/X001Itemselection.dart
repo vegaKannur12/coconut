@@ -353,7 +353,7 @@ class _SalesItemState extends State<SalesItem> {
                                                           listen: false)
                                                       .salefilteredeValue!,
                                                   "sales",
-                                                  value.salesitemList2)
+                                                  value.salesitemList2,"sales")
                                           : Provider.of<Controller>(context,
                                                   listen: false)
                                               .searchProcess_X001(
@@ -361,7 +361,7 @@ class _SalesItemState extends State<SalesItem> {
                                                   widget.os,
                                                   "",
                                                   "sales",
-                                                  value.salesitemList2);
+                                                  value.salesitemList2,"sales");
                                     }),
                                 IconButton(
                                     icon: Icon(
@@ -372,7 +372,7 @@ class _SalesItemState extends State<SalesItem> {
                                       Provider.of<Controller>(context,
                                               listen: false)
                                           .fromSalesbagTable_X001(
-                                              widget.customerId);
+                                              widget.customerId,"sales");
                                       Provider.of<Controller>(context,
                                               listen: false)
                                           .setIssearch(false);
@@ -591,30 +591,50 @@ class _SalesItemState extends State<SalesItem> {
                                                       children: [
                                                         Flexible(
                                                           flex: 5,
-                                                          child: Text(
-                                                            '${value.newList[index]["pritem"]}' +
-                                                                '- ' +
-                                                                '${value.newList[index]["prcode"]}',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                // color: value.newList[index]
-                                                                //             [
-                                                                //             "cartrowno"] ==
-                                                                //         null
-                                                                //     ? value.selected[
-                                                                //             index]
-                                                                //         ? Colors
-                                                                //             .black
-                                                                //         : Colors
-                                                                //             .black
-                                                                //     : Colors
-                                                                //         .black,
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                '${value.newList[index]["pritem"]}' +
+                                                                    '- ' +
+                                                                    '${value.newList[index]["prcode"]}',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: TextStyle(
+                                                                    // color: value.newList[index]
+                                                                    //             [
+                                                                    //             "cartrowno"] ==
+                                                                    //         null
+                                                                    //     ? value.selected[
+                                                                    //             index]
+                                                                    //         ? Colors
+                                                                    //             .black
+                                                                    //         : Colors
+                                                                    //             .black
+                                                                    //     : Colors
+                                                                    //         .black,
+                                                                    fontSize: 15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              value.newList[index]
+                                                                          [
+                                                                          "qty"] ==
+                                                                      null
+                                                                  ? Container()
+                                                                  : Text(
+                                                                      "${value.newList[index]["qty"]}",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              P_Settings.wavecolor),
+                                                                    ),
+                                                            ],
                                                           ),
                                                         ),
                                                         SizedBox(
@@ -1172,30 +1192,50 @@ class _SalesItemState extends State<SalesItem> {
                                                       children: [
                                                         Flexible(
                                                           flex: 5,
-                                                          child: Text(
-                                                            '${value.salesitemList2[index]["pritem"]}' +
-                                                                '- ' +
-                                                                '${value.salesitemList2[index]["prcode"]}',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                // color: value.salesitemList2[index]
-                                                                //             [
-                                                                //             "cartrowno"] ==
-                                                                //         null
-                                                                //     ? value.selected[
-                                                                //             index]
-                                                                //         ? Colors
-                                                                //             .black
-                                                                //         : Colors
-                                                                //             .black
-                                                                //     : Colors
-                                                                //         .black,
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                '${value.salesitemList2[index]["pritem"]}' +
+                                                                    '- ' +
+                                                                    '${value.salesitemList2[index]["prcode"]}',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: TextStyle(
+                                                                    // color: value.salesitemList2[index]
+                                                                    //             [
+                                                                    //             "cartrowno"] ==
+                                                                    //         null
+                                                                    //     ? value.selected[
+                                                                    //             index]
+                                                                    //         ? Colors
+                                                                    //             .black
+                                                                    //         : Colors
+                                                                    //             .black
+                                                                    //     : Colors
+                                                                    //         .black,
+                                                                    fontSize: 15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              value.salesitemList2[index]
+                                                                          [
+                                                                          "qty"] ==
+                                                                      null
+                                                                  ? Container()
+                                                                  : Text(
+                                                                      "${value.salesitemList2[index]["qty"]}",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              P_Settings.wavecolor),
+                                                                    ),
+                                                            ],
                                                           ),
                                                         ),
                                                         SizedBox(

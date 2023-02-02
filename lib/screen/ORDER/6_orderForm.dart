@@ -11,7 +11,6 @@ import 'package:orderapp/screen/ORDER/6.1_remarks.dart';
 import 'package:orderapp/screen/ORDER/6_collection.dart';
 import 'package:orderapp/screen/ORDER/X001_orderItemSelection.dart';
 import 'package:orderapp/screen/ORDER/itemselection_copy.dart';
-
 import 'package:orderapp/screen/RETURN/returnItemList.dart';
 import 'package:orderapp/screen/SALES/X001Itemselection.dart';
 import 'package:orderapp/screen/SALES/sale_itemlist.dart';
@@ -317,7 +316,15 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                 hintText: 'Area / Route',
                                                 helperText: ' ', // th
                                                 suffixIcon: IconButton(
-                                                  onPressed: fieldText.clear,
+                                                  onPressed: () {
+                                                    fieldText.clear();
+                                                    _selectedAreaId = ' ';
+                                                      Provider.of<Controller>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .getCustomer(
+                                                                  _selectedAreaId);
+                                                  },
                                                   icon: Icon(Icons.clear),
                                                 ),
                                               ),
@@ -501,6 +508,18 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                     // helperText: ' ',
                                                     prefixIcon: IconButton(
                                                       onPressed: () {
+                                                        print(
+                                                            "szfjzjfnjd------$_selectedAreaId");
+                                                        if (_selectedAreaId ==
+                                                            null) {
+                                                          print("yes correct");
+                                                          Provider.of<Controller>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .getCustomer(
+                                                                  _selectedAreaId);
+                                                        }
+
                                                         print(
                                                             "values.custmerDetails-----------${values.custmerDetails}");
 
@@ -1052,7 +1071,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                               false)
                                                                       .fromSalesbagTable_X001(
                                                                           custmerId
-                                                                              .toString());
+                                                                              .toString(),"sales");
                                                                   Provider.of<Controller>(
                                                                           context,
                                                                           listen:
@@ -1303,7 +1322,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                             false)
                                                                     .fromOrderbagTable_X001(
                                                                         custmerId
-                                                                            .toString());
+                                                                            .toString(),"sale order");
                                                                 // Provider.of<Controller>(
                                                                 //         context,
                                                                 //         listen:

@@ -664,13 +664,13 @@ class _CartListState extends State<CartList> {
                                                                     widget
                                                                         .custmerId,
                                                                     index);
-                                                            Provider.of<Controller>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                                .getProductList(
-                                                                    widget
-                                                                        .custmerId);
+                                                            // Provider.of<Controller>(
+                                                            //         context,
+                                                            //         listen:
+                                                            //             false)
+                                                            //     .getProductList(
+                                                            //         widget
+                                                            //             .custmerId);
                                                             Provider.of<Controller>(
                                                                     context,
                                                                     listen:
